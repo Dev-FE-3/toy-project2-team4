@@ -6,7 +6,6 @@ export default function Input({
   type = "text",
   placeholder = "",
   defaultValue = "",
-  maxLength = 10,
   isWrong = false,
   isDisabled = false,
   onChange,
@@ -21,11 +20,10 @@ export default function Input({
     <input
       type={type}
       placeholder={placeholder}
-      maxLength={maxLength}
+      disabled={isDisabled}
       value={value}
       onChange={handleChangeValue}
       className={`${styles.input} ${isWrong ? styles.wrong : ""} ${isDisabled ? styles.disabled : ""}`}
-      disabled={isDisabled}
     ></input>
   );
 }
