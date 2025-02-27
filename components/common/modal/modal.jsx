@@ -1,27 +1,36 @@
-import Icon from "../icon/icon";
 import style from "../modal/modal.module.css";
+import Button from "../button/button";
 
 /*
 onCancel : 취소 버튼 누르면 실행할 함수
 onCheck : 확인 버튼 누르면 실행할 함수
 title : 모달 안내창의 제목
 titleIcon : 제목 왼쪽에 붙을 아이콘
+checkButtonColor : 확인 버튼 색상 지정 red | blue | gray | yellow
 children : 전달할 내용 
-showCancelButton : 취소 버튼 유무
+showCancelButton : 취소 버튼 유무 true | false
 */
 
-const Modal = ({ onCancel, onCheck, title, titleIcon, children, showCancelButton }) => {
+const Modal = ({ onCancel, onCheck, title, titleIcon, checkButtonColor, children, showCancelButton }) => {
   let setButton;
 
   if (showCancelButton) {
     setButton = (
       <>
-        <button onClick={onCheck}>확인</button>
-        <button onClick={onCancel}>취소</button>
+        <Button color={checkButtonColor} onClick={onCheck}>
+          확인
+        </Button>
+        <Button color="gray" onClick={onCancel}>
+          취소
+        </Button>
       </>
     );
   } else {
-    setButton = <button onClick={onCheck}>확인</button>;
+    setButton = (
+      <Button color={checkButtonColor} onClick={onCheck}>
+        확인
+      </Button>
+    );
   }
 
   return (
@@ -36,7 +45,6 @@ const Modal = ({ onCancel, onCheck, title, titleIcon, children, showCancelButton
             <div className={style.contentWrapper}>
               <div className={style.headerIconWrapper}>
                 <header className={style.header}>{title}</header>
-                <Icon iconname="close" size="2rem" color="black"></Icon>
               </div>
               <section className={style.modalBody}>{children}</section>
             </div>

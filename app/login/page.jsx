@@ -20,19 +20,18 @@ const Login = () => {
     <div>
       로그인 페이지
       <button onClick={onClickModal}>모달창 on</button>
+      <Icon iconname="home" size="2rem" color="red"></Icon>
       {/* calss 추가하기 */}
-      <Icon iconname="radio_button_checked" size="24px" color="red"></Icon>
       {isModal ? (
         <Modal
           onCheck={onClickModal}
           onCancel={onClickModal}
-          title="주의"
-          titleIcon={<Icon iconname="warning" size="2rem" color="#D86060"></Icon>}
+          title="주의!"
+          titleIcon={<Icon style="rounded" iconname="warning" size="2rem" color="#d86060"></Icon>}
+          checkButtonColor="red"
           showCancelButton={true}
         >
-          <p> 홍길동님의 로그인 정보는 아래와 같습니다. </p>
-          <p> 아이디 : 2501001 </p>
-          <p> 초기 비밀번호 : 041212 </p>
+          <p> 정말 삭제 하시겠습니까? </p>
         </Modal>
       ) : (
         <></>
