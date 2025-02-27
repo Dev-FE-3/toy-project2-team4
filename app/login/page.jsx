@@ -20,6 +20,8 @@ const Login = () => {
     <div>
       로그인 페이지
       <button onClick={onClickModal}>모달창 on</button>
+      {/* calss 추가하기 */}
+      <Icon iconname="radio_button_checked" size="24px" color="red"></Icon>
       {isModal ? (
         <Modal
           onCheck={onClickModal}
