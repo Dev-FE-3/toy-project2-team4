@@ -1,0 +1,25 @@
+.input {
+  border: 2px solid #dadada;
+  background-color: var(--background);
+  border-radius: 3px;
+  width: 240px;
+  height: 40px;
+  outline: none;
+}
+
+.input::placeholder {
+  color: var(--gray);
+}
+
+.input:focus {
+  border-color: var(--primary);
+}
+
+.input.wrong {
+  border-color: var(--red);
+}
+
+.input.disabled {
+  background-color: #ebebeb;
+  color: var(--gray);
+}
