@@ -23,7 +23,7 @@
 }
 
 .blue {
-  background-color: #256EF4;
+  background-color: var(--primary);
   color: white;
 }
 
