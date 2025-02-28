@@ -1,4 +1,4 @@
-import style from "../modal/modal.module.css";
+import style from "../modal/modal.module.scss";
 import Button from "../button/button";
 
 /*
