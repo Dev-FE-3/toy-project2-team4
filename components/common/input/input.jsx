@@ -4,7 +4,7 @@ import styles from "./input.module.css";
 
 /**
  * Input 컴포넌트 props
- * 
+ *
  * @param { "text" | "password" | "time" | "date" } type - 입력 타입 (text, password, time, date 중 하나)
  * @param { string } placeholder - 입력란에 표시될 텍스트
  * @param { string } defaultValue - 기본값
