@@ -4,7 +4,14 @@ import Button from "../../components/common/button/button";
 import Dropdown from "../../components/common/dropdown/dropdown";
 
 const modificationHistory = () => {
-  const options = ["1번 옵션입니다.", "2번 옵션", "3번 옵션임"];
+  const options = [
+    "1번 옵션입니다.",
+    "2번 옵션",
+    "3번 옵션임",
+    "4번 옵션입니다.",
+    "5번 옵션입니다.",
+    "6번 옵션입니다.",
+  ];
 
   return (
     <>
