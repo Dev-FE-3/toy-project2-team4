@@ -4,7 +4,7 @@ import Icon from "../icon/icon";
 
 /**
  * @param {string[]} initialOptions - 드롭다운 옵션 리스트
- * @param {function} onSelect - 옵션 선택 시 실행할 콜백 함수 (선택된 값 전달)
+ * @param {function} onSelect - 옵션 선택 시 실행할 콜백 함수
  */
 
 const Dropdown = ({ initialOptions = [], onSelect}) => {
