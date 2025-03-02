@@ -24,6 +24,8 @@ export default function CalendarDate({ year, month }) {
                 day = totalDays + day;
               }
               const otherMonth = todayMonth !== month;
+
+              const classList = getClassListForDay(todayMonth, day);
               return (
                 <Day
                   key={`${week}-${dayIndex}`}
@@ -31,6 +33,7 @@ export default function CalendarDate({ year, month }) {
                   month={todayMonth}
                   dayIndex={dayIndex}
                   day={day}
+                  classList={classList}
                 />
               );
             })}
@@ -63,5 +66,34 @@ export default function CalendarDate({ year, month }) {
     const lastDay = new Date(year, month, 0);
     const totalDays = lastDay.getDate();
     return totalDays;
+  }
+
+  // 주어진 날짜에 해당하는 수업을 반환하는 함수
+  function getClassListForDay(todayMonth, day) {
+    const classes = [
+      {
+        date: "2025-03-02",
+        lessons: [{ instructor: "장은혜", title: "React", startTime: "10:00", endTime: "12:00" }],
+      },
+      {
+        date: "2025-03-01",
+        lessons: [
+          { instructor: "표현경", title: "CSS", startTime: "09:00", endTime: "11:00" },
+          { instructor: "양정규", title: "C++", startTime: "10:00", endTime: "11:00" },
+        ],
+      },
+      {
+        date: "2025-03-01",
+        lessons: [{ instructor: "양정규", title: "C++", startTime: "10:00", endTime: "11:00" }],
+      },
+      {
+        date: "2025-04-01",
+        lessons: [{ instructor: "박현수", title: "JavaScript", startTime: "14:00", endTime: "16:00" }],
+      },
+      // 추가 수업 데이터
+    ];
+    const formattedDate = `${year}-${String(todayMonth).padStart(2, "0")}-${String(day).padStart(2, "0")}`;
+    const dayClass = classes.find((classData) => classData.date === formattedDate);
+    return dayClass ? dayClass.lessons : [];
   }
 }
