@@ -1,6 +1,6 @@
 "use client";
 import { useState } from "react";
-import styles from "./input.module.css";
+import styles from "./input.module.scss";
 
 /**
  * Input 컴포넌트 props
