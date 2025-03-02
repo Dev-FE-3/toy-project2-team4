@@ -1,6 +1,6 @@
 import CalendarDate from "./calendarDate";
-import styles from "./calendar.module.scss";
-export default function Calendar({ currentDate }) {
+import styles from "../page.module.scss";
+export default function Calendar({ year, month }) {
   return (
     <>
       <div className={styles.CalendarSection}>
@@ -13,7 +13,7 @@ export default function Calendar({ currentDate }) {
           <li>토요일</li>
           <li>일요일</li>
         </ul>
-        <CalendarDate />
+        <CalendarDate year={year} month={month} />
       </div>
     </>
   );
