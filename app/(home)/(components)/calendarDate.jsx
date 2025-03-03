@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import Day from "./day";
 import styles from "../page.module.scss";
-export default function CalendarDate({ year, month }) {
+export default function CalendarDate({ year, month, classList }) {
   const daysInWeek = 7;
   const weeksInMonth = getWeeksInMonth(year, month);
   const firstDayOfMonth = getFirstDayOfMonth(year, month);
@@ -25,7 +25,7 @@ export default function CalendarDate({ year, month }) {
               }
               const otherMonth = todayMonth !== month;
 
-              const classList = getClassListForDay(todayMonth, day);
+              const todayClassList = getClassForDay(classList, todayMonth, day);
               return (
                 <Day
                   key={`${week}-${dayIndex}`}
@@ -33,7 +33,7 @@ export default function CalendarDate({ year, month }) {
                   month={todayMonth}
                   dayIndex={dayIndex}
                   day={day}
-                  classList={classList}
+                  classList={todayClassList}
                 />
               );
             })}
@@ -68,32 +68,10 @@ export default function CalendarDate({ year, month }) {
     return totalDays;
   }
 
-  // 주어진 날짜에 해당하는 수업을 반환하는 함수
-  function getClassListForDay(todayMonth, day) {
-    const classes = [
-      {
-        date: "2025-03-02",
-        lessons: [{ instructor: "장은혜", title: "React", startTime: "10:00", endTime: "12:00" }],
-      },
-      {
-        date: "2025-03-01",
-        lessons: [
-          { instructor: "표현경", title: "CSS", startTime: "09:00", endTime: "11:00" },
-          { instructor: "양정규", title: "C++", startTime: "10:00", endTime: "11:00" },
-        ],
-      },
-      {
-        date: "2025-03-01",
-        lessons: [{ instructor: "양정규", title: "C++", startTime: "10:00", endTime: "11:00" }],
-      },
-      {
-        date: "2025-04-01",
-        lessons: [{ instructor: "박현수", title: "JavaScript", startTime: "14:00", endTime: "16:00" }],
-      },
-      // 추가 수업 데이터
-    ];
+  function getClassForDay(classList, todayMonth, day) {
     const formattedDate = `${year}-${String(todayMonth).padStart(2, "0")}-${String(day).padStart(2, "0")}`;
-    const dayClass = classes.find((classData) => classData.date === formattedDate);
-    return dayClass ? dayClass.lessons : [];
+    const todayClassList = classList.filter((classData) => classData.date === formattedDate);
+    return todayClassList? todayClassList: [];
   }
+
 }

@@ -1,10 +1,16 @@
-import ClassList from "./classList"
+import ClassList from "./classList";
 import styles from "../page.module.scss";
-export default function Day({ otherMonth, month, dayIndex, day , classList}) {
+import { useState } from "react";
+export default function Day({ otherMonth, month, dayIndex, day, classList }) {
+  const [isExpanded, setIsExpanded] = useState(false);
+
+  const toggleExpand = () => {
+    setIsExpanded(!isExpanded);
+  };
   return (
-    <div className={`${styles.dayComponent} ${otherMonth ? styles.otherMonth : ""}`}>
+    <div className={`${styles.dayComponent} ${otherMonth ? styles.otherMonth : ""}  ${isExpanded ? styles.expanded : ""}`}>
       <div className={styles.dayIndex}>{day}</div>
-      <ClassList classList={classList} />
+      <ClassList classList={classList}  isExpanded={isExpanded} toggleExpand={toggleExpand} />
     </div>
   );
 }
