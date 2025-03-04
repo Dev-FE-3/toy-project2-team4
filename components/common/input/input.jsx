@@ -1,10 +1,10 @@
 "use client";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import styles from "./input.module.scss";
 
 /**
  * Input 컴포넌트 props
- * 
+ *
  * @param { "text" | "password" | "time" | "date" } type - 입력 타입 (text, password, time, date 중 하나)
  * @param { string } placeholder - 입력란에 표시될 텍스트
  * @param { string } defaultValue - 기본값
@@ -24,10 +24,15 @@ export default function Input({
 }) {
   const [value, setValue] = useState(defaultValue);
 
+  useEffect(() => {
+    setValue(defaultValue);
+  }, [defaultValue]);
+
   const handleChangeValue = (e) => {
     setValue(e.target.value);
     onChange(e.target.value);
   };
+
   return (
     <input
       type={type}
