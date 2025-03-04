@@ -10,6 +10,7 @@
   },
   "dependencies": {
     "@next/eslint-plugin-next": "^15.1.7",
+    "firebase": "^10.1.0",
     "next": "14.2.24",
     "react": "^18",
     "react-dom": "^18"
@@ -20,6 +21,7 @@
     "eslint": "^8",
     "eslint-config-next": "14.2.24",
     "eslint-config-prettier": "^10.0.1",
-    "prettier": "^3.5.2"
+    "prettier": "^3.5.2",
+    "sass": "^1.85.1"
   }
 }
