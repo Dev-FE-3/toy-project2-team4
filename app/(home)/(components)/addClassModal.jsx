@@ -1,18 +1,25 @@
 "use client";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import styles from "../page.module.scss";
-import Button from "../../../components/common/button/button"; // Button 컴포넌트
-import Input from "../../../components/common/input/input"; // Input 컴포넌트
-import Dropdown from "../../../components/common/dropdown/dropdown"; // Dropdown 컴포넌트
+import Button from "../../../components/common/button/button";
+import Input from "../../../components/common/input/input";
+import Dropdown from "../../../components/common/dropdown/dropdown";
 
-const AddClassModal = ({ onCancel, onCheck, instructors, title, showModal }) => {
+const AddClassModal = ({ onCancel, onCheck, instructors, title, showModal, defaultValues }) => {
   const [selectedInstructor, setSelectedInstructor] = useState("");
   const [selectedCourse, setSelectedCourse] = useState("");
   const [classDate, setClassDate] = useState("");
   const [startTime, setStartTime] = useState("");
   const [endTime, setEndTime] = useState("");
 
-  // 입력값이 변경될 때마다 상태 업데이트
+  const resetForm = () => {
+    setSelectedInstructor("");
+    setSelectedCourse("");
+    setClassDate("");
+    setStartTime("");
+    setEndTime("");
+  };
+
   const handleInstructorSelect = (instructor) => {
     setSelectedInstructor(instructor);
   };
@@ -34,59 +41,78 @@ const AddClassModal = ({ onCancel, onCheck, instructors, title, showModal }) => 
   };
 
   const handleSubmit = () => {
-    // 수업 추가 로직 (서버로 전송 또는 상태 변경 등)
-    console.log({
+    const classData = {
       instructor: selectedInstructor,
       title: selectedCourse,
       date: classDate,
       startTime,
       endTime,
-    });
-    onCheck({instructor: selectedInstructor,
-      title: selectedCourse,
-      date: classDate,
-      startTime,
-      endTime,}); // 확인 후 모달 닫기
+    };
+    onCheck(classData);
+    resetForm();
   };
 
+  const handleCancel = () => {
+    
+    console.log(selectedInstructor);
+    console.log(selectedCourse);
+    console.log(classDate);
+    console.log(startTime);
+    console.log(endTime);
+    resetForm();
+    onCancel();
+  };
+
+  useEffect(() => {
+    if (defaultValues) {
+      setSelectedInstructor(defaultValues.instructor || "");
+      setSelectedCourse(defaultValues.title || "");
+      setClassDate(defaultValues.date || "");
+      setStartTime(defaultValues.startTime || "");
+      setEndTime(defaultValues.endTime || "");
+    
+      // setClassDate(defaultValues.date ? defaultValues.date.split('T')[0] : "");
+      // setStartTime(defaultValues.startTime ? defaultValues.startTime.slice(0, 5) : "");
+      // setEndTime(defaultValues.endTime ? defaultValues.endTime.slice(0, 5) : "");
+     } else {
+      resetForm();
+    }
+  }, [defaultValues, showModal]);
+
   return (
-    <div
-      className={`${styles.modal} ${showModal ? styles.modalOpen : ""}`}
-      onCancel={onCancel}
-      onCheck={handleSubmit}
-    >
+    <div className={`${styles.modal} ${showModal ? styles.modalOpen : ""}`}>
       <div className={styles.modalContent}>
-        <h1>수업 추가</h1>
+        <h1>{defaultValues ? "수업 수정" : "수업 추가"}</h1>
         <div className={styles.formGroup}>
           <label>강사</label>
-          <Dropdown initialOptions={instructors} onSelect={handleInstructorSelect} />
+          <Dropdown initialOptions={instructors} onSelect={handleInstructorSelect} defaultValue={selectedInstructor} />
         </div>
 
         <div className={styles.formGroup}>
           <label>강의명</label>
-          <Dropdown initialOptions={title} onSelect={handleCourseSelect} />
+          <Dropdown initialOptions={title} onSelect={handleCourseSelect} defaultValue={selectedCourse} />
         </div>
 
         <div className={styles.formGroup}>
           <label>수업 일자</label>
-          <Input type="date" onChange={handleDateChange} />
+          <Input type="date" onChange={handleDateChange} defaultValue={classDate} />
         </div>
 
         <div className={styles.formGroup}>
           <label>시작 시간</label>
-          <Input type="time" onChange={handleStartTimeChange} />
+          <Input type="time" onChange={handleStartTimeChange} defaultValue={startTime} />
         </div>
 
         <div className={styles.formGroup}>
           <label>종료 시간</label>
-          <Input type="time" onChange={handleEndTimeChange} />
+          <Input type="time" onChange={handleEndTimeChange} defaultValue={endTime} />
         </div>
 
         <div className={styles.modalButton}>
           <Button color="blue" onClick={handleSubmit}>
-            등록
+            {defaultValues ? "수정" : "등록"}
           </Button>
-          <Button color="gray" onClick={onCancel}>
+          <Button color="gray" onClick={handleCancel}>
             취소
           </Button>
         </div>

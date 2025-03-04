@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import Day from "./day";
 import styles from "../page.module.scss";
-export default function CalendarDate({ year, month, classList }) {
+export default function CalendarDate({ year, month, classList, onEdit, onDelete }) {
   const daysInWeek = 7;
   const weeksInMonth = getWeeksInMonth(year, month);
   const firstDayOfMonth = getFirstDayOfMonth(year, month);
@@ -34,6 +34,8 @@ export default function CalendarDate({ year, month, classList }) {
                   dayIndex={dayIndex}
                   day={day}
                   classList={todayClassList}
+                  onEdit={onEdit}
+                  onDelete={onDelete}
                 />
               );
             })}
