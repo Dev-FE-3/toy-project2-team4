@@ -1,6 +1,6 @@
-import Navigation from "../components/navigation/navigation.jsx";
-import { notoSansKr } from "../styles/font.js";
-import "../styles/global.css";
+import Navigation from "./components/navigation/navigation.jsx";
+import { notoSansKr } from "./styles/font.js";
+import "./styles/global.css";
 
 export const metadata = {
   title: "그랑 코딩학원",
@@ -10,10 +10,6 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <html lang="kr">
-      <head>
-        <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet" />
-        <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded" rel="stylesheet" />
-      </head>
       <body className={notoSansKr.className}>
         <Navigation />
         {children}
