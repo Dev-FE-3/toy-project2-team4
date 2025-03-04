@@ -17,6 +17,7 @@ export default function LoginPage() {
     e.preventDefault();
     try {
       await signInWithEmailAndPassword(auth, email, password);
+      // await console.log(signInWithEmailAndPassword(auth, email, password));
       console.log("로그인에 성공했습니다!");
       window.location.href = "/"; // 로그인 성공 시 홈으로 리다이렉트
     } catch (err) {

@@ -1,8 +1,8 @@
-"use client"; // 클라이언트 컴포넌트로 지정
+"use client";
 
 import { useEffect } from "react";
 import { usePathname, useRouter } from "next/navigation";
-import { auth } from "../../utils/firebase"; // Firebase 설정 가져오기
+import { auth } from "../../utils/firebase";
 import { onAuthStateChanged } from "firebase/auth";
 
 export default function ProtectedRoute({ children }) {
