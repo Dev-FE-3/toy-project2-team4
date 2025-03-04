@@ -1,3 +1,5 @@
+"use client";
+
 import React, { useState, useRef, useEffect } from "react";
 import styles from "./dropdown.module.scss";
 import Icon from "../icon/icon";
@@ -7,9 +9,9 @@ import Icon from "../icon/icon";
  * @param {function} onSelect - 옵션 선택 시 실행할 콜백 함수
  */
 
-const Dropdown = ({ initialOptions = [], onSelect}) => {
+const Dropdown = ({ initialOptions = [], onSelect }) => {
   const [isOpen, setIsOpen] = useState(false);
-  const [selectOption, setSelectOption] = useState('선택하기')
+  const [selectOption, setSelectOption] = useState("선택하기");
   const dropdownRef = useRef(null);
 
   const handleClickOutside = (e) => {
@@ -19,10 +21,10 @@ const Dropdown = ({ initialOptions = [], onSelect}) => {
   };
 
   const handleItemClick = (option) => {
-    setSelectOption(option)
+    setSelectOption(option);
     if (onSelect) onSelect(option); // 부모 컴포넌트로 선택 값 전달
-    setIsOpen(false);  
-  }
+    setIsOpen(false);
+  };
 
   useEffect(() => {
     document.addEventListener("mousedown", handleClickOutside);
@@ -42,7 +44,13 @@ const Dropdown = ({ initialOptions = [], onSelect}) => {
           <div className={styles.dropdownList}>
             <ul>
               {initialOptions.map((option, index) => (
-                <li key={index} className={styles.dropItem} onClick={() => {handleItemClick(option)}}>
+                <li
+                  key={index}
+                  className={styles.dropItem}
+                  onClick={() => {
+                    handleItemClick(option);
+                  }}
+                >
                   {option}
                 </li>
               ))}
