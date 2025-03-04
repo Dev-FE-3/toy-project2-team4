@@ -1,9 +1,9 @@
 "use client";
 import Calendar from "./(components)/calendar";
 import Dropdown from "../../components/common/dropdown/dropdown";
-import AddClassModal from "./(components)/addClassModal"
+import AddClassModal from "./(components)/addClassModal";
 import styles from "./page.module.scss";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { classData } from "./classData";
 import Button from "../../components/common/button/button";
 
@@ -18,21 +18,32 @@ export default function Home() {
     setSelectedFilter(filter); // 선택된 필터 값 상태로 업데이트
   };
 
-  const classList = getClassList(classData, selectedFilter);
+  const filterClassList = getClassList(classData, selectedFilter);
 
+  const [classListData, setClassListData] = useState(filterClassList);
   const [showModal, setShowModal] = useState(false);
 
-  const instructors = ["장은혜", "양정규", "표현경"]; // 강사 목록 예시
-  const courses = ["React", "CSS", "C++", "JavaScript"]; // 강의명 목록 예시
+  const instructors = ["장은혜", "양정규", "표현경", "박현수"]; // 강사 목록 예시
+  const courses = ["React", "CSS", "C++", "JavaScript", "TypeScript", "Python", "Java", "Swift", "Go", "Kotlin"]; // 강의명 목록 예시
 
-  const handleModalCancel = () => {
+  const handleModalClose = () => {
     setShowModal(false); // 모달 닫기
   };
-
-  const handleModalCheck = () => {
-    setShowModal(false); // 모달 닫기
+  const handleAddClass = (newClass) => {
+    setClassListData([...classListData, newClass]); // 새 수업 추가
+    console.log(classListData);
+    handleModalClose();
   };
 
+  // classListData가 업데이트될 때마다 출력
+  useEffect(() => {
+    console.log("Updated class list:", classListData);
+  }, [classListData]); // classListData가 변경될 때마다 실행
+
+  useEffect(() => {
+    // 필터가 변경될 때마다 classListData를 다시 설정
+    setClassListData(filterClassList);
+  }, [selectedFilter]); // selectedFilter가 변경될 때마다 실행
   return (
     <>
       <div>수업 확인 페이지</div>
@@ -46,17 +57,17 @@ export default function Home() {
             {year}년 {month}월
           </p>
           <Button color="blue" onClick={() => setShowModal(true)}>
-          수업 추가
+            수업 추가
           </Button>
           <AddClassModal
-            onCancel={handleModalCancel}
-            onCheck={handleModalCheck}
+            onCancel={handleModalClose}
+            onCheck={handleAddClass}
             instructors={instructors}
-            courses={courses}
+            title={courses}
             showModal={showModal}
           />
         </div>
-        <Calendar year={year} month={month} classList={classList} />
+        <Calendar year={year} month={month} classList={classListData} />
       </div>
     </>
   );

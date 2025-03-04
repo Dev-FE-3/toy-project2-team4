@@ -5,7 +5,7 @@ import Button from "../../../components/common/button/button"; // Button 컴포�
 import Input from "../../../components/common/input/input"; // Input 컴포넌트
 import Dropdown from "../../../components/common/dropdown/dropdown"; // Dropdown 컴포넌트
 
-const AddClassModal = ({ onCancel, onCheck, instructors, courses, showModal }) => {
+const AddClassModal = ({ onCancel, onCheck, instructors, title, showModal }) => {
   const [selectedInstructor, setSelectedInstructor] = useState("");
   const [selectedCourse, setSelectedCourse] = useState("");
   const [classDate, setClassDate] = useState("");
@@ -37,12 +37,16 @@ const AddClassModal = ({ onCancel, onCheck, instructors, courses, showModal }) =
     // 수업 추가 로직 (서버로 전송 또는 상태 변경 등)
     console.log({
       instructor: selectedInstructor,
-      course: selectedCourse,
+      title: selectedCourse,
       date: classDate,
       startTime,
       endTime,
     });
-    onCheck(); // 확인 후 모달 닫기
+    onCheck({instructor: selectedInstructor,
+      title: selectedCourse,
+      date: classDate,
+      startTime,
+      endTime,}); // 확인 후 모달 닫기
   };
 
   return (
@@ -50,10 +54,6 @@ const AddClassModal = ({ onCancel, onCheck, instructors, courses, showModal }) =
       className={`${styles.modal} ${showModal ? styles.modalOpen : ""}`}
       onCancel={onCancel}
       onCheck={handleSubmit}
-      title="수업 추가"
-      titleIcon={<span>📝</span>}
-      checkButtonColor="blue"
-      showCancelButton={true}
     >
       <div className={styles.modalContent}>
         <h1>수업 추가</h1>
@@ -64,7 +64,7 @@ const AddClassModal = ({ onCancel, onCheck, instructors, courses, showModal }) =
 
         <div className={styles.formGroup}>
           <label>강의명</label>
-          <Dropdown initialOptions={courses} onSelect={handleCourseSelect} />
+          <Dropdown initialOptions={title} onSelect={handleCourseSelect} />
         </div>
 
         <div className={styles.formGroup}>
