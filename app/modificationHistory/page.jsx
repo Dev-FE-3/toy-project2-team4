@@ -78,6 +78,24 @@ const datas = [
     requestStatus: "대기",
     isClickable: true,
   },
+  {
+    num: 9,
+    email: "test@test.com",
+    registeredDate: "2024.12.15",
+    reasonForRequest: "오류 수정",
+    content: "출석 시간 오류로 인해 정정을 요청합니다.",
+    requestStatus: "대기",
+    isClickable: true,
+  },
+  {
+    num: 10,
+    email: "test@test.com",
+    registeredDate: "2024.12.15",
+    reasonForRequest: "오류 수정",
+    content: "출석 시간 오류로 인해 정정을 요청합니다.",
+    requestStatus: "대기",
+    isClickable: true,
+  },
 ];
 
 const ModificationHistory = () => {
@@ -153,6 +171,7 @@ const ModificationHistory = () => {
       {isModal && (
         <Modal
           onCheck={() => handleListDelete(selectedList)}
+          onCancel={() => setIsModal(!isModal)}
           title="주의"
           titleIcon={<Icon style="rounded" iconname="warning" size="2rem" color="#d86060"></Icon>}
           checkButtonColor="red"
