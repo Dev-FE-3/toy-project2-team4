@@ -1,7 +1,7 @@
 import ClassList from "./classList";
 import styles from "../page.module.scss";
 import { useState } from "react";
-export default function Day({ otherMonth, month, dayIndex, day, classList, onEdit, onDelete, isAdmin }) {
+export default function Day({ otherMonth, day, classList, onEdit, onDelete, isAdmin }) {
   const [isExpanded, setIsExpanded] = useState(false);
 
   const toggleExpand = () => {

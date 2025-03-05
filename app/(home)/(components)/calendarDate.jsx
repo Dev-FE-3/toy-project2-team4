@@ -1,4 +1,3 @@
-import React, { useEffect, useState } from "react";
 import Day from "./day";
 import styles from "../page.module.scss";
 export default function CalendarDate({ year, month, classList, onEdit, onDelete, isAdmin }) {
