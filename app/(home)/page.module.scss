@@ -14,6 +14,7 @@ $border-color: #e8e8e8;
     height: 32px;
     margin-bottom: 12px;
     display: flex;
+
     // Dropdown 컨테이너
     & > :first-child {
       flex: 1;
@@ -85,21 +86,27 @@ $border-color: #e8e8e8;
     .calendarRow {
       background-color: var(--background); // 배경색 설정
       display: flex; // Flexbox 레이아웃 사용
-      flex-basis: calc(100% / 6); // 높이를 1/6로 설정
+      height: calc(100% / 6); // 높이를 1/6로 설정
 
       .dayComponent {
-        border: 1px solid $border-color; // 테두리 설정
+        border: 1px solid $border-color;
         flex: 1;
         display: flex;
         flex-direction: column;
-        max-height: 200px; /* 기본적으로 고정된 높이 */
-        padding: 12px 12px 0 12px;
+        // padding: 12px 12px 0 12px;
 
         &.expanded {
           z-index: 1;
+
+          .classList {
+            height: auto; // expanded 상태에서는 자동 높이
+            background-color: var(--background); // 배경색 설정
+            border-bottom: 4px solid $border-color;
+          }
         }
 
         .dayIndex {
+          margin: 12px 12px 0 12px;
           font-size: 19px;
           font-weight: 700;
           line-height: 1; // 텍스트의 기본 라인 높이를 1로 설정하여 여백 없애기
@@ -108,7 +115,7 @@ $border-color: #e8e8e8;
         .classList {
           height: 75px; // 기본적으로 3개 수업까지만 보이도록 설정
           margin-top: 3px;
-          // background-color: var(--background);
+          overflow-y: inherit;
 
           .classItem {
             font-size: 1.3rem;
@@ -119,6 +126,7 @@ $border-color: #e8e8e8;
             height: 24px;
             display: flex;
             justify-content: space-between;
+            margin: 0 12px;
 
             .userIconContainer {
               display: none;
@@ -143,11 +151,6 @@ $border-color: #e8e8e8;
               }
             }
           }
-          // &.expanded {
-          //   height: max-content; // 확장된 상태에서는 높이를 제한하지 않음
-          //   background-color: red;
-          //   font-size: 50px;
-          // }
         }
         .toggleButton {
           all: unset;
@@ -168,6 +171,11 @@ $border-color: #e8e8e8;
       .otherMonth {
         background-color: var(--content);
         color: var(--gray);
+        &.expanded {
+          .classList {
+            background-color: var(--content); // 배경색 설정
+          }
+        }
       }
     }
   }
@@ -214,8 +222,9 @@ $border-color: #e8e8e8;
         }
 
         .isWrong {
-          > * {  // isWrong의 직계 자식 요소 모두 선택
-            outline: 1px solid var(--red); 
+          > * {
+            // isWrong의 직계 자식 요소 모두 선택
+            outline: 1px solid var(--red);
             border-radius: 5px;
             box-sizing: border-box;
           }
@@ -236,32 +245,4 @@ $border-color: #e8e8e8;
   .adminIconContainer {
     visibility: visible;
   }
-
-  //   // admin일 때 보이도록 설정
-  //   &.admin {
-  //     .classAddButton {
-  //       visibility: hidden;
-  //     }
-
-  //     .adminIconContainer {
-  //       display: flex;
-  //       gap: 4px;
-
-  //       .icon {
-  //         display: none;
-  //         cursor: pointer;
-  //         color: #8b8b8b;
-
-  //         &:hover {
-  //           color: #000000;
-  //         }
-  //       }
-  //     }
-
-  //     .classItem:hover {
-  //       .icon {
-  //         visibility: visible;
-  //       }
-  //     }
-  //   }
 }
