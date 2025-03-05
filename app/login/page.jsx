@@ -1,43 +1,78 @@
 "use client";
 
 import { useState } from "react";
-import Modal from "../../components/common/modal/modal";
-import Icon from "../../components/common/icon/icon.jsx";
-const Login = () => {
-  const [isModal, setIsModal] = useState(false);
+import { auth } from "../../utils/firebase"; // Firebase 초기화 import
+import { signInWithEmailAndPassword, createUserWithEmailAndPassword } from "firebase/auth";
+import style from "./page.module.scss";
+import Input from "../../components/common/input/input";
 
-  // 모달창 사용 예시 함수
-  const onClickModal = () => {
-    if (isModal) {
-      setIsModal(false);
-    } else {
-      setIsModal(true);
+export default function LoginPage() {
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [error, setError] = useState("");
+  const [isSignup, setIsSignup] = useState(false); // 로그인/회원가입 토글
+
+  // 로그인 처리
+  const handleLogin = async (e) => {
+    e.preventDefault();
+    try {
+      await signInWithEmailAndPassword(auth, email, password);
+      // await console.log(signInWithEmailAndPassword(auth, email, password));
+      console.log("로그인에 성공했습니다!");
+      window.location.href = "/"; // 로그인 성공 시 홈으로 리다이렉트
+    } catch (err) {
+      setError("로그인에 실패했습니다.");
     }
-    console.log(isModal);
+  };
+
+  // 회원가입 처리
+  const handleSignup = async (e) => {
+    e.preventDefault();
+    try {
+      await createUserWithEmailAndPassword(auth, email, password);
+      console.log("회원가입에 성공했습니다!");
+      setIsSignup(false);
+      // window.location.href = "/"; // 회원가입 후 홈으로 리다이렉트
+    } catch (err) {
+      setError("회원가입에 실패했습니다.");
+    }
+  };
+
+  const resetIput = () => {};
+
+  const logOut = () => {
+    auth.signOut();
   };
 
   return (
-    <div>
-      로그인 페이지
-      <button onClick={onClickModal}>모달창 on</button>
-      <Icon iconname="home" size="2rem" color="red"></Icon>
-      {/* calss 추가하기 */}
-      {isModal ? (
-        <Modal
-          onCheck={onClickModal}
-          onCancel={onClickModal}
-          title="주의!"
-          titleIcon={<Icon style="rounded" iconname="warning" size="2rem" color="#d86060"></Icon>}
-          checkButtonColor="red"
-          showCancelButton={true}
-        >
-          <p> 정말 삭제 하시겠습니까? </p>
-        </Modal>
-      ) : (
-        <></>
-      )}
+    <div className={style.container}>
+      <header>
+        <h1>{isSignup ? "회원가입" : "로그인"}</h1>
+      </header>
+      <main>
+        <form onSubmit={isSignup ? handleSignup : handleLogin}>
+          <Input type="email" defaultValue={email} placeholder="Email" onChange={setEmail} />
+          {/* <input type="email" value={email} onChange={(e) => setEmail(e.target.value)} placeholder="Email" required /> */}
+          <Input type="password" defaultValue={password} placeholder="Password" onChange={setPassword} />
+          {/* <input
+          type="password"
+          value={password}
+          onChange={(e) => setPassword(e.target.value)}
+          placeholder="Password"
+          required
+          /> */}
+          <button type="submit" onClick={resetIput}>
+            {isSignup ? "회원가입" : "로그인"}
+          </button>
+        </form>
+        {error && error}
+      </main>
+
+      <footer>
+        <button onClick={() => setIsSignup(!isSignup)}>{isSignup ? "로그인 하기" : "회원가입 하기"}</button>
+      </footer>
+
+      <button onClick={logOut}>로그아웃</button>
     </div>
   );
-};
-
-export default Login;
+}
