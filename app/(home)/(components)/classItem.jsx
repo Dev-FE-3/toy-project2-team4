@@ -4,7 +4,7 @@ import Icon from "../../../components/common/icon/icon";
 import Modal from "../../../components/common/modal/modal";
 import { useState } from "react";
 
-export default function ClassItem({ index, item, onEdit, onDelete }) {
+export default function ClassItem({ index, item, onEdit, onDelete, isAdmin }) {
   const [showDeleteModal, setShowDeleteModal] = useState(false);
   const color = classColors[item.title] || "#E0E0E0"; // 없으면 기본 회색
   const backgroundColor = `${color}33`; // HEX 뒤에 "33" 추가 → 약 20% 투명도 (RGBA로 변환됨)
@@ -30,19 +30,23 @@ export default function ClassItem({ index, item, onEdit, onDelete }) {
       >
         <p>{item.title}</p>
         <div className={styles.adminIconContainer}>
-          <div className={styles.icon} onClick={() => onEdit(item)}>
-            <Icon
-              iconname="edit" // 연필 아이콘
-              size="20px"
-            />
-          </div>
-          <div className={styles.icon} onClick={handleDeleteClick}>
-            <Icon
-              style="outlined"
-              iconname="close" // X 아이콘
-              size="20px"
-            />
-          </div>
+          {isAdmin && (
+            <>
+              <div className={styles.icon} onClick={() => onEdit(item)}>
+                <Icon
+                  iconname="edit" // 연필 아이콘
+                  size="20px"
+                />
+              </div>
+              <div className={styles.icon} onClick={handleDeleteClick}>
+                <Icon
+                  style="outlined"
+                  iconname="close" // X 아이콘
+                  size="20px"
+                />
+              </div>
+            </>
+          )}
         </div>
       </div>
 

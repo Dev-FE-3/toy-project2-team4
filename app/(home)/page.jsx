@@ -9,32 +9,32 @@ import Button from "../../components/common/button/button";
 import Icon from "../../components/common/icon/icon";
 
 export default function Home() {
-  // 1. 상수 정의
+  // 상수 정의
   const currentDate = new Date();
-  const [year, setYear] = useState(currentDate.getFullYear());
-  const [month, setMonth] = useState(currentDate.getMonth() + 1);
   const instructors = ["장은혜", "양정규", "표현경", "박현수"];
   const courses = ["React", "CSS", "C++", "JavaScript", "TypeScript", "Python", "Java", "Swift", "Go", "Kotlin"];
-
-  // 2. 상태 관리
+  
+  // 상태 관리
+  const [year, setYear] = useState(currentDate.getFullYear());
+  const [month, setMonth] = useState(currentDate.getMonth() + 1);
   const [selectedFilter, setSelectedFilter] = useState("장은혜"); // 드롭다운 필터링
   const [classListData, setClassListData] = useState(classData); // 수업 데이터
   const [showModal, setShowModal] = useState(false); // 수업 추가/수정 모달
   const [selectedClass, setSelectedClass] = useState(null); // 선택한 수업(admin)
   const [isAdmin] = useState(true); // 실제로는 로그인 상태나 권한에 따라 결정될 것
 
-  // 3. 유틸리티 함수
+  // 유틸리티 함수
   const getClassList = (classData, selectedFilter) => {
     return selectedFilter === "전체보기" ? classData : classData.filter((item) => item.instructor === selectedFilter);
   };
 
-  // 4. 이벤트 핸들러
+  // 이벤트 핸들러
   // 필터링
   const handleFilterSelect = (filter) => {
     setSelectedFilter(filter);
   };
-
-  const handleAddClass = (newClass) => {
+  // 수업 추가/수정
+  const handleSaveClass = (newClass) => {
     if (selectedClass) {
       setClassListData(
         (
@@ -52,18 +52,15 @@ export default function Home() {
     setShowModal(false);
     setSelectedClass(null);
   };
-  // 수업 수정
+  // 수업 수정 버튼 클릭
   const handleEditClass = (classItem) => {
     setSelectedClass(classItem);
     setShowModal(true);
   };
-  // 수업 삭제
+  // 수업 삭제 버튼 클릭
   const handleDelete = (id) => {
-    console.log("Deleting id:", id); // 삭제하려는 id 확인
-    console.log("Before delete:", classListData); // 삭제 전 데이터
     setClassListData((prev) => {
       const newData = prev.filter((item) => item.id !== id);
-      console.log("After delete:", newData); // 삭제 후 데이터
       return newData;
     });
   };
@@ -85,11 +82,11 @@ export default function Home() {
     setYear(newYear);
   };
 
-  // 5. 계산된 값
+  // 계산된 값
   // 강사별 필터링된 수업 리스트
   const filteredClassList = getClassList(classListData, selectedFilter);
 
-  // 6. 렌더링
+  // 렌더링
   return (
     <>
       <div>수업 확인 페이지</div>
@@ -113,13 +110,13 @@ export default function Home() {
               <Icon iconname="chevron_right" />
             </div>
           </div>
-          {isAdmin && (
           <div className={styles.classAddButton}>
-            <Button color="blue" onClick={() => setShowModal(true)}>
-              수업 추가
-            </Button>
-          </div>
+            {isAdmin && (
+              <Button color="blue" onClick={() => setShowModal(true)}>
+                수업 추가
+              </Button>
             )}
+          </div>
         </div>
 
         <Calendar
@@ -128,11 +125,12 @@ export default function Home() {
           classList={filteredClassList}
           onEdit={handleEditClass}
           onDelete={handleDelete}
+          isAdmin={isAdmin}
         />
 
         <AddClassModal
           onCancel={handleModalClose}
-          onCheck={handleAddClass}
+          onCheck={handleSaveClass}
           instructors={instructors}
           title={courses}
           showModal={showModal}

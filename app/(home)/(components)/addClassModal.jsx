@@ -6,70 +6,87 @@ import Input from "../../../components/common/input/input";
 import Dropdown from "../../../components/common/dropdown/dropdown";
 
 const AddClassModal = ({ onCancel, onCheck, instructors, title, showModal, defaultValues }) => {
-  const [selectedInstructor, setSelectedInstructor] = useState("");
-  const [selectedCourse, setSelectedCourse] = useState("");
-  const [classDate, setClassDate] = useState("");
-  const [startTime, setStartTime] = useState("");
-  const [endTime, setEndTime] = useState("");
+  const [isWrong, setIsWrong] = useState({
+    instructor: false,
+    title: false,
+    date: false,
+    startTime: false,
+    endTime: false,
+  });
+  const [formData, setFormData] = useState({
+    instructor: defaultValues?.instructor || "",
+    title: defaultValues?.title || "",
+    date: defaultValues?.date || "",
+    startTime: defaultValues?.startTime || "",
+    endTime: defaultValues?.endTime || "",
+  });
 
   const resetForm = () => {
-    setSelectedInstructor("");
-    setSelectedCourse("");
-    setClassDate("");
-    setStartTime("");
-    setEndTime("");
+    setFormData({
+      instructor: "",
+      title: "",
+      date: "",
+      startTime: "",
+      endTime: "",
+    });
+    setIsWrong({
+      instructor: false,
+      title: false,
+      date: false,
+      startTime: false,
+      endTime: false,
+    });
   };
 
-  const handleInstructorSelect = (instructor) => {
-    setSelectedInstructor(instructor);
-  };
+  const handleChange = (field, value) => {
+    setFormData((prev) => ({
+      ...prev,
+      [field]: value,
+    }));
 
-  const handleCourseSelect = (course) => {
-    setSelectedCourse(course);
-  };
-
-  const handleDateChange = (date) => {
-    setClassDate(date);
-  };
-
-  const handleStartTimeChange = (time) => {
-    setStartTime(time);
-  };
-
-  const handleEndTimeChange = (time) => {
-    setEndTime(time);
+    if (value) {
+      setIsWrong((prev) => ({
+        ...prev,
+        [field]: false,
+      }));
+    }
   };
 
   const handleSubmit = () => {
-    const classData = {
-      instructor: selectedInstructor,
-      title: selectedCourse,
-      date: classDate,
-      startTime,
-      endTime,
-    };
-    onCheck(classData);
+    // 각 필드별로 비어있는지 확인하고 wrongFields 업데이트
+    const newWrongFields = Object.keys(formData).reduce(
+      (acc, key) => ({
+        ...acc,
+        [key]: !formData[key],
+      }),
+      {},
+    );
+
+    setIsWrong(newWrongFields);
+
+    // 하나라도 비어있으면 제출하지 않음
+    if (Object.values(newWrongFields).some((isWrong) => isWrong)) {
+      return;
+    }
+
+    onCheck(formData); // formData를 직접 전달
     resetForm();
   };
 
   const handleCancel = () => {
-    console.log(selectedInstructor);
-    console.log(selectedCourse);
-    console.log(classDate);
-    console.log(startTime);
-    console.log(endTime);
     resetForm();
     onCancel();
   };
 
   useEffect(() => {
     if (defaultValues) {
-      setSelectedInstructor(defaultValues.instructor || "");
-      setSelectedCourse(defaultValues.title || "");
-      setClassDate(defaultValues.date || "");
-      setStartTime(defaultValues.startTime || "");
-      setEndTime(defaultValues.endTime || "");
-
+      setFormData({
+        instructor: defaultValues.instructor || "",
+        title: defaultValues.title || "",
+        date: defaultValues.date || "",
+        startTime: defaultValues.startTime || "",
+        endTime: defaultValues.endTime || "",
+      });
     } else {
       resetForm();
     }
@@ -81,22 +98,26 @@ const AddClassModal = ({ onCancel, onCheck, instructors, title, showModal, defau
         <h1>{defaultValues ? "수업 수정" : "수업 추가"}</h1>
         <div className={styles.formGroup}>
           <label>강사</label>
-          <Dropdown
-            key={`instructor-${defaultValues?.instructor || "new"}-${showModal}`}
-            initialOptions={instructors}
-            onSelect={handleInstructorSelect}
-            defaultValue={selectedInstructor}
-          />
+          <div className={`${isWrong.instructor ? styles.isWrong : ""}`}>
+            <Dropdown
+              key={`instructor-${defaultValues?.instructor || "new"}-${showModal}`}
+              initialOptions={instructors}
+              onSelect={(value) => handleChange("instructor", value)}
+              defaultValue={formData.instructor}
+            />
+          </div>
         </div>
 
         <div className={styles.formGroup}>
           <label>강의명</label>
-          <Dropdown
-            key={`course-${defaultValues?.title || "new"}-${showModal}`}
-            initialOptions={title}
-            onSelect={handleCourseSelect}
-            defaultValue={selectedCourse}
-          />
+          <div className={`${isWrong.title ? styles.isWrong : ""}`}>
+            <Dropdown
+              key={`course-${defaultValues?.title || "new"}-${showModal}`}
+              initialOptions={title}
+              onSelect={(value) => handleChange("title", value)}
+              defaultValue={formData.title}
+            />
+          </div>
         </div>
 
         <div className={styles.formGroup}>
@@ -104,8 +125,9 @@ const AddClassModal = ({ onCancel, onCheck, instructors, title, showModal, defau
           <Input
             key={`date-${defaultValues?.date || "new"}-${showModal}`}
             type="date"
-            onChange={handleDateChange}
-            defaultValue={classDate}
+            isWrong={isWrong.date}
+            onChange={(value) => handleChange("date", value)}
+            defaultValue={formData.date}
           />
         </div>
 
@@ -114,8 +136,9 @@ const AddClassModal = ({ onCancel, onCheck, instructors, title, showModal, defau
           <Input
             key={`start-${defaultValues?.startTime || "new"}-${showModal}`}
             type="time"
-            onChange={handleStartTimeChange}
-            defaultValue={startTime}
+            isWrong={isWrong.startTime}
+            onChange={(value) => handleChange("startTime", value)}
+            defaultValue={formData.startTime}
           />
         </div>
 
@@ -124,8 +147,9 @@ const AddClassModal = ({ onCancel, onCheck, instructors, title, showModal, defau
           <Input
             key={`end-${defaultValues?.endTime || "new"}-${showModal}`}
             type="time"
-            onChange={handleEndTimeChange}
-            defaultValue={endTime}
+            isWrong={isWrong.endTime}
+            onChange={(value) => handleChange("endTime", value)}
+            defaultValue={formData.endTime}
           />
         </div>
 
