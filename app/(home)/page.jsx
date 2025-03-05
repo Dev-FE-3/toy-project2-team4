@@ -1,5 +1,5 @@
 "use client";
-import { useState, useEffect } from "react";
+import { useState} from "react";
 import Calendar from "./(components)/calendar";
 import Dropdown from "../../components/common/dropdown/dropdown";
 import AddClassModal from "./(components)/addClassModal";
@@ -7,17 +7,16 @@ import styles from "./page.module.scss";
 import { classData } from "./classData";
 import Button from "../../components/common/button/button";
 import Icon from "../../components/common/icon/icon";
+import { INSTRUCTORS, CLASS_TITLES } from "./constants";
 
 export default function Home() {
   // 상수 정의
   const currentDate = new Date();
-  const instructors = ["장은혜", "양정규", "표현경", "박현수"];
-  const courses = ["React", "CSS", "C++", "JavaScript", "TypeScript", "Python", "Java", "Swift", "Go", "Kotlin"];
-  
+
   // 상태 관리
   const [year, setYear] = useState(currentDate.getFullYear());
   const [month, setMonth] = useState(currentDate.getMonth() + 1);
-  const [selectedFilter, setSelectedFilter] = useState("장은혜"); // 드롭다운 필터링
+  const [selectedFilter, setSelectedFilter] = useState(INSTRUCTORS[0]); // 기본값도 상수에서 가져오기
   const [classListData, setClassListData] = useState(classData); // 수업 데이터
   const [showModal, setShowModal] = useState(false); // 수업 추가/수정 모달
   const [selectedClass, setSelectedClass] = useState(null); // 선택한 수업(admin)
@@ -92,7 +91,7 @@ export default function Home() {
       <div>수업 확인 페이지</div>
       <div className={styles.calendarContainer}>
         <div className={styles.calendarHeader}>
-          <Dropdown initialOptions={["전체보기", ...instructors]} onSelect={handleFilterSelect} />
+          <Dropdown initialOptions={["전체보기", ...INSTRUCTORS]} onSelect={handleFilterSelect} />
           <div className={styles.pagination}>
             <div
               className={styles.paginationIcon}
@@ -131,8 +130,8 @@ export default function Home() {
         <AddClassModal
           onCancel={handleModalClose}
           onCheck={handleSaveClass}
-          instructors={instructors}
-          title={courses}
+          instructors={INSTRUCTORS}
+          title={CLASS_TITLES}
           showModal={showModal}
           defaultValues={selectedClass}
         />

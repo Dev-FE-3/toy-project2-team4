@@ -1,12 +1,12 @@
 import styles from "../page.module.scss";
-import { classColors } from "../classColors";
+import { CLASS_COLORS } from "../constants";
 import Icon from "../../../components/common/icon/icon";
 import Modal from "../../../components/common/modal/modal";
 import { useState } from "react";
 
 export default function ClassItem({ index, item, onEdit, onDelete, isAdmin }) {
   const [showDeleteModal, setShowDeleteModal] = useState(false);
-  const color = classColors[item.title] || "#E0E0E0"; // 없으면 기본 회색
+  const color = CLASS_COLORS[item.title] || "#E0E0E0"; // 없으면 기본 회색
   const backgroundColor = `${color}33`; // HEX 뒤에 "33" 추가 → 약 20% 투명도 (RGBA로 변환됨)
 
   const handleDeleteClick = () => {
