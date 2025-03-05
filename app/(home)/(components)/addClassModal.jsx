@@ -70,9 +70,6 @@ const AddClassModal = ({ onCancel, onCheck, instructors, title, showModal, defau
       setStartTime(defaultValues.startTime || "");
       setEndTime(defaultValues.endTime || "");
 
-      // setClassDate(defaultValues.date ? defaultValues.date.split('T')[0] : "");
-      // setStartTime(defaultValues.startTime ? defaultValues.startTime.slice(0, 5) : "");
-      // setEndTime(defaultValues.endTime ? defaultValues.endTime.slice(0, 5) : "");
     } else {
       resetForm();
     }

@@ -6,10 +6,6 @@ $border-color: #e8e8e8;
   background-color: var(--content);
   display: flex; // Flexbox 레이아웃 사용
   flex-direction: column; // Flexbox 방향을 세로로 설정
-  justify-content: center; // 수평 중앙 정렬
-  align-items: center; // 수직 중앙 정렬
-  margin: 100px;
-  border-radius: 12px;
 
   .calendarHeader {
     width: 100%;
