@@ -21,6 +21,7 @@ export default function Home() {
   const [classListData, setClassListData] = useState(classData); // 수업 데이터
   const [showModal, setShowModal] = useState(false); // 수업 추가/수정 모달
   const [selectedClass, setSelectedClass] = useState(null); // 선택한 수업(admin)
+  const [isAdmin] = useState(true); // 실제로는 로그인 상태나 권한에 따라 결정될 것
 
   // 3. 유틸리티 함수
   const getClassList = (classData, selectedFilter) => {
@@ -112,9 +113,13 @@ export default function Home() {
               <Icon iconname="chevron_right" />
             </div>
           </div>
-          <Button color="blue" onClick={() => setShowModal(true)}>
-            수업 추가
-          </Button>
+          {isAdmin && (
+          <div className={styles.classAddButton}>
+            <Button color="blue" onClick={() => setShowModal(true)}>
+              수업 추가
+            </Button>
+          </div>
+            )}
         </div>
 
         <Calendar

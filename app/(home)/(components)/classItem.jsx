@@ -29,7 +29,7 @@ export default function ClassItem({ index, item, onEdit, onDelete }) {
         }}
       >
         <p>{item.title}</p>
-        <div className={`${styles.adminIconContainer} ${styles.userIconContainer}`}>
+        <div className={styles.adminIconContainer}>
           <div className={styles.icon} onClick={() => onEdit(item)}>
             <Icon
               iconname="edit" // 연필 아이콘
@@ -51,7 +51,7 @@ export default function ClassItem({ index, item, onEdit, onDelete }) {
           onCancel={() => setShowDeleteModal(false)}
           onCheck={handleDeleteConfirm}
           title="수업 삭제"
-          titleIcon="⚠️"
+          titleIcon={<Icon style="rounded" iconname="warning" size="2rem" color="#d86060"></Icon>}
           checkButtonColor="red"
           showCancelButton={true}
         >
