@@ -53,7 +53,6 @@ const AddClassModal = ({ onCancel, onCheck, instructors, title, showModal, defau
   };
 
   const handleCancel = () => {
-    
     console.log(selectedInstructor);
     console.log(selectedCourse);
     console.log(classDate);
@@ -70,11 +69,11 @@ const AddClassModal = ({ onCancel, onCheck, instructors, title, showModal, defau
       setClassDate(defaultValues.date || "");
       setStartTime(defaultValues.startTime || "");
       setEndTime(defaultValues.endTime || "");
-    
+
       // setClassDate(defaultValues.date ? defaultValues.date.split('T')[0] : "");
       // setStartTime(defaultValues.startTime ? defaultValues.startTime.slice(0, 5) : "");
       // setEndTime(defaultValues.endTime ? defaultValues.endTime.slice(0, 5) : "");
-     } else {
+    } else {
       resetForm();
     }
   }, [defaultValues, showModal]);
@@ -85,27 +84,52 @@ const AddClassModal = ({ onCancel, onCheck, instructors, title, showModal, defau
         <h1>{defaultValues ? "수업 수정" : "수업 추가"}</h1>
         <div className={styles.formGroup}>
           <label>강사</label>
-          <Dropdown initialOptions={instructors} onSelect={handleInstructorSelect} defaultValue={selectedInstructor} />
+          <Dropdown
+            key={`instructor-${defaultValues?.instructor || "new"}-${showModal}`}
+            initialOptions={instructors}
+            onSelect={handleInstructorSelect}
+            defaultValue={selectedInstructor}
+          />
         </div>
 
         <div className={styles.formGroup}>
           <label>강의명</label>
-          <Dropdown initialOptions={title} onSelect={handleCourseSelect} defaultValue={selectedCourse} />
+          <Dropdown
+            key={`course-${defaultValues?.title || "new"}-${showModal}`}
+            initialOptions={title}
+            onSelect={handleCourseSelect}
+            defaultValue={selectedCourse}
+          />
         </div>
 
         <div className={styles.formGroup}>
           <label>수업 일자</label>
-          <Input type="date" onChange={handleDateChange} defaultValue={classDate} />
+          <Input
+            key={`date-${defaultValues?.date || "new"}-${showModal}`}
+            type="date"
+            onChange={handleDateChange}
+            defaultValue={classDate}
+          />
         </div>
 
         <div className={styles.formGroup}>
           <label>시작 시간</label>
-          <Input type="time" onChange={handleStartTimeChange} defaultValue={startTime} />
+          <Input
+            key={`start-${defaultValues?.startTime || "new"}-${showModal}`}
+            type="time"
+            onChange={handleStartTimeChange}
+            defaultValue={startTime}
+          />
         </div>
 
         <div className={styles.formGroup}>
           <label>종료 시간</label>
-          <Input type="time" onChange={handleEndTimeChange} defaultValue={endTime} />
+          <Input
+            key={`end-${defaultValues?.endTime || "new"}-${showModal}`}
+            type="time"
+            onChange={handleEndTimeChange}
+            defaultValue={endTime}
+          />
         </div>
 
         <div className={styles.modalButton}>

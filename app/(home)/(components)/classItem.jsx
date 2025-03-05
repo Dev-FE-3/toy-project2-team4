@@ -14,7 +14,7 @@ export default function ClassItem({ index, item, onEdit, onDelete }) {
   };
 
   const handleDeleteConfirm = () => {
-    onDelete();
+    onDelete(item.id);
     setShowDeleteModal(false);
   };
 

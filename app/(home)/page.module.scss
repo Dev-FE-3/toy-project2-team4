@@ -19,9 +19,25 @@ $border-color: #e8e8e8;
     margin-bottom: 12px;
     display: flex;
     justify-content: space-between; // 부모 요소에서 자식 요소를 양 끝으로 배치
-    p {
-      flex-grow: 1; // 가운데 p 태그가 남은 공간을 차지하도록 설정
-      text-align: center; // 텍스트 가운데 정렬
+    align-items: center;
+
+    .pagination {
+      display: flex;
+      gap: 20px;
+      align-items: center;
+
+      .paginationIcon {
+        color: var(--gray);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+        
+        &:hover {
+          color: var(--foreground);
+
+        }
+      }
     }
   }
 
@@ -93,7 +109,7 @@ $border-color: #e8e8e8;
             height: 24px;
             display: flex;
             justify-content: space-between;
-            
+
             .userIconContainer {
               display: none;
             }

@@ -14,13 +14,6 @@ export default function ClassList({ classList, isExpanded, toggleExpand, onEdit,
     setShowDeleteModal(true);
   };
 
-  const handleDeleteConfirm = () => {
-    if (selectedClass) {
-      onDelete(selectedClass.id);
-    }
-    setShowDeleteModal(false);
-  };
-
   // 3. 유틸리티 함수
   const sortByTime = (classList) => {
     return classList.sort((a, b) => {
@@ -40,7 +33,7 @@ export default function ClassList({ classList, isExpanded, toggleExpand, onEdit,
       {sortByTime(classList)
         .slice(0, isExpanded ? classList.length : 3)
         .map((item, index) => (
-          <ClassItem key={index} item={item} onEdit={onEdit} onDelete={() => handleDeleteClick(item)} />
+          <ClassItem key={index} item={item} onEdit={onEdit} onDelete={onDelete} />
         ))}
 
       {/* 수업이 3개 이상일 때만 확장/축소 버튼을 보여줌 */}

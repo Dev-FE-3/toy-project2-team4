@@ -6,12 +6,13 @@ import AddClassModal from "./(components)/addClassModal";
 import styles from "./page.module.scss";
 import { classData } from "./classData";
 import Button from "../../components/common/button/button";
+import Icon from "../../components/common/icon/icon";
 
 export default function Home() {
   // 1. 상수 정의
   const currentDate = new Date();
-  const year = currentDate.getFullYear();
-  const month = currentDate.getMonth() + 1;
+  const [year, setYear] = useState(currentDate.getFullYear());
+  const [month, setMonth] = useState(currentDate.getMonth() + 1);
   const instructors = ["장은혜", "양정규", "표현경", "박현수"];
   const courses = ["React", "CSS", "C++", "JavaScript", "TypeScript", "Python", "Java", "Swift", "Go", "Kotlin"];
 
@@ -31,13 +32,16 @@ export default function Home() {
   const handleFilterSelect = (filter) => {
     setSelectedFilter(filter);
   };
-  
+
   const handleAddClass = (newClass) => {
     if (selectedClass) {
-      setClassListData((prev) => // 수정 : 기존 수업의 데이터를 변경
-        prev.map((item) => (item.id === selectedClass.id ? { ...newClass, id: selectedClass.id } : item)),
+      setClassListData(
+        (
+          prev, // 수정 : 기존 수업의 데이터를 변경
+        ) => prev.map((item) => (item.id === selectedClass.id ? { ...newClass, id: selectedClass.id } : item)),
       );
-    } else { // 수업 추가: 기존 데이터에 새로운 수업 데이터 추가
+    } else {
+      // 수업 추가: 기존 데이터에 새로운 수업 데이터 추가
       setClassListData((prev) => [...prev, { ...newClass, id: Date.now() }]);
     }
     handleModalClose();
@@ -54,7 +58,30 @@ export default function Home() {
   };
   // 수업 삭제
   const handleDelete = (id) => {
-    setClassListData((prev) => prev.filter((item) => item.id !== id));
+    console.log("Deleting id:", id); // 삭제하려는 id 확인
+    console.log("Before delete:", classListData); // 삭제 전 데이터
+    setClassListData((prev) => {
+      const newData = prev.filter((item) => item.id !== id);
+      console.log("After delete:", newData); // 삭제 후 데이터
+      return newData;
+    });
+  };
+
+  // 월 변경 함수 추가
+  const handleMonthChange = (increment) => {
+    let newMonth = month + increment;
+    let newYear = year;
+
+    if (newMonth > 12) {
+      newMonth = 1;
+      newYear += 1;
+    } else if (newMonth < 1) {
+      newMonth = 12;
+      newYear -= 1;
+    }
+
+    setMonth(newMonth);
+    setYear(newYear);
   };
 
   // 5. 계산된 값
@@ -68,9 +95,23 @@ export default function Home() {
       <div className={styles.calendarContainer}>
         <div className={styles.calendarHeader}>
           <Dropdown initialOptions={["전체보기", ...instructors]} onSelect={handleFilterSelect} />
-          <p>
-            {year}년 {month}월
-          </p>
+          <div className={styles.pagination}>
+            <div
+              className={styles.paginationIcon}
+              onClick={() => handleMonthChange(-1)} // 이전 달
+            >
+              <Icon iconname="chevron_left" />
+            </div>
+            <p>
+              {year}년 {month}월
+            </p>
+            <div
+              className={styles.paginationIcon}
+              onClick={() => handleMonthChange(1)} // 다음 달
+            >
+              <Icon iconname="chevron_right" />
+            </div>
+          </div>
           <Button color="blue" onClick={() => setShowModal(true)}>
             수업 추가
           </Button>
