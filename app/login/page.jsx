@@ -1,43 +1,51 @@
 "use client";
 
 import { useState } from "react";
-import Modal from "../../components/common/modal/modal";
-import Icon from "../../components/common/icon/icon.jsx";
-const Login = () => {
-  const [isModal, setIsModal] = useState(false);
+import style from "./page.module.scss";
+import LoginForm from "./components/loginForm";
+import SignupForm from "./components/signupForm";
+import { auth } from "../../utils/firebase";
 
-  // 모달창 사용 예시 함수
-  const onClickModal = () => {
-    if (isModal) {
-      setIsModal(false);
+export default function LoginPage() {
+  const [isSignUp, setIsSignUp] = useState(false); // 로그인/회원가입 토글
+  const [isManager, setIsManager] = useState(false); // 관리자인지 강사님인지 확인
+
+  const changeManager = () => {
+    if (isManager) {
+      setIsManager(false);
     } else {
-      setIsModal(true);
+      setIsManager(true);
     }
-    console.log(isModal);
+  };
+
+  const changeSigup = () => {
+    if (isSignUp) {
+      setIsSignUp(false);
+    } else {
+      setIsSignUp(true);
+    }
+  };
+
+  const logOut = () => {
+    auth.signOut();
+    sessionStorage.removeItem("firebaseAuth");
   };
 
   return (
-    <div>
-      로그인 페이지
-      <button onClick={onClickModal}>모달창 on</button>
-      <Icon iconname="home" size="2rem" color="red"></Icon>
-      {/* calss 추가하기 */}
-      {isModal ? (
-        <Modal
-          onCheck={onClickModal}
-          onCancel={onClickModal}
-          title="주의!"
-          titleIcon={<Icon style="rounded" iconname="warning" size="2rem" color="#d86060"></Icon>}
-          checkButtonColor="red"
-          showCancelButton={true}
-        >
-          <p> 정말 삭제 하시겠습니까? </p>
-        </Modal>
-      ) : (
-        <></>
-      )}
+    <div className={style.container}>
+      <aside className={style.left}>
+        <img src="/assets/loginimg.png" />
+        {/* <button onClick={logOut}>로그아웃</button> */}
+      </aside>
+      <main className={style.right}>
+        <article className={style.article}>
+          {isSignUp ? (
+            <SignupForm changeSingUp={changeSigup} changeManager={changeManager} isManager={isManager} />
+          ) : (
+            <LoginForm changeSingUp={changeSigup} changeManager={changeManager} isManager={isManager} />
+          )}
+        </article>
+      </main>
     </div>
   );
-};
-
-export default Login;
+}
