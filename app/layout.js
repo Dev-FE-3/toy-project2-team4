@@ -1,11 +1,10 @@
+"use client";
+
 import Navigation from "../components/navigation/navigation.jsx";
 import { notoSansKr } from "../styles/font.js";
 import "../styles/global.css";
-
-export const metadata = {
-  title: "그랑 코딩학원",
-  description: "그랑 코딩학원 인트라넷 서비스",
-};
+import { Provider } from "react-redux";
+import store from "./modificationHistory/redux/store";
 
 export default function RootLayout({ children }) {
   return (
@@ -16,7 +15,7 @@ export default function RootLayout({ children }) {
       </head>
       <body className={notoSansKr.className}>
         <Navigation />
-        {children}
+        <Provider store={store}>{children}</Provider>
       </body>
     </html>
   );
