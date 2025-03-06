@@ -1,6 +1,6 @@
 "use client";
 import styles from "./modificationList.module.scss";
-import Button from "../common/button/button"
+import Button from "../../common/button/button"
 
 const ModificationList = ({ sortedDatas, totalCount, handleModal, listDatas }) => {
   return (
