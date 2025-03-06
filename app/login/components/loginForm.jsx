@@ -30,7 +30,7 @@ const LoginForm = ({ changeSingUp, changeManager, isManager }) => {
       sessionStorage.setItem("firebaseAuth", firebaseAuth);
 
       console.log("로그인성공");
-      // window.location.href = "/"; // 로그인 성공 시 홈으로 리다이렉트
+      window.location.href = "/"; // 로그인 성공 시 홈으로 리다이렉트
     } catch (err) {
       console.log("로그인에 실패했습니다.", err);
       alert("아이디와 비밀번호를 확인해 주세요.");

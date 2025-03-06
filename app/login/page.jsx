@@ -35,7 +35,7 @@ export default function LoginPage() {
     <div className={style.container}>
       <aside className={style.left}>
         <img src="/assets/loginimg.png" />
-        <button onClick={logOut}>로그아웃</button>
+        {/* <button onClick={logOut}>로그아웃</button> */}
       </aside>
       <main className={style.right}>
         <article className={style.article}>
