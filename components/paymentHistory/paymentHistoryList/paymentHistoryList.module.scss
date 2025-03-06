@@ -1,0 +1,68 @@
+.container {
+  background-color: var(--content);
+  border-radius: 12px;
+  padding: 4px;
+}
+
+.header {
+  display: flex; /* Flexbox 사용 */
+  font-weight: bold; /* 헤더 텍스트를 굵게 */
+  border-bottom: 1px solid #000; /* 경계선 */
+  font-size: 1.9rem;
+}
+
+.itemContent {
+  flex: 1; /* 각 항목을 고르게 분배 */
+  text-align: center; /* 텍스트 중앙 정렬 */
+}
+
+.titleContent {
+  flex: 2; /* title 항목에 대해 더 큰 비율 */
+  text-align: center; /* 텍스트 중앙 정렬 */
+}
+
+.ul {
+  display: flex;
+  flex-direction: column;
+  padding-top: 4px;
+  height: 82vh;
+  overflow-y: auto;
+  gap: 12px;
+}
+
+.listItem {
+  display: flex; /* Flexbox 사용 */
+  align-items: center; /* 세로 중앙 정렬 */
+  font-size: 1.5rem;
+  border-radius: 10px;
+  padding: 8px; /* 패딩 */
+  background-color: var(--background);
+  transition: background-color 0.3s; /* 배경색 전환 효과 */
+
+  &:hover {
+    background-color: #f0f0f0; /* 마우스 오버 시 배경색 변경 */
+  }
+}
+.emptyMessage {
+  flex: 1; /* 각 항목을 고르게 분배 */
+  text-align: center; /* 텍스트 중앙 정렬 */
+  font-size: 1.5rem;
+}
+
+.totalAmount {
+  font-size: 1.7rem;
+}
+
+.viewButton {
+  background-color: var(--primary);
+  border-radius: 8px;
+  color: white; /* 버튼 텍스트 색상 */
+  border: none; /* 테두리 없음 */
+  padding: 0.5rem 1rem; /* 패딩 */
+  cursor: pointer; /* 커서 포인터 */
+  transition: background-color 0.3s; /* 배경색 전환 효과 */
+
+  &:hover {
+    background-color: #004492; /* 마우스 오버 시 버튼 색상 변경 */
+  }
+}
