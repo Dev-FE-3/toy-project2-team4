@@ -1,10 +1,9 @@
 "use client";
-import styles from "../modificationHistory.module.scss";
-// import Button from "../../../components/common/button/button";
-import Icon from "../../../components/common/icon/icon";
-import Modal from "../../../components/common/modal/modal";
+import styles from "./modificationHistory.module.scss";
+import Icon from "../common/icon/icon";
+import Modal from "../common/modal/modal";
 import { useState } from "react";
-import ModificationList from "./modificationList";  // 추가된 부분
+import ModificationList from "../modificationList/modificationList";  // 추가된 부분
 
 const datas = [
   {
