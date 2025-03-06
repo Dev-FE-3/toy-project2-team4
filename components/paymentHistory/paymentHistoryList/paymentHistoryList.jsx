@@ -5,7 +5,7 @@ import { useMemo } from "react";
 import { formatSimpleDate } from "../../../utils/timeUtils";
 import styles from "./paymentHistoryList.module.scss";
 
-const PaymentHistoryList = ({ items, onClick, emptyMessage }) => {
+export const PaymentHistoryList = ({ items, onClick, emptyMessage }) => {
   const sortedItems = useMemo(() => [...items].sort((a, b) => b.id - a.id), [items]);
 
   const handleOpenDetail = (item) => {
@@ -48,5 +48,3 @@ const PaymentHistoryList = ({ items, onClick, emptyMessage }) => {
     </>
   );
 };
-
-export default PaymentHistoryList;

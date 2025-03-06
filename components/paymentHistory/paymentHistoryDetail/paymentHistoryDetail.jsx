@@ -7,7 +7,13 @@ import { formatSimpleDate } from "../../../utils/timeUtils";
 import { fetchData } from "../../../utils/apiUtils";
 import styles from "./paymentHistoryDetail.module.scss";
 
-const PaymentHistoryDetail = ({ item, onClose, isRequestingCorrection, setIsRequestingCorrection, onOpenModal }) => {
+export const PaymentHistoryDetail = ({
+  item,
+  onClose,
+  isRequestingCorrection,
+  setIsRequestingCorrection,
+  onOpenModal,
+}) => {
   if (item === null) {
     return null; // null일 경우 아무것도 렌더링하지 않음
   }
@@ -129,5 +135,3 @@ const PaymentHistoryDetail = ({ item, onClose, isRequestingCorrection, setIsRequ
     </div>
   );
 };
-
-export default PaymentHistoryDetail;
