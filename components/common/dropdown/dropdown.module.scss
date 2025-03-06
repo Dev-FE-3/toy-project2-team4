@@ -5,9 +5,10 @@ $background: var(--background);
   display: inline-block;
 
   .dropdown {
+    width: 120px;
     background-color: #e0e0e0;
     border: none;
-    padding: 4px 12px;
+    padding: 4px 10px;
     cursor: pointer;
     border-radius: 4px;
     display: flex;
@@ -15,15 +16,16 @@ $background: var(--background);
     justify-content: center;
     gap: 4px;
     font-size: 1.4rem;
+    justify-content: space-between
   }
 
   .dropdownList {
+    width: 120px;
     position: absolute;
     top: 100%;
     left: 0;
     background-color: $background;
     list-style: none;
-    width: 150px;
     border-radius: 3px;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
     z-index: 100;
