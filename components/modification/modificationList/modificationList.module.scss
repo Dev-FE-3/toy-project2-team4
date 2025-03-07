@@ -1,0 +1,59 @@
+.listContent {
+  display: flex;
+  flex-direction: column;
+  padding: 8px 0;
+  gap: 12px;
+}
+
+.listLine {
+  font-size: 1.9rem;
+  background-color: var(--background);
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  height: 71.75px;
+
+  div {
+    text-align: center;
+  }
+
+  div:nth-child(4) {
+    min-width: 0;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    text-align: left;
+  }
+}
+
+.status {
+  &.pending {
+    color: var(--secondary-2); // 대기
+  }
+
+  &.complete {
+    color: var(--foreground); // 정정 완료
+  }
+}
+
+.noData {
+  font-size: 1.9rem;
+  background-color: var(--background);
+  text-align: center;
+}
+
+// 칸 비율 설정
+.listLine div:nth-child(1),
+.listLine div:nth-child(6) {
+  flex: 1;
+}
+
+.listLine div:nth-child(2),
+.listLine div:nth-child(3),
+.listLine div:nth-child(5) {
+  flex: 2;
+}
+
+.listLine div:nth-child(4) {
+  flex: 3;
+}
