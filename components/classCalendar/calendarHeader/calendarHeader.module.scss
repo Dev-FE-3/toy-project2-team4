@@ -1,0 +1,41 @@
+.calendarHeader {
+  width: 100%;
+  font-size: 24px;
+  font-weight: 700;
+  height: 32px;
+  margin-bottom: 12px;
+  display: flex;
+
+  // Dropdown 컨테이너
+  & > :first-child {
+    flex: 1;
+    display: flex;
+    justify-content: left; // 드롭다운 중앙 정렬
+  }
+
+  .pagination {
+    flex: 1;
+    display: flex;
+    gap: 20px;
+    align-items: center;
+    justify-content: center; // 페이지네이션 중앙 정렬
+
+    .paginationIcon {
+      color: var(--gray);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+
+      &:hover {
+        color: var(--foreground);
+      }
+    }
+  }
+  // 수업 추가 버튼 컨테이너
+  .classAddButton {
+    flex: 1;
+    display: flex;
+    justify-content: right; // 버튼 중앙 정렬
+  }
+}

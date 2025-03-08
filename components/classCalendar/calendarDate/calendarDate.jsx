@@ -1,5 +1,5 @@
-import Day from "./day";
-import styles from "../page.module.scss";
+import { Day } from "../index";
+import styles from "./calendarDate.module.scss";
 export default function CalendarDate({ year, month, classList, onEdit, onDelete, isAdmin }) {
   const daysInWeek = 7;
   const weeksInMonth = getWeeksInMonth(year, month);
@@ -73,7 +73,6 @@ export default function CalendarDate({ year, month, classList, onEdit, onDelete,
   function getClassForDay(classList, todayMonth, day) {
     const formattedDate = `${year}-${String(todayMonth).padStart(2, "0")}-${String(day).padStart(2, "0")}`;
     const todayClassList = classList.filter((classData) => classData.date === formattedDate);
-    return todayClassList? todayClassList: [];
+    return todayClassList ? todayClassList : [];
   }
-
 }

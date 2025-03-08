@@ -1,9 +1,9 @@
 "use client";
 import { useState, useEffect } from "react";
-import styles from "../page.module.scss";
-import Button from "../../../components/common/button/button";
-import Input from "../../../components/common/input/input";
-import Dropdown from "../../../components/common/dropdown/dropdown";
+import styles from "./addClassModal.module.scss";
+import Button from "../../common/button/button";
+import Input from "../../common/input/input";
+import Dropdown from "../../common/dropdown/dropdown";
 
 const AddClassModal = ({ onCancel, onCheck, instructors, title, showModal, defaultValues }) => {
   const [isWrong, setIsWrong] = useState({
@@ -68,7 +68,6 @@ const AddClassModal = ({ onCancel, onCheck, instructors, title, showModal, defau
     if (Object.values(newWrongFields).some((isWrong) => isWrong)) {
       return;
     }
-
     onCheck(formData); // formData를 직접 전달
     resetForm();
   };

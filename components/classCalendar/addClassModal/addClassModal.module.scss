@@ -1,0 +1,65 @@
+.modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.15);
+  display: none;
+  justify-content: center;
+  align-items: center;
+
+  &.modalOpen {
+    display: flex;
+  }
+  .modalContent {
+    width: 384px;
+    padding: 40px 70px;
+    background: var(--background);
+    color: black;
+    border-radius: 0.5rem;
+    display: flex;
+    flex-direction: column;
+
+    h1 {
+      font-size: 2rem;
+      font-weight: 700;
+      text-align: center;
+      margin-bottom: 20px;
+    }
+
+    .formGroup {
+      font-size: 1.5rem;
+      display: flex;
+      flex-direction: column;
+      margin-bottom: 10px;
+
+      label {
+        margin-bottom: 3px;
+        font-weight: 400;
+      }
+
+      .isWrong {
+        > * {
+          // isWrong의 직계 자식 요소 모두 선택
+          outline: 1px solid var(--red);
+          border-radius: 5px;
+          box-sizing: border-box;
+        }
+      }
+    }
+
+    .modalButton {
+      display: flex;
+      justify-content: center;
+      gap: 20px;
+      margin-top: 20px;
+    }
+  }
+}
+
+// admin이 아닐 때 기본적으로 숨김
+.classAddButton,
+.adminIconContainer {
+  visibility: visible;
+}

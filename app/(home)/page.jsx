@@ -1,13 +1,14 @@
 "use client";
 import { useState } from "react";
-import CalendarDate from "./(components)/calendarDate";
-import Dropdown from "../../components/common/dropdown/dropdown";
-import AddClassModal from "./(components)/addClassModal";
+import {
+  AddClassModal,
+  CalendarDate,
+  CalendarHeader,
+  INSTRUCTORS,
+  CLASS_TITLES,
+  classData,
+} from "../../components/classCalendar/index";
 import styles from "./page.module.scss";
-import { classData } from "./classData";
-import Button from "../../components/common/button/button";
-import Icon from "../../components/common/icon/icon";
-import { INSTRUCTORS, CLASS_TITLES } from "./constants";
 
 export default function Home() {
   // 상수 정의
@@ -28,10 +29,7 @@ export default function Home() {
   };
 
   // 이벤트 핸들러
-  // 필터링
-  const handleFilterSelect = (filter) => {
-    setSelectedFilter(filter);
-  };
+
   // 수업 추가/수정
   const handleSaveClass = (newClass) => {
     if (selectedClass) {
@@ -64,23 +62,6 @@ export default function Home() {
     });
   };
 
-  // 월 변경 함수 추가
-  const handleMonthChange = (increment) => {
-    let newMonth = month + increment;
-    let newYear = year;
-
-    if (newMonth > 12) {
-      newMonth = 1;
-      newYear += 1;
-    } else if (newMonth < 1) {
-      newMonth = 12;
-      newYear -= 1;
-    }
-
-    setMonth(newMonth);
-    setYear(newYear);
-  };
-
   // 계산된 값
   // 강사별 필터링된 수업 리스트
   const filteredClassList = getClassList(classListData, selectedFilter);
@@ -90,35 +71,16 @@ export default function Home() {
     <>
       <div>수업 확인 페이지</div>
       <div className={styles.calendarContainer}>
-        <div className={styles.calendarHeader}>
-          <Dropdown initialOptions={["전체보기", ...INSTRUCTORS]} onSelect={handleFilterSelect} />
-          <div className={styles.pagination}>
-            <div
-              className={styles.paginationIcon}
-              onClick={() => handleMonthChange(-1)} // 이전 달
-            >
-              <Icon iconname="chevron_left" />
-            </div>
-            <p>
-              {year}년 {month}월
-            </p>
-            <div
-              className={styles.paginationIcon}
-              onClick={() => handleMonthChange(1)} // 다음 달
-            >
-              <Icon iconname="chevron_right" />
-            </div>
-          </div>
-          <div className={styles.classAddButton}>
-            {isAdmin && (
-              <Button color="blue" onClick={() => setShowModal(true)}>
-                수업 추가
-              </Button>
-            )}
-          </div>
-        </div>
-
-    
+        <CalendarHeader
+          year={year}
+          setYear={setYear}
+          month={month}
+          setMonth={setMonth}
+          INSTRUCTORS={INSTRUCTORS}
+          isAdmin={isAdmin}
+          setSelectedFilter={setSelectedFilter}
+          setShowModal={setShowModal}
+        />
         <div className={styles.CalendarSection}>
           <ul className={styles.dayLabel}>
             <li>월요일</li>

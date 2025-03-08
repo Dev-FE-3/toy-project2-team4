@@ -1,0 +1,58 @@
+$border-color: #e8e8e8;
+
+.dayComponent {
+  border: 1px solid $border-color;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  // padding: 12px 12px 0 12px;
+
+  &.expanded {
+    z-index: 1;
+
+    .classList {
+      height: auto; // expanded 상태에서는 자동 높이
+      background-color: var(--background); // 배경색 설정
+      border-bottom: 4px solid $border-color;
+    }
+  }
+
+  .dayIndex {
+    margin: 12px 12px 0 12px;
+    font-size: 19px;
+    font-weight: 700;
+    line-height: 1; // 텍스트의 기본 라인 높이를 1로 설정하여 여백 없애기
+  }
+
+  .classList {
+    height: 75px; // 기본적으로 3개 수업까지만 보이도록 설정
+    margin-top: 3px;
+    overflow-y: inherit;
+  }
+
+  .toggleButton {
+    all: unset;
+    cursor: pointer;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 5px;
+    margin-top: 3px;
+
+    &:hover {
+      background-color: #bebcbc;
+    }
+  }
+}
+
+.otherMonth {
+  background-color: var(--content);
+  color: var(--gray);
+
+  &.expanded {
+    .classList {
+      background-color: var(--content); // 배경색 설정
+    }
+  }
+}

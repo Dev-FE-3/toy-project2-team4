@@ -1,7 +1,7 @@
-import styles from "../page.module.scss";
-import { CLASS_COLORS } from "../constants";
-import Icon from "../../../components/common/icon/icon";
-import Modal from "../../../components/common/modal/modal";
+import styles from "./classItem.module.scss";
+import { CLASS_COLORS } from "../index";
+import Icon from "../../common/icon/icon";
+import Modal from "../../common/modal/modal";
 import { useState } from "react";
 
 export default function ClassItem({ index, item, onEdit, onDelete, isAdmin }) {
