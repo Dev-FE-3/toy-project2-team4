@@ -1,6 +1,6 @@
 "use client";
-import { useState} from "react";
-import Calendar from "./(components)/calendar";
+import { useState } from "react";
+import CalendarDate from "./(components)/calendarDate";
 import Dropdown from "../../components/common/dropdown/dropdown";
 import AddClassModal from "./(components)/addClassModal";
 import styles from "./page.module.scss";
@@ -118,14 +118,26 @@ export default function Home() {
           </div>
         </div>
 
-        <Calendar
-          year={year}
-          month={month}
-          classList={filteredClassList}
-          onEdit={handleEditClass}
-          onDelete={handleDelete}
-          isAdmin={isAdmin}
-        />
+    
+        <div className={styles.CalendarSection}>
+          <ul className={styles.dayLabel}>
+            <li>월요일</li>
+            <li>화요일</li>
+            <li>수요일</li>
+            <li>목요일</li>
+            <li>금요일</li>
+            <li>토요일</li>
+            <li>일요일</li>
+          </ul>
+          <CalendarDate
+            year={year}
+            month={month}
+            classList={filteredClassList}
+            onEdit={handleEditClass}
+            onDelete={handleDelete}
+            isAdmin={isAdmin}
+          />
+        </div>
 
         <AddClassModal
           onCancel={handleModalClose}
