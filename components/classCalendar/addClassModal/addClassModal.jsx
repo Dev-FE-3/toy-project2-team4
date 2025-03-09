@@ -89,7 +89,7 @@ const AddClassModal = ({ onCancel, onCheck, instructors, title, showModal, defau
     } else {
       resetForm();
     }
-  }, [defaultValues, showModal]);
+  }, [defaultValues]);
 
   return (
     <div className={`${styles.modal} ${showModal ? styles.modalOpen : ""}`}>
@@ -102,7 +102,7 @@ const AddClassModal = ({ onCancel, onCheck, instructors, title, showModal, defau
               key={`instructor-${defaultValues?.instructor || "new"}-${showModal}`}
               initialOptions={instructors}
               onSelect={(value) => handleChange("instructor", value)}
-              defaultValue={formData.instructor}
+              defaultValue={defaultValues?.instructor || ""}
             />
           </div>
         </div>
@@ -114,7 +114,7 @@ const AddClassModal = ({ onCancel, onCheck, instructors, title, showModal, defau
               key={`course-${defaultValues?.title || "new"}-${showModal}`}
               initialOptions={title}
               onSelect={(value) => handleChange("title", value)}
-              defaultValue={formData.title}
+              defaultValue={defaultValues?.title || ""}
             />
           </div>
         </div>
@@ -126,7 +126,7 @@ const AddClassModal = ({ onCancel, onCheck, instructors, title, showModal, defau
             type="date"
             isWrong={isWrong.date}
             onChange={(value) => handleChange("date", value)}
-            defaultValue={formData.date}
+            defaultValue={defaultValues?.date || ""}
           />
         </div>
 
@@ -137,7 +137,7 @@ const AddClassModal = ({ onCancel, onCheck, instructors, title, showModal, defau
             type="time"
             isWrong={isWrong.startTime}
             onChange={(value) => handleChange("startTime", value)}
-            defaultValue={formData.startTime}
+            defaultValue={defaultValues?.startTime || ""}
           />
         </div>
 
@@ -148,7 +148,7 @@ const AddClassModal = ({ onCancel, onCheck, instructors, title, showModal, defau
             type="time"
             isWrong={isWrong.endTime}
             onChange={(value) => handleChange("endTime", value)}
-            defaultValue={formData.endTime}
+            defaultValue={defaultValues?.endTime || ""}
           />
         </div>
 

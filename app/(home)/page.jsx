@@ -78,6 +78,7 @@ export default function Home() {
           setMonth={setMonth}
           INSTRUCTORS={INSTRUCTORS}
           isAdmin={isAdmin}
+          selectedFilter={selectedFilter}
           setSelectedFilter={setSelectedFilter}
           setShowModal={setShowModal}
         />
