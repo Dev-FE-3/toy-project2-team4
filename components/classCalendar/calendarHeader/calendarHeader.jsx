@@ -3,14 +3,9 @@ import Button from "../../common/button/button";
 import Icon from "../../common/icon/icon";
 import styles from "./calendarHeader.module.scss";
 import React from "react";
-import { setMonth, setYear } from "../../../store/reducers/classCalendarReducer"
+import { setMonth, setYear } from "../../../store/reducers/classCalendarReducer/classCalendarActions";
 import { useDispatch, useSelector } from "react-redux";
-export default function CalendarHeader({
-  INSTRUCTORS,
-  selectedFilter,
-  setSelectedFilter,
-  setShowModal,
-}) {
+export default function CalendarHeader({ INSTRUCTORS, selectedFilter, setSelectedFilter, setShowModal }) {
   // Redux에서 전역 상태 가져오기
   const isAdmin = useSelector((state) => state.classCalendar.isAdmin);
   const year = useSelector((state) => state.classCalendar.year);
