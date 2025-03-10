@@ -56,18 +56,10 @@ const LoginForm = ({ changeSingUp, changeManager, isManager }) => {
       <h1 className={style.title}>그랑코딩학원</h1>
 
       <div className={style.changeuserbtn}>
-        <Button
-          type="button"
-          onClick={handleRoleChange}
-          style={isManager ? {} : { backgroundColor: "white", boxShadow: "1px 2px 0px 0px rgba(0, 0, 0, 0.25)" }}
-        >
+        <Button type="button" onClick={handleRoleChange} style={isManager ? {} : { backgroundColor: "white" }}>
           강사님
         </Button>
-        <Button
-          type="button"
-          onClick={handleRoleChange}
-          style={isManager ? { backgroundColor: "white", boxShadow: "1px 2px 0px 0px rgba(0, 0, 0, 0.25)" } : {}}
-        >
+        <Button type="button" onClick={handleRoleChange} style={isManager ? { backgroundColor: "white" } : {}}>
           관리자
         </Button>
       </div>
@@ -85,6 +77,8 @@ const LoginForm = ({ changeSingUp, changeManager, isManager }) => {
 
         <div className={style.items}>
           <Button type="submit">로그인</Button>
+        </div>
+        <div className={style.items}>
           <Button type="button" onClick={changeSingUp}>
             회원가입
           </Button>

@@ -5,11 +5,15 @@
   --foreground: #171717;
   --content: #f3f3f3; /* 컨텐츠 배경 색상 */
   --primary: #3199fe; /* 메인 색상 */
+  --primary-dark: #0f3861;
   --secondary-1: #b6c8fb; /* 보조 색상 */
   --secondary-2: #0e46a3; /* 보조 색상 */
   --yellow: #ffc20e;
+  --yellow-dark: #c49710;
   --red: #d86060;
+  --red-dark: #cc3838;
   --gray: #999999;
+  --gray-dark: #474646;
 }
 
 html,
@@ -25,7 +29,7 @@ html {
 body {
   color: var(--foreground);
   background: var(--background);
-  font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
+  font-family: system-ui, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   line-height: 1.5;
@@ -51,15 +55,15 @@ a {
 
 ::-webkit-scrollbar {
   width: 15px;
-  background-color: #bebebe66;
+  background-color: var(--gray);
   border-radius: 50px;
 }
 ::-webkit-scrollbar-thumb {
-  background-color: #333;
-  border: 3px solid #bebebe;
+  background-color: var(--gray-dark);
+  border: 3px solid var(--gray);
   border-radius: 50px;
 }
 ::-webkit-scrollbar-track {
-  background-color: #bebebe60;
+  background-color: var(--gray);
   border-radius: 50px;
 }
