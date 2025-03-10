@@ -80,8 +80,6 @@ export default function Home() {
             <li>일요일</li>
           </ul>
           <CalendarDate
-            //           year={year}
-            //           month={month}
             classList={filteredClassList}
             onEdit={handleEditClass}
             onDelete={handleDelete}
