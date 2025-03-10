@@ -1,5 +1,7 @@
 "use client";
+import ModificationHistory from "../../components/modification/modificationHistory/modificationHistory";
 
+<<<<<<< HEAD
 import Button from "../../components/common/button/button";
 import styles from "./modificationHistory.module.scss";
 import Modal from "../../components/common/modal/modal";
@@ -209,3 +211,8 @@ const ModificationHistory = () => {
 };
 
 export default ModificationHistory;
+=======
+export default function ModificationHistoryPage() {
+  return <ModificationHistory />;
+}
+>>>>>>> redux-setting
