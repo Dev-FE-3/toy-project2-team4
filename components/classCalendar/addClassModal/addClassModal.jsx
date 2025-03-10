@@ -14,12 +14,26 @@ const AddClassModal = ({ onCancel, onCheck, INSTRUCTORS, title, showModal, defau
     endTime: false,
   });
   const [formData, setFormData] = useState({
-    instructor: defaultValues?.instructor || "",
-    title: defaultValues?.title || "",
-    date: defaultValues?.date || "",
-    startTime: defaultValues?.startTime || "",
-    endTime: defaultValues?.endTime || "",
+    instructor: "",
+    title: "",
+    date: "",
+    startTime: "",
+    endTime: "",
   });
+
+  useEffect(() => {
+    if (defaultValues) {
+      setFormData({
+        instructor: defaultValues.instructor || "",
+        title: defaultValues.title || "",
+        date: defaultValues.date || "",
+        startTime: defaultValues.startTime || "",
+        endTime: defaultValues.endTime || "",
+      });
+    } else {
+      resetForm();
+    }
+  }, [defaultValues]);
 
   const resetForm = () => {
     setFormData({
@@ -76,20 +90,6 @@ const AddClassModal = ({ onCancel, onCheck, INSTRUCTORS, title, showModal, defau
     resetForm();
     onCancel();
   };
-
-  useEffect(() => {
-    if (defaultValues) {
-      setFormData({
-        instructor: defaultValues.instructor || "",
-        title: defaultValues.title || "",
-        date: defaultValues.date || "",
-        startTime: defaultValues.startTime || "",
-        endTime: defaultValues.endTime || "",
-      });
-    } else {
-      resetForm();
-    }
-  }, [defaultValues]);
 
   return (
     <div className={`${styles.modal} ${showModal ? styles.modalOpen : ""}`}>
