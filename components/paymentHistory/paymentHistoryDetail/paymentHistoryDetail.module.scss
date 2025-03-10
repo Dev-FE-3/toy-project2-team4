@@ -2,9 +2,6 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  background-color: var(--content);
-  border-radius: 12px;
-  padding: 4px;
 }
 
 .header {
@@ -27,25 +24,11 @@
 .headerActions {
   display: flex;
   align-items: center;
-  gap: 4px;
+  gap: 14px;
 }
 
 .dateText {
   font-size: 1.5rem;
-}
-
-.saveButton {
-  background-color: var(--primary);
-  border-radius: 8px;
-  color: white;
-  border: none;
-  padding: 0.5rem 1rem;
-  cursor: pointer;
-  transition: background-color 0.3s;
-
-  &:hover {
-    background-color: #004492;
-  }
 }
 
 .closeButton {
@@ -64,7 +47,6 @@
 
 .formContent {
   padding-top: 4px;
-  background-color: var(--content);
   border-radius: 10px;
   height: 82vh;
 }
@@ -78,20 +60,29 @@
   font-size: 1.7rem;
 }
 
+.textMaxLength {
+  display: flex;
+  justify-content: space-between;
+
+  small {
+    font-size: 1.4rem;
+  }
+}
+
 .textareaLabel {
   font-size: 1.7rem;
 }
 
 .textarea {
   width: 100%;
-  border: 1px solid white;
+  border: 1px solid var(--gray);
   border-radius: 8px;
   padding: 8px;
   height: 75vh;
 
   &:focus {
     outline: none;
-    border-color: #3b82f6;
-    box-shadow: 0 0 0 1px #3b82f6;
+    border-color: var(--primary);
+    box-shadow: 0 0 0 1px var(--primary);
   }
 }

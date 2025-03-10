@@ -1,4 +1,4 @@
-import detailImg from "../../public/images/mock_paymentHistory.webp";
+import detailImg from "../../public/images/mock_paymentHistory_2.webp";
 
 export const paymentHistoryData = [
   {

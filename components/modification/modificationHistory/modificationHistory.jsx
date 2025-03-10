@@ -13,7 +13,7 @@ const ModificationHistory = () => {
   const count = useSelector((state) => state.counter.value);
   const dispatch = useDispatch();
 
-  const userEmail = "test2@test.com";
+  const userEmail = "test@test.com";
 
   useEffect(() => {
     fetch("/modificationData.json")
@@ -54,6 +54,7 @@ const ModificationHistory = () => {
 
   return (
     <main className={styles.container}>
+      <h1 className={styles.pageTitle}>정정 내역</h1>
       <p className={styles.totalCount}>
         총 <strong>{listDatas.length}</strong> 개
       </p>
@@ -88,6 +89,7 @@ const ModificationHistory = () => {
             삭제 시 복구가 어렵습니다.
             <br />
             아래 내용을 삭제 하시려면 확인을 눌러주세요.
+            <br />
             <br />
             사유: {selectedList?.reasonForRequest}
             <br />

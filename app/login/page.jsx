@@ -26,26 +26,18 @@ export default function LoginPage() {
     }
   };
 
-  const logOut = () => {
-    auth.signOut();
-    sessionStorage.removeItem("firebaseAuth");
-  };
+  // const logOut = () => {
+  //   auth.signOut();
+  //   sessionStorage.removeItem("firebaseAuth");
+  // };
 
   return (
-    <div className={style.container}>
-      <aside className={style.left}>
-        <img src="/assets/loginimg.png" />
-        {/* <button onClick={logOut}>로그아웃</button> */}
-      </aside>
-      <main className={style.right}>
-        <article className={style.article}>
-          {isSignUp ? (
-            <SignupForm changeSingUp={changeSigup} changeManager={changeManager} isManager={isManager} />
-          ) : (
-            <LoginForm changeSingUp={changeSigup} changeManager={changeManager} isManager={isManager} />
-          )}
-        </article>
-      </main>
-    </div>
+    <main className={style.contaier}>
+      {isSignUp ? (
+        <SignupForm changeSingUp={changeSigup} changeManager={changeManager} isManager={isManager} />
+      ) : (
+        <LoginForm changeSingUp={changeSigup} changeManager={changeManager} isManager={isManager} />
+      )}
+    </main>
   );
 }

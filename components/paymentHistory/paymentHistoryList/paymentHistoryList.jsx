@@ -4,6 +4,7 @@ import { useMemo } from "react";
 
 import { formatSimpleDate } from "../../../utils/timeUtils";
 import styles from "./paymentHistoryList.module.scss";
+import Button from "../../common/button/button";
 
 export const PaymentHistoryList = ({ items, onClick, emptyMessage }) => {
   const sortedItems = useMemo(() => [...items].sort((a, b) => b.id - a.id), [items]);
@@ -36,9 +37,7 @@ export const PaymentHistoryList = ({ items, onClick, emptyMessage }) => {
                 <div className={styles.itemContent}>{item.totalAmount.toLocaleString()}</div>
                 <div className={styles.itemContent}>{item.actualAmount.toLocaleString()}</div>
                 <div className={styles.itemContent}>
-                  <button className={styles.viewButton} onClick={() => handleOpenDetail(item)}>
-                    열람하기
-                  </button>
+                  <Button onClick={() => handleOpenDetail(item)}>열람하기</Button>
                 </div>
               </li>
             ))}
