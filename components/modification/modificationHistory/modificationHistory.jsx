@@ -2,106 +2,26 @@
 import styles from "./modificationHistory.module.scss";
 import Icon from "../../common/icon/icon";
 import Modal from "../../common/modal/modal";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import ModificationList from "../modificationList/modificationList";
 
-const datas = [
-  {
-    num: 1,
-    email: "test@test.com",
-    registeredDate: "2025.02.20",
-    reasonForRequest: "업무 연장",
-    content: "추가 수업한 부분에 대해서 정정을 신청하겠습니다.",
-    requestStatus: "대기",
-    isClickable: true,
-  },
-  {
-    num: 2,
-    email: "test@test.com",
-    registeredDate: "2024.12.15",
-    reasonForRequest: "오류 수정",
-    content: "출석 시간 오류로 인해 정정을 요청합니다.",
-    requestStatus: "대기",
-    isClickable: true,
-  },
-  {
-    num: 3,
-    email: "test@test.com",
-    registeredDate: "2024.11.30",
-    reasonForRequest: "업무 연장",
-    content: "추가 업무가 발생하여 정정 요청합니다.",
-    requestStatus: "정정 완료",
-    isClickable: false,
-  },
-  {
-    num: 4,
-    email: "test@test.com",
-    registeredDate: "2025.02.20",
-    reasonForRequest: "업무 연장",
-    content: "추가 수업한 부분에 대해서 정정을 신청하겠습니다.",
-    requestStatus: "대기",
-    isClickable: true,
-  },
-  {
-    num: 5,
-    email: "test@test.com",
-    registeredDate: "2024.12.15",
-    reasonForRequest: "오류 수정",
-    content: "출석 시간 오류로 인해 정정을 요청합니다.",
-    requestStatus: "대기",
-    isClickable: true,
-  },
-  {
-    num: 6,
-    email: "test@test.com",
-    registeredDate: "2024.11.30",
-    reasonForRequest: "업무 연장",
-    content: "추가 업무가 발생하여 정정 요청합니다.",
-    requestStatus: "정정 완료",
-    isClickable: false,
-  },
-  {
-    num: 7,
-    email: "test@test.com",
-    registeredDate: "2025.02.20",
-    reasonForRequest: "업무 연장",
-    content: "추가 수업한 부분에 대해서 정정을 신청하겠습니다.",
-    requestStatus: "대기",
-    isClickable: true,
-  },
-  {
-    num: 8,
-    email: "test@test.com",
-    registeredDate: "2024.12.15",
-    reasonForRequest: "오류 수정",
-    content: "출석 시간 오류로 인해 정정을 요청합니다.",
-    requestStatus: "대기",
-    isClickable: true,
-  },
-  {
-    num: 9,
-    email: "test@test.com",
-    registeredDate: "2024.12.15",
-    reasonForRequest: "오류 수정",
-    content: "출석 시간 오류로 인해 정정을 요청합니다.",
-    requestStatus: "대기",
-    isClickable: true,
-  },
-  {
-    num: 10,
-    email: "test@test.com",
-    registeredDate: "2024.12.15",
-    reasonForRequest: "오류 수정",
-    content: "출석 시간 오류로 인해 정정을 요청합니다.",
-    requestStatus: "대기",
-    isClickable: true,
-  },
-];
-
 const ModificationHistory = () => {
-  const [listDatas, setListDatas] = useState([...datas]);
+  const [listDatas, setListDatas] = useState([]);
   const [isModal, setIsModal] = useState(false);
   const [selectedList, setSelectedList] = useState(null);
+
+  const userEmail = "test2@test.com";
+
+  useEffect(() => {
+    fetch("/modificationData.json")
+      .then((response) => response.json())
+      .then((data) => {
+        console.log("데이터 패칭 성공!", data.datas);
+        const filteredData = data.datas.filter((item) => item.email === userEmail);
+        setListDatas(filteredData);
+      })
+      .catch((error) => console.log("Error fetching data: ", error));
+  }, []);
 
   const sortedDatas = [...listDatas].sort((a, b) => new Date(b.registeredDate) - new Date(a.registeredDate));
   const totalCount = sortedDatas.length;
