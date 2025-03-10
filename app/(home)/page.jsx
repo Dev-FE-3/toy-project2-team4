@@ -11,18 +11,11 @@ import {
 import styles from "./page.module.scss";
 
 export default function Home() {
-  // 상수 정의
- // const currentDate = new Date();
 
-  // 상태 관리
- // const [year, setYear] = useState(currentDate.getFullYear());
- // const [month, setMonth] = useState(currentDate.getMonth() + 1);
   const [selectedFilter, setSelectedFilter] = useState("장은혜"); // 기본값도 상수에서 가져오기
   const [classListData, setClassListData] = useState(classData); // 수업 데이터
   const [showModal, setShowModal] = useState(false); // 수업 추가/수정 모달
   const [selectedClass, setSelectedClass] = useState(null); // 선택한 수업(admin)
-  const [isAdmin] = useState(true); // 실제로는 로그인 상태나 권한에 따라 결정될 것
-
 
   // 유틸리티 함수
   const getClassList = (classData, selectedFilter) => {
@@ -34,14 +27,12 @@ export default function Home() {
   // 수업 추가/수정
   const handleSaveClass = (newClass) => {
     if (selectedClass) {
-      setClassListData(
-        (
-          prev, // 수정 : 기존 수업의 데이터를 변경
-        ) => prev.map((item) => (item.id === selectedClass.id ? { ...newClass, id: selectedClass.id } : item)),
+      setClassListData((list) =>
+        list.map((item) => (item.id === selectedClass.id ? { ...newClass, id: selectedClass.id } : item)),
       );
     } else {
       // 수업 추가: 기존 데이터에 새로운 수업 데이터 추가
-      setClassListData((prev) => [...prev, { ...newClass, id: Date.now() }]);
+      setClassListData((list) => [...list, { ...newClass, id: Date.now() }]);
     }
     handleModalClose();
   };
@@ -57,8 +48,8 @@ export default function Home() {
   };
   // 수업 삭제 버튼 클릭
   const handleDelete = (id) => {
-    setClassListData((prev) => {
-      const newData = prev.filter((item) => item.id !== id);
+    setClassListData((list) => {
+      const newData = list.filter((item) => item.id !== id);
       return newData;
     });
   };
@@ -73,12 +64,7 @@ export default function Home() {
       <div>수업 확인 페이지</div>
       <div className={styles.calendarContainer}>
         <CalendarHeader
- //         year={year}
- //         setYear={setYear}
- //         month={month}
- //         setMonth={setMonth}
           INSTRUCTORS={INSTRUCTORS}
-          isAdmin={isAdmin}
           selectedFilter={selectedFilter}
           setSelectedFilter={setSelectedFilter}
           setShowModal={setShowModal}
@@ -94,12 +80,11 @@ export default function Home() {
             <li>일요일</li>
           </ul>
           <CalendarDate
- //           year={year}
- //           month={month}
+            //           year={year}
+            //           month={month}
             classList={filteredClassList}
             onEdit={handleEditClass}
             onDelete={handleDelete}
-            isAdmin={isAdmin}
           />
         </div>
 

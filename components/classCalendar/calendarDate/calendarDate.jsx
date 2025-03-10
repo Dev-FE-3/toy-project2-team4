@@ -1,7 +1,7 @@
 import { Day } from "../index";
 import styles from "./calendarDate.module.scss";
 import { useSelector } from "react-redux";
-export default function CalendarDate({ classList, onEdit, onDelete, isAdmin }) {
+export default function CalendarDate({ classList, onEdit, onDelete }) {
   // Redux에서 전역 상태 가져오기
   const year = useSelector((state) => state.classCalendar.year);
   const month = useSelector((state) => state.classCalendar.month);
@@ -41,7 +41,6 @@ export default function CalendarDate({ classList, onEdit, onDelete, isAdmin }) {
                   classList={todayClassList}
                   onEdit={onEdit}
                   onDelete={onDelete}
-                  isAdmin={isAdmin}
                 />
               );
             })}

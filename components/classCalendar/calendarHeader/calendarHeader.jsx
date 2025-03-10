@@ -6,17 +6,13 @@ import React from "react";
 import { setMonth, setYear } from "../../../store/reducers/classCalendarReducer"
 import { useDispatch, useSelector } from "react-redux";
 export default function CalendarHeader({
-  // year,
-  //setYear,
-  //month,
-  //setMonth,
   INSTRUCTORS,
-  isAdmin,
   selectedFilter,
   setSelectedFilter,
   setShowModal,
 }) {
   // Redux에서 전역 상태 가져오기
+  const isAdmin = useSelector((state) => state.classCalendar.isAdmin);
   const year = useSelector((state) => state.classCalendar.year);
   const month = useSelector((state) => state.classCalendar.month);
   const dispatch = useDispatch();
@@ -34,16 +30,13 @@ export default function CalendarHeader({
     if (newMonth > 12) {
       newMonth = 1;
       newYear += 1;
-      //   setYear(newYear);
       dispatch(setYear(newYear)); // Redux 상태도 업데이트
     } else if (newMonth < 1) {
       newMonth = 12;
       newYear -= 1;
-      //     setYear(newYear);
       dispatch(setYear(newYear)); // Redux 상태도 업데이트
     }
 
-    //  setMonth(newMonth);
     dispatch(setMonth(newMonth)); // Redux 상태도 업데이트
   };
 
