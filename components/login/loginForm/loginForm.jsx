@@ -1,11 +1,15 @@
 import { browserSessionPersistence, setPersistence, signInWithEmailAndPassword } from "firebase/auth";
 import { useState } from "react";
 import { auth } from "../../../utils/firebase";
-import Input from "../../../components/common/input/input";
-import Button from "../../../components/common/button/button";
-import style from "../style/loginForm.module.scss";
+import Input from "../../common/input/input";
+import Button from "../../common/button/button";
+import style from "../loginForm/loginForm.module.scss";
+import { useDispatch } from "react-redux";
+import { loginSuccess } from "../../../store/reducers/authReducer";
 
 const LoginForm = ({ changeSingUp, changeManager, isManager }) => {
+  const dispatch = useDispatch();
+
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
@@ -16,21 +20,25 @@ const LoginForm = ({ changeSingUp, changeManager, isManager }) => {
       //로그인 유저 정책을 '브라우져 세션'으로 설정
       await setPersistence(auth, browserSessionPersistence);
       const userCredential = await signInWithEmailAndPassword(auth, email, password);
-      const user = userCredential.user.displayName;
+      const user = userCredential.user;
 
-      const jsonUser = JSON.parse(user);
-      jsonUser.email = userCredential.user.email;
+      // 유저 정보 확인
+      if (!user.displayName) throw new Error("유저 정보가 없습니다.");
 
-      if (!user || isManager !== (jsonUser.role === "admin")) {
+      const userInfo = JSON.parse(user.displayName);
+      userInfo.email = user.email;
+
+      if (!user || isManager !== (userInfo.role === "admin")) {
         alert("아이디와 비밀번호를 확인해 주세요.");
         return;
       }
-
-      const firebaseAuth = JSON.stringify(jsonUser);
-      sessionStorage.setItem("firebaseAuth", firebaseAuth);
+      console.log(userInfo);
+      // redux 상태 업데이트
+      dispatch(loginSuccess(userInfo));
 
       console.log("로그인성공");
-      window.location.href = "/"; // 로그인 성공 시 홈으로 리다이렉트
+
+      // window.location.href = "/"; // 로그인 성공 시 홈으로 리다이렉트
     } catch (err) {
       console.log("로그인에 실패했습니다.", err);
       alert("아이디와 비밀번호를 확인해 주세요.");
