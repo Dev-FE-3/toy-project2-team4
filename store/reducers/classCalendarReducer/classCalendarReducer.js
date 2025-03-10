@@ -1,10 +1,10 @@
-import {SET_MONTH, SET_YEAR, SET_IS_ADMIN} from "../actionsType"
+import { SET_MONTH, SET_YEAR } from "../actionsType";
 
 // 초기 상태
 const initialState = {
   year: new Date().getFullYear(), // 현재 년도
   month: new Date().getMonth() + 1, // 현재 월
-  isAdmin : true,
+  isAdmin: true,
 };
 
 // Reducer
@@ -14,8 +14,6 @@ const classCalendarReducer = (state = initialState, action) => {
       return { ...state, year: action.payload };
     case SET_MONTH:
       return { ...state, month: action.payload };
-    case SET_IS_ADMIN:
-      return { ...state, isAdmin: action.payload};
     default:
       return state;
   }
