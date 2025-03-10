@@ -1,0 +1,56 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  background-color: var(--content);
+  border-radius: 12px;
+  padding: 20px 20px;
+  width: 100%;
+}
+
+.totalCount {
+  font-size: 1.7rem;
+
+  strong {
+    font-weight: bold;
+  }
+}
+
+.listWapper {
+  display: flex;
+  flex-direction: column;
+  border-top: 2px solid var(--foreground);
+  border-bottom: 2px solid var(--foreground);
+  width: 100%;
+  height: 624px;
+  overflow-y: auto;
+}
+
+.listTitle {
+  height: 52px;
+  font-size: 2.4rem;
+  border-bottom: 1px solid var(--foreground);
+  align-items: center;
+  display: flex;
+  width: 100%;
+
+  div {
+    text-align: center;
+  }
+}
+
+// 칸 비율 설정
+.listTitle div:nth-child(1),
+.listTitle div:nth-child(6) {
+  flex: 1;
+}
+
+.listTitle div:nth-child(2),
+.listTitle div:nth-child(3),
+.listTitle div:nth-child(5) {
+  flex: 2;
+}
+
+.listTitle div:nth-child(4) {
+  flex: 3;
+}

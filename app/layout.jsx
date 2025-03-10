@@ -2,6 +2,7 @@ import "../styles/global.css";
 import Navigation from "../components/navigation/navigation.jsx";
 import CenteredLayout from "../components/centeredLayout/CenteredLayout.jsx";
 import { notoSansKr } from "../styles/font.js";
+import ReduxProvider from "../store/reduxProvider";
 
 export const metadata = {
   title: "그랑 코딩학원",
@@ -16,8 +17,10 @@ export default function RootLayout({ children }) {
         <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded" rel="stylesheet" />
       </head>
       <body className={notoSansKr.className}>
-        <Navigation />
-        <CenteredLayout>{children}</CenteredLayout>
+        <ReduxProvider>
+          <Navigation />
+          <CenteredLayout>{children}</CenteredLayout>
+        </ReduxProvider>
       </body>
     </html>
   );
