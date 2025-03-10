@@ -1,10 +1,16 @@
 import { Day } from "../index";
 import styles from "./calendarDate.module.scss";
-export default function CalendarDate({ year, month, classList, onEdit, onDelete, isAdmin }) {
+import { useSelector } from "react-redux";
+export default function CalendarDate({ classList, onEdit, onDelete, isAdmin }) {
+  // Redux에서 전역 상태 가져오기
+  const year = useSelector((state) => state.classCalendar.year);
+  const month = useSelector((state) => state.classCalendar.month);
+  
   const daysInWeek = 7;
   const weeksInMonth = getWeeksInMonth(year, month);
   const firstDayOfMonth = getFirstDayOfMonth(year, month);
   const totalDays = getTotalDays(year, month);
+
 
   return (
     <>

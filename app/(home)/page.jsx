@@ -12,16 +12,17 @@ import styles from "./page.module.scss";
 
 export default function Home() {
   // 상수 정의
-  const currentDate = new Date();
+ // const currentDate = new Date();
 
   // 상태 관리
-  const [year, setYear] = useState(currentDate.getFullYear());
-  const [month, setMonth] = useState(currentDate.getMonth() + 1);
+ // const [year, setYear] = useState(currentDate.getFullYear());
+ // const [month, setMonth] = useState(currentDate.getMonth() + 1);
   const [selectedFilter, setSelectedFilter] = useState("장은혜"); // 기본값도 상수에서 가져오기
   const [classListData, setClassListData] = useState(classData); // 수업 데이터
   const [showModal, setShowModal] = useState(false); // 수업 추가/수정 모달
   const [selectedClass, setSelectedClass] = useState(null); // 선택한 수업(admin)
   const [isAdmin] = useState(true); // 실제로는 로그인 상태나 권한에 따라 결정될 것
+
 
   // 유틸리티 함수
   const getClassList = (classData, selectedFilter) => {
@@ -72,10 +73,10 @@ export default function Home() {
       <div>수업 확인 페이지</div>
       <div className={styles.calendarContainer}>
         <CalendarHeader
-          year={year}
-          setYear={setYear}
-          month={month}
-          setMonth={setMonth}
+ //         year={year}
+ //         setYear={setYear}
+ //         month={month}
+ //         setMonth={setMonth}
           INSTRUCTORS={INSTRUCTORS}
           isAdmin={isAdmin}
           selectedFilter={selectedFilter}
@@ -93,8 +94,8 @@ export default function Home() {
             <li>일요일</li>
           </ul>
           <CalendarDate
-            year={year}
-            month={month}
+ //           year={year}
+ //           month={month}
             classList={filteredClassList}
             onEdit={handleEditClass}
             onDelete={handleDelete}

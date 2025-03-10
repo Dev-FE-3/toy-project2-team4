@@ -2,17 +2,25 @@ import Dropdown from "../../common/dropdown/dropdown";
 import Button from "../../common/button/button";
 import Icon from "../../common/icon/icon";
 import styles from "./calendarHeader.module.scss";
+import React from "react";
+import { setMonth, setYear } from "../../../store/reducers/classCalendarReducer"
+import { useDispatch, useSelector } from "react-redux";
 export default function CalendarHeader({
-  year,
-  setYear,
-  month,
-  setMonth,
+  // year,
+  //setYear,
+  //month,
+  //setMonth,
   INSTRUCTORS,
   isAdmin,
   selectedFilter,
   setSelectedFilter,
   setShowModal,
 }) {
+  // Redux에서 전역 상태 가져오기
+  const year = useSelector((state) => state.classCalendar.year);
+  const month = useSelector((state) => state.classCalendar.month);
+  const dispatch = useDispatch();
+
   // 필터링
   const handleFilterSelect = (filter) => {
     setSelectedFilter(filter);
@@ -26,18 +34,26 @@ export default function CalendarHeader({
     if (newMonth > 12) {
       newMonth = 1;
       newYear += 1;
+      //   setYear(newYear);
+      dispatch(setYear(newYear)); // Redux 상태도 업데이트
     } else if (newMonth < 1) {
       newMonth = 12;
       newYear -= 1;
+      //     setYear(newYear);
+      dispatch(setYear(newYear)); // Redux 상태도 업데이트
     }
 
-    setMonth(newMonth);
-    setYear(newYear);
+    //  setMonth(newMonth);
+    dispatch(setMonth(newMonth)); // Redux 상태도 업데이트
   };
 
   return (
     <div className={styles.calendarHeader}>
-      <Dropdown initialOptions={["전체보기", ...INSTRUCTORS]} onSelect={handleFilterSelect} defaultValue={selectedFilter}/>
+      <Dropdown
+        initialOptions={["전체보기", ...INSTRUCTORS]}
+        onSelect={handleFilterSelect}
+        defaultValue={selectedFilter}
+      />
       <div className={styles.pagination}>
         <div
           className={styles.paginationIcon}
