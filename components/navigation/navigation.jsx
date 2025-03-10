@@ -1,7 +1,21 @@
+"use client";
+
 import Link from "next/link";
 import styles from "./navigation.module.scss";
+import { useDispatch, useSelector } from "react-redux";
+import { logout } from "../../store/reducers/authReducer";
+import { auth } from "../../utils/firebase";
 
 const Navigation = () => {
+  const dispatch = useDispatch();
+
+  const userInfo = useSelector((state) => state.auth.user);
+
+  const logOut = () => {
+    dispatch(logout());
+    auth.signOut();
+  };
+
   return (
     <header className={styles.header}>
       <nav className={styles.nav}>
@@ -23,9 +37,17 @@ const Navigation = () => {
               <Link href="/modificationHistory">정정내역</Link>
             </li>
           </ul>
+
+          <h1>
+            {userInfo?.name}
+            {userInfo?.email}
+            {userInfo?.role}
+          </h1>
         </div>
 
-        <button className={styles.button}>로그아웃</button>
+        <button className={styles.button} onClick={logOut}>
+          로그아웃
+        </button>
       </nav>
     </header>
   );
