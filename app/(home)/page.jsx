@@ -4,9 +4,9 @@ import {
   AddClassModal,
   CalendarDate,
   CalendarHeader,
-  INSTRUCTORS,
   CLASS_TITLES,
   classData,
+  INSTRUCTORS,
 } from "../../components/classCalendar/index";
 import styles from "./page.module.scss";
 
@@ -17,7 +17,7 @@ export default function Home() {
   // 상태 관리
   const [year, setYear] = useState(currentDate.getFullYear());
   const [month, setMonth] = useState(currentDate.getMonth() + 1);
-  const [selectedFilter, setSelectedFilter] = useState(INSTRUCTORS[0]); // 기본값도 상수에서 가져오기
+  const [selectedFilter, setSelectedFilter] = useState("장은혜"); // 기본값도 상수에서 가져오기
   const [classListData, setClassListData] = useState(classData); // 수업 데이터
   const [showModal, setShowModal] = useState(false); // 수업 추가/수정 모달
   const [selectedClass, setSelectedClass] = useState(null); // 선택한 수업(admin)
@@ -105,7 +105,7 @@ export default function Home() {
         <AddClassModal
           onCancel={handleModalClose}
           onCheck={handleSaveClass}
-          instructors={INSTRUCTORS}
+          INSTRUCTORS={INSTRUCTORS}
           title={CLASS_TITLES}
           showModal={showModal}
           defaultValues={selectedClass}

@@ -5,7 +5,7 @@ import Button from "../../common/button/button";
 import Input from "../../common/input/input";
 import Dropdown from "../../common/dropdown/dropdown";
 
-const AddClassModal = ({ onCancel, onCheck, instructors, title, showModal, defaultValues }) => {
+const AddClassModal = ({ onCancel, onCheck, INSTRUCTORS, title, showModal, defaultValues }) => {
   const [isWrong, setIsWrong] = useState({
     instructor: false,
     title: false,
@@ -100,7 +100,7 @@ const AddClassModal = ({ onCancel, onCheck, instructors, title, showModal, defau
           <div className={`${isWrong.instructor ? styles.isWrong : ""}`}>
             <Dropdown
               key={`instructor-${defaultValues?.instructor || "new"}-${showModal}`}
-              initialOptions={instructors}
+              initialOptions={INSTRUCTORS}
               onSelect={(value) => handleChange("instructor", value)}
               defaultValue={defaultValues?.instructor || ""}
             />
