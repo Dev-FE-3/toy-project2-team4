@@ -4,11 +4,14 @@ import Icon from "../../common/icon/icon";
 import Modal from "../../common/modal/modal";
 import { useEffect, useState } from "react";
 import ModificationList from "../modificationList/modificationList";
+import { useDispatch, useSelector } from "react-redux";
 
 const ModificationHistory = () => {
   const [listDatas, setListDatas] = useState([]);
   const [isModal, setIsModal] = useState(false);
   const [selectedList, setSelectedList] = useState(null);
+  const count = useSelector((state) => state.counter.value);
+  const dispatch = useDispatch();
 
   const userEmail = "test2@test.com";
 
@@ -22,6 +25,14 @@ const ModificationHistory = () => {
       })
       .catch((error) => console.log("Error fetching data: ", error));
   }, []);
+
+  const increment = () => {
+    dispatch({ type: "increment" });
+  };
+
+  const decrement = () => {
+    dispatch({ type: "decrement" });
+  };
 
   const sortedDatas = [...listDatas].sort((a, b) => new Date(b.registeredDate) - new Date(a.registeredDate));
   const totalCount = sortedDatas.length;
@@ -84,6 +95,12 @@ const ModificationHistory = () => {
           </p>
         </Modal>
       )}
+
+      <div>
+        <h1>Counter: {count} </h1>
+        <button onClick={increment}>+증가 시키기</button>
+        <button onClick={decrement}>-감소 시키기</button>
+      </div>
     </main>
   );
 };
