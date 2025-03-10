@@ -2,9 +2,8 @@
 
 import { useState } from "react";
 import style from "./page.module.scss";
-import LoginForm from "./components/loginForm";
-import SignupForm from "./components/signupForm";
-import { auth } from "../../utils/firebase";
+import LoginForm from "../../components/login/loginForm/loginForm";
+import SignupForm from "../../components/login/signupForm/signupForm";
 
 export default function LoginPage() {
   const [isSignUp, setIsSignUp] = useState(false); // 로그인/회원가입 토글
@@ -25,17 +24,10 @@ export default function LoginPage() {
       setIsSignUp(true);
     }
   };
-
-  const logOut = () => {
-    auth.signOut();
-    sessionStorage.removeItem("firebaseAuth");
-  };
-
   return (
     <div className={style.container}>
       <aside className={style.left}>
         <img src="/assets/loginimg.png" />
-        {/* <button onClick={logOut}>로그아웃</button> */}
       </aside>
       <main className={style.right}>
         <article className={style.article}>

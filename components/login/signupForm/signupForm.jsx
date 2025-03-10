@@ -1,9 +1,9 @@
 import { createUserWithEmailAndPassword, updateProfile } from "firebase/auth";
 import { useState } from "react";
 import { auth } from "../../../utils/firebase";
-import Input from "../../../components/common/input/input";
-import Button from "../../../components/common/button/button";
-import style from "../style/signupForm.module.scss";
+import Input from "../../common/input/input";
+import Button from "../../common/button/button";
+import style from "../signupForm/signupForm.module.scss";
 
 const SignupForm = ({ changeSingUp, changeManager, isManager }) => {
   const [email, setEmail] = useState("");
