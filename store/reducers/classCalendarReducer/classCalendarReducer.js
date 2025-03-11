@@ -4,7 +4,6 @@ import { SET_MONTH, SET_YEAR } from "../actionsType";
 const initialState = {
   year: new Date().getFullYear(), // 현재 년도
   month: new Date().getMonth() + 1, // 현재 월
-  isAdmin: true,
 };
 
 // Reducer

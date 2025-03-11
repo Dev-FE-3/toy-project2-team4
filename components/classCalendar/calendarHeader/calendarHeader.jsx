@@ -7,7 +7,8 @@ import { setMonth, setYear } from "../../../store/reducers/classCalendarReducer/
 import { useDispatch, useSelector } from "react-redux";
 export default function CalendarHeader({ INSTRUCTORS, selectedFilter, setSelectedFilter, setShowModal }) {
   // Redux에서 전역 상태 가져오기
-  const isAdmin = useSelector((state) => state.classCalendar.isAdmin);
+  const role = useSelector((state) => state.auth.user?.role)
+  const isAdmin = role === "admin";
   const year = useSelector((state) => state.classCalendar.year);
   const month = useSelector((state) => state.classCalendar.month);
   const dispatch = useDispatch();
