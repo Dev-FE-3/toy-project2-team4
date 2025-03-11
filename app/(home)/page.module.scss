@@ -12,6 +12,7 @@ $border-color: #e8e8e8;
     height: 100%; // 부모 요소의 높이를 100%로 설정
     display: flex; // Flexbox 레이아웃 사용
     flex-direction: column; // Flexbox 방향을 세로로 설정
+    margin-bottom: 1px; // 아래에 여유 공간 추가(서브픽셀 렌더링 오차범위)
 
     .dayLabel {
       width: 100%;
@@ -26,13 +27,15 @@ $border-color: #e8e8e8;
       li {
         flex: 1; // 각 요일이 균등한 너비를 가지도록 설정
         text-align: left; // 텍스트를 왼쪽 정렬
-        border: 1.5px solid $border-color;
+        border: 2px solid $border-color;
         overflow: hidden;
         padding: 1.2rem;
         font-size: 1.7rem;
-        margin-right: -1.5px; // 오른쪽 border가 겹치는 것을 방지
-        margin-bottom: -1.5px; // 아래쪽 border가 겹치는 것을 방지
+        margin-right: -2px; // 오른쪽 border가 겹치는 것을 방지
+        margin-bottom: -2px; // 아래쪽 border가 겹치는 것을 방지
 
+        box-sizing: border-box;
+        
         &:first-child {
           border-top-left-radius: 10px; // 첫 번째 요소 왼쪽 위
         }
