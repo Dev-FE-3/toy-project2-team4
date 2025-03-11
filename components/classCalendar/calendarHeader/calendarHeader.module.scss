@@ -1,7 +1,6 @@
 .calendarHeader {
   width: 100%;
   font-size: 24px;
-  font-weight: 700;
   height: 32px;
   margin-bottom: 12px;
   display: flex;
@@ -19,8 +18,10 @@
     gap: 20px;
     align-items: center;
     justify-content: center; // 페이지네이션 중앙 정렬
+    font-weight: 700;
 
     .paginationIcon {
+      all: unset;  // 버튼의 모든 기본 스타일 제거
       color: var(--gray);
       display: flex;
       align-items: center;

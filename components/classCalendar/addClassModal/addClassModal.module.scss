@@ -32,13 +32,16 @@
       font-size: 1.5rem;
       display: flex;
       flex-direction: column;
-      margin-bottom: 10px;
+      margin-bottom: 16px;
 
       label {
         margin-bottom: 3px;
         font-weight: 400;
       }
-
+      .dropdownComponent button {
+        width: 240px;
+        height: 40px;
+      }
       .isWrong {
         > * {
           // isWrong의 직계 자식 요소 모두 선택

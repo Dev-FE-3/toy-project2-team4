@@ -1,19 +1,22 @@
 $border-color: #e8e8e8;
 
 .dayComponent {
-  border: 1px solid $border-color;
+  border: 1.5px solid $border-color;
+  box-sizing: border-box;
   flex: 1;
   display: flex;
   flex-direction: column;
-  // padding: 12px 12px 0 12px;
-
+  margin-right: -1.5px;  // 오른쪽 border가 겹치는 것을 방지
+  margin-bottom: -1.5px; // 아래쪽 border가 겹치는 것을 방지
+  &:last-child {
+    margin-right: 0;
+  }
   &.expanded {
     z-index: 1;
 
     .classList {
       height: auto; // expanded 상태에서는 자동 높이
       background-color: var(--background); // 배경색 설정
-      border-bottom: 4px solid $border-color;
     }
   }
 

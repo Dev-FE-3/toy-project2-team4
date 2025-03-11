@@ -43,21 +43,21 @@ export default function CalendarHeader({ INSTRUCTORS, selectedFilter, setSelecte
         defaultValue={selectedFilter}
       />
       <div className={styles.pagination}>
-        <div
+        <button
           className={styles.paginationIcon}
           onClick={() => handleMonthChange(-1)} // 이전 달
         >
           <Icon iconname="chevron_left" />
-        </div>
+        </button>
         <p>
           {year}년 {month}월
         </p>
-        <div
+        <button
           className={styles.paginationIcon}
           onClick={() => handleMonthChange(1)} // 다음 달
         >
           <Icon iconname="chevron_right" />
-        </div>
+        </button>
       </div>
       <div className={styles.classAddButton}>
         {isAdmin && (

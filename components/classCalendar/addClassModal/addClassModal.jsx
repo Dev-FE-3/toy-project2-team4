@@ -103,6 +103,7 @@ const AddClassModal = ({ onCancel, onCheck, INSTRUCTORS, title, showModal, defau
               initialOptions={INSTRUCTORS}
               onSelect={(value) => handleChange("instructor", value)}
               defaultValue={defaultValues?.instructor || ""}
+              className={styles.dropdownComponent}
             />
           </div>
         </div>
@@ -115,6 +116,7 @@ const AddClassModal = ({ onCancel, onCheck, INSTRUCTORS, title, showModal, defau
               initialOptions={title}
               onSelect={(value) => handleChange("title", value)}
               defaultValue={defaultValues?.title || ""}
+              className={styles.dropdownComponent}
             />
           </div>
         </div>

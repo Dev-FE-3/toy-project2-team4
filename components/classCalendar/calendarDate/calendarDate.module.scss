@@ -4,10 +4,20 @@ $border-color: #e8e8e8;
   flex-grow: 1; // 남은 공간을 모두 차지하도록 설정
   display: flex; // Flexbox 레이아웃 사용
   flex-direction: column; // Flexbox 방향을 세로로 설정
-}
 
-.calendarRow {
-  background-color: var(--background); // 배경색 설정
-  display: flex; // Flexbox 레이아웃 사용
-  height: calc(100% / 6); // 높이를 1/6로 설정
+  .calendarRow {
+    background-color: var(--background); // 배경색 설정
+    display: flex; // Flexbox 레이아웃 사용
+    height: calc(100% / 6); // 높이를 1/6로 설정
+
+    &:last-child > div {
+      // 마지막 줄의 모든 div
+      &:first-child {
+        border-bottom-left-radius: 10px;
+      }
+      &:last-child {
+        border-bottom-right-radius: 10px;
+      }
+    }
+  }
 }
