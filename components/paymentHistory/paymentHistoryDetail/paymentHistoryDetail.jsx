@@ -9,6 +9,8 @@ import styles from "./paymentHistoryDetail.module.scss";
 import Button from "../../common/button/button";
 import Icon from "../../common/icon/icon";
 import Dropdown from "../../common/dropdown/dropdown";
+import paymentImg from "../../../public/images/mock_paymentHistory_2.webp";
+import emptyImg from "../../../public/images/mock_paymentHistory_1.webp";
 
 export const PaymentHistoryDetail = ({
   item,
@@ -100,7 +102,10 @@ export const PaymentHistoryDetail = ({
                 <label className={styles.select} htmlFor="categorySelect">
                   사유
                 </label>
-                <Dropdown initialOptions={["업무 연장", "무급 휴가 사용", "휴일 근무", "기타"]}></Dropdown>
+                <Dropdown
+                  initialOptions={["업무 연장", "무급 휴가 사용", "휴일 근무", "기타"]}
+                  onSelect={handleCategoryChange}
+                ></Dropdown>
               </div>
               <div className={styles.textareaLabel}>
                 <div className={styles.textMaxLength} htmlFor="contents">
@@ -119,7 +124,9 @@ export const PaymentHistoryDetail = ({
           ) : (
             <Image
               alt="paymentHistoryDetail"
-              src={item.reportImg}
+              src={item.reportImg ? paymentImg : emptyImg}
+              width={500}
+              height={750}
               style={{
                 width: "100%",
                 height: "100%",
