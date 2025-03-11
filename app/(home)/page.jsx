@@ -9,10 +9,13 @@ import {
   INSTRUCTORS,
 } from "../../components/classCalendar/index";
 import styles from "./page.module.scss";
+import { useSelector } from "react-redux";
 
 export default function Home() {
 
-  const [selectedFilter, setSelectedFilter] = useState("장은혜"); // 기본값도 상수에서 가져오기
+  const userName = useSelector((state) => state.auth.user?.name) // 로그인된 사용자 정보(name)
+  const isAdmin = useSelector((state) => state.auth.user?.role) === "admin"
+  const [selectedFilter, setSelectedFilter] = useState(isAdmin ? "전체보기" : userName);
   const [classListData, setClassListData] = useState(classData); // 수업 데이터
   const [showModal, setShowModal] = useState(false); // 수업 추가/수정 모달
   const [selectedClass, setSelectedClass] = useState(null); // 선택한 수업(admin)
