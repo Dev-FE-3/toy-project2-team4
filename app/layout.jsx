@@ -3,6 +3,7 @@ import Navigation from "../components/navigation/navigation.jsx";
 import CenteredLayout from "../components/centeredLayout/CenteredLayout.jsx";
 import { notoSansKr } from "../styles/font.js";
 import ReduxProvider from "../store/reduxProvider";
+import IntegrateMSW from "../mocks/integrateMSW";
 
 export const metadata = {
   title: "그랑 코딩학원",
@@ -19,7 +20,9 @@ export default function RootLayout({ children }) {
       <body className={notoSansKr.className}>
         <ReduxProvider>
           <Navigation />
-          <CenteredLayout>{children}</CenteredLayout>
+          <CenteredLayout>
+            <IntegrateMSW>{children}</IntegrateMSW>
+          </CenteredLayout>
         </ReduxProvider>
       </body>
     </html>
