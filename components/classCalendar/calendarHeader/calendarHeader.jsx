@@ -37,11 +37,13 @@ export default function CalendarHeader({ INSTRUCTORS, selectedFilter, setSelecte
 
   return (
     <div className={styles.calendarHeader}>
-      <Dropdown
-        initialOptions={["전체보기", ...INSTRUCTORS]}
-        onSelect={handleFilterSelect}
-        defaultValue={selectedFilter}
-      />
+      <div className={styles.filteringDropdown}>
+        <Dropdown
+          initialOptions={["전체보기", ...INSTRUCTORS]}
+          onSelect={handleFilterSelect}
+          defaultValue={selectedFilter}
+        />
+      </div>
       <div className={styles.pagination}>
         <button
           className={styles.paginationIcon}

@@ -38,9 +38,11 @@
         margin-bottom: 3px;
         font-weight: 400;
       }
-      .dropdownComponent button {
+      .dropdownComponent {
         width: 240px;
-        height: 40px;
+        & button {
+          height: 40px;
+        }
       }
       .isWrong {
         > * {
