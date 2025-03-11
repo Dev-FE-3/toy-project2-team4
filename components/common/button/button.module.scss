@@ -1,0 +1,48 @@
+/* 기본 btn */
+.btn {
+  padding: 6px 12px;
+  border-radius: 3px;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  border: none;
+  outline: none;
+  transition: background-color 0.3s
+}
+
+/* color */
+.red {
+  background-color: var(--red);
+  color: var(--background);
+
+  &:hover {
+    background-color: var(--red-dark);
+  }
+}
+
+.yellow {
+  background-color: var(--yellow);
+  color: var(--foreground);
+
+  &:hover {
+    background-color: var(--yellow-dark);
+  }
+}
+
+.blue {
+  background-color: var(--primary);
+  color: var(--background);
+
+  &:hover {
+    background-color: var(--primary-dark);
+  }
+}
+
+.gray {
+  background-color: var(--gray);
+  color: var(--background);
+
+  &:hover {
+    background-color: var(--gray-dark);
+  }
+}

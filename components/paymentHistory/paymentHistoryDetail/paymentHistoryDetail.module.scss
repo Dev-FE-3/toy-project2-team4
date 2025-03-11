@@ -1,0 +1,88 @@
+.container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 1px solid #000;
+  padding: 16px 8px 8px 8px;
+  font-size: 1.9rem;
+}
+
+.formCard {
+  width: 100%;
+}
+
+.title {
+  font-weight: bold;
+}
+
+.headerActions {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.dateText {
+  font-size: 1.5rem;
+}
+
+.closeButton {
+  color: #6b7280;
+  background: none;
+  border: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  &:hover {
+    color: #374151;
+  }
+}
+
+.formContent {
+  padding-top: 4px;
+  border-radius: 10px;
+  height: 82vh;
+}
+
+.selectContainer {
+  display: flex;
+  gap: 8px;
+}
+
+.select {
+  font-size: 1.7rem;
+}
+
+.textMaxLength {
+  display: flex;
+  justify-content: space-between;
+
+  small {
+    font-size: 1.4rem;
+  }
+}
+
+.textareaLabel {
+  font-size: 1.7rem;
+}
+
+.textarea {
+  width: 100%;
+  border: 1px solid var(--gray);
+  border-radius: 8px;
+  padding: 8px;
+  height: 75vh;
+
+  &:focus {
+    outline: none;
+    border-color: var(--primary);
+    box-shadow: 0 0 0 1px var(--primary);
+  }
+}
