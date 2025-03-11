@@ -6,6 +6,9 @@ import Image from "next/image";
 import { formatSimpleDate } from "../../../utils/timeUtils";
 import { fetchData } from "../../../utils/apiUtils";
 import styles from "./paymentHistoryDetail.module.scss";
+import Button from "../../common/button/button";
+import Icon from "../../common/icon/icon";
+import Dropdown from "../../common/dropdown/dropdown";
 
 export const PaymentHistoryDetail = ({
   item,
@@ -79,16 +82,12 @@ export const PaymentHistoryDetail = ({
           <div className={styles.headerActions}>
             <div className={styles.dateText}>급여일: {formatSimpleDate(item.payDate)}</div>
             {isRequestingCorrection ? (
-              <button className={styles.saveButton} onClick={handleSaveRequest}>
-                저장하기
-              </button>
+              <Button onClick={handleSaveRequest}>저장하기</Button>
             ) : (
-              <button className={styles.saveButton} onClick={handleCorrectionRequest}>
-                정정요청
-              </button>
+              <Button onClick={handleCorrectionRequest}>정정요청</Button>
             )}
             <button className={styles.closeButton} onClick={handleClose}>
-              <span className={styles.closeX}>X</span>
+              <Icon iconname="close"></Icon>
             </button>
           </div>
         </div>
@@ -101,19 +100,16 @@ export const PaymentHistoryDetail = ({
                 <label className={styles.select} htmlFor="categorySelect">
                   사유
                 </label>
-                <select id="categorySelect" value={selectedCategory} onChange={handleCategoryChange}>
-                  <option value="default" disabled>
-                    카테고리 선택
-                  </option>
-                  <option value="category1">카테고리 1</option>
-                  <option value="category2">카테고리 2</option>
-                  <option value="category3">카테고리 3</option>
-                </select>
+                <Dropdown initialOptions={["업무 연장", "무급 휴가 사용", "휴일 근무", "기타"]}></Dropdown>
               </div>
               <div className={styles.textareaLabel}>
-                <div>내용 ({content.length}/300자)</div>
+                <div className={styles.textMaxLength} htmlFor="contents">
+                  <label>내용</label>
+                  <small>({content.length}/300자)</small>
+                </div>
               </div>
               <textarea
+                id="contents"
                 className={styles.textarea}
                 value={content}
                 onChange={handleContentChange}
