@@ -7,6 +7,9 @@ import styles from "./paymentHistoryList.module.scss";
 import Button from "../../common/button/button";
 
 export const PaymentHistoryList = ({ items, onClick, emptyMessage }) => {
+  if (!Array.isArray(items)) {
+    return <div>No data available</div>;
+  }
   const sortedItems = useMemo(() => [...items].sort((a, b) => b.id - a.id), [items]);
 
   const handleOpenDetail = (item) => {
