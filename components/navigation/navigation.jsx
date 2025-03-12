@@ -15,7 +15,10 @@ const Navigation = () => {
   const logOut = () => {
     dispatch(logout());
     auth.signOut();
+    // localStorage.removeItem("userInfo");
   };
+
+  if (!userInfo) return null;
 
   return (
     <header className={styles.header}>
@@ -23,20 +26,24 @@ const Navigation = () => {
         {/* <div className={styles.navContainer}> */}
         <ul className={styles.listContainer}>
           <li className={styles.item}>
-            <Link href="/login">로그인</Link>
-          </li>
-          <li className={styles.item}>
             <Link href="/">수업 확인</Link>
           </li>
-          <li className={styles.item}>
-            <Link href="/paymentHistory">급여내역</Link>
-          </li>
-          <li className={styles.item}>
-            <Link href="/modificationHistory">정정내역</Link>
-          </li>
+          {userInfo.role === "admin" ? (
+            <></>
+          ) : (
+            <>
+              <li className={styles.item}>
+                <Link href="/paymentHistory">급여내역</Link>
+              </li>
+              <li className={styles.item}>
+                <Link href="/modificationHistory">정정내역</Link>
+              </li>
+            </>
+          )}
         </ul>
+        <span>안녕하세요? {userInfo?.name}님!</span>
         {/* </div> */}
-        <Button>로그아웃</Button>
+        <Button onClick={logOut}>로그아웃</Button>
       </nav>
     </header>
   );

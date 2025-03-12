@@ -1,0 +1,126 @@
+.container {
+  padding: 32px 36px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  gap: 32px;
+  width: 500px;
+  border-radius: 2rem;
+  border: 1px solid var(--gray);
+  // height: 750px;
+}
+
+.title {
+  color: black;
+  font-size: 2.5rem;
+  font-weight: bold;
+}
+
+.changeuserbtn {
+  width: 100%;
+  height: 70px;
+
+  display: flex;
+
+  background-color: #f2f4f7;
+  border-radius: 1rem;
+
+  button {
+    margin: 5px;
+    width: 100%;
+    font-size: 2rem;
+    font-weight: bold;
+    color: black;
+    background-color: rgba(0, 0, 0, 0);
+    border-radius: 1rem;
+  }
+}
+.roleButton {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  width: 100%;
+
+  margin: 8px;
+
+  font-size: 2rem;
+  font-weight: bold;
+
+  color: black;
+
+  border-radius: 1rem;
+
+  &:hover {
+    cursor: pointer;
+  }
+}
+.selected {
+  // background-color: rosybrown;
+}
+
+.roleFocus {
+  position: absolute;
+  margin: 5px 7px;
+  padding: 30px 100px;
+  border-radius: 1rem;
+  background-color: white;
+  transition: transform 0.3s ease-in-out;
+}
+.userFocus {
+  background-color: white;
+}
+.adminFocus {
+  transform: translateX(210px);
+  background-color: white;
+}
+
+.form {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+
+  .items {
+    width: 100%;
+    color: black;
+    display: flex;
+    flex-direction: column;
+
+    gap: 10px;
+
+    label {
+      font-weight: bold;
+      font-size: 1.3rem;
+    }
+  }
+
+  input {
+    width: 100%;
+    height: 60px;
+    border-radius: 1rem;
+    color: black;
+    font-size: 1.6rem;
+    padding: 10px;
+  }
+}
+
+.button {
+  width: 100%;
+  height: 70px;
+  font-size: 2rem;
+  font-weight: bold;
+  border-radius: 1rem;
+}
+
+.signButton {
+  background-color: var(--background);
+  border: 1px solid var(--gray);
+  color: var(--gray);
+
+  &:hover {
+    color: var(--background);
+  }
+}

@@ -1,14 +1,16 @@
-import { browserSessionPersistence, setPersistence, signInWithEmailAndPassword } from "firebase/auth";
+import { signInWithEmailAndPassword } from "firebase/auth";
 import { useState } from "react";
 import { auth } from "../../../utils/firebase";
-import Input from "../../common/input/input";
-import Button from "../../common/button/button";
-import style from "../loginForm/loginForm.module.scss";
 import { useDispatch } from "react-redux";
 import { loginSuccess } from "../../../store/reducers/authReducer";
+import { useRouter } from "next/navigation";
+import Button from "../../common/button/button";
+import Input from "../../common/input/input";
+import style from "../loginPageForm.module.scss";
 
 const LoginForm = ({ changeSingUp, changeManager, isManager }) => {
   const dispatch = useDispatch();
+  const router = useRouter();
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -16,9 +18,10 @@ const LoginForm = ({ changeSingUp, changeManager, isManager }) => {
   // 로그인 처리
   const handleLogin = async (e) => {
     e.preventDefault();
+    console.log(isManager);
     try {
       //로그인 유저 정책을 '브라우져 세션'으로 설정
-      await setPersistence(auth, browserSessionPersistence);
+      // await setPersistence(auth, browserSessionPersistence);
       const userCredential = await signInWithEmailAndPassword(auth, email, password);
       const user = userCredential.user;
 
@@ -33,22 +36,33 @@ const LoginForm = ({ changeSingUp, changeManager, isManager }) => {
         return;
       }
       console.log(userInfo);
+
+      // 로컬 스토리지에
+      // localStorage.setItem("userInfo", JSON.stringify(userInfo));
       // redux 상태 업데이트
       dispatch(loginSuccess(userInfo));
 
-      console.log("로그인성공");
-
-      // window.location.href = "/"; // 로그인 성공 시 홈으로 리다이렉트
+      router.replace("/"); // 로그인 성공 시 홈으로 리다이렉트(새로고침 없이)
     } catch (err) {
       console.log("로그인에 실패했습니다.", err);
       alert("아이디와 비밀번호를 확인해 주세요.");
     }
   };
 
-  const handleRoleChange = () => {
-    changeManager();
-    setEmail("");
-    setPassword("");
+  const handleUserButton = () => {
+    if (isManager) {
+      changeManager();
+      setEmail("");
+      setPassword("");
+    }
+  };
+
+  const handleAdminButton = () => {
+    if (!isManager) {
+      changeManager();
+      setEmail("");
+      setPassword("");
+    }
   };
 
   return (
@@ -56,30 +70,34 @@ const LoginForm = ({ changeSingUp, changeManager, isManager }) => {
       <h1 className={style.title}>그랑코딩학원</h1>
 
       <div className={style.changeuserbtn}>
-        <Button type="button" onClick={handleRoleChange} style={isManager ? {} : { backgroundColor: "white" }}>
+        <div className={`${style.roleFocus} ${isManager ? style.adminFocus : style.userFocus}`}></div>
+        <div className={`${style.roleButton} ${isManager ? {} : style.selected}`} onClick={handleUserButton}>
           강사님
-        </Button>
-        <Button type="button" onClick={handleRoleChange} style={isManager ? { backgroundColor: "white" } : {}}>
+        </div>
+        <div className={`${style.roleButton} ${isManager ? style.selected : {}}`} onClick={handleAdminButton}>
           관리자
-        </Button>
+        </div>
       </div>
 
       <form className={style.form} onSubmit={handleLogin} key={isManager ? "manager" : "user"}>
         <div className={style.items}>
-          <h3>이메일</h3>
+          <label>이메일</label>
           <Input type="email" defaultValue={email} placeholder="이메일" onChange={setEmail} />
         </div>
 
         <div className={style.items}>
-          <h3>비밀번호</h3>
+          <label>비밀번호</label>
           <Input type="password" defaultValue={password} placeholder="비밀번호" onChange={setPassword} />
         </div>
 
         <div className={style.items}>
-          <Button type="submit">로그인</Button>
+          <Button type="submit" className={style.button}>
+            로그인
+          </Button>
         </div>
+
         <div className={style.items}>
-          <Button type="button" onClick={changeSingUp}>
+          <Button type="button" onClick={changeSingUp} className={`${style.signButton} ${style.button}`}>
             회원가입
           </Button>
         </div>
