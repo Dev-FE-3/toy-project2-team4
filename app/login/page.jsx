@@ -25,11 +25,6 @@ export default function LoginPage() {
     }
   };
 
-  // const logOut = () => {
-  //   auth.signOut();
-  //   sessionStorage.removeItem("firebaseAuth");
-  // };
-
   return (
     <main className={style.contaier}>
       {isSignUp ? (
