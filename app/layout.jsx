@@ -4,6 +4,8 @@ import Navigation from "../components/navigation/navigation.jsx";
 import CenteredLayout from "../components/centeredLayout/CenteredLayout.jsx";
 import ReduxProvider from "../store/reduxProvider";
 import ProtectedRoute from "../components/protectedroute/protectedroute";
+import IntegrateMSW from "../mocks/integrateMSW";
+
 
 export const metadata = {
   title: "그랑 코딩학원",
@@ -20,8 +22,10 @@ export default function RootLayout({ children }) {
       <body className={notoSansKr.className}>
         <ReduxProvider>
           <ProtectedRoute>
-            <Navigation />
-            <CenteredLayout>{children}</CenteredLayout>
+          <Navigation />
+          <CenteredLayout>
+            <IntegrateMSW>{children}</IntegrateMSW>
+          </CenteredLayout>
           </ProtectedRoute>
         </ReduxProvider>
       </body>

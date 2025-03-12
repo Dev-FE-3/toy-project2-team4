@@ -1,3 +1,5 @@
+"use client";
+
 import React, { useState, useRef, useEffect } from "react";
 import styles from "./dropdown.module.scss";
 import Icon from "../icon/icon";
@@ -35,29 +37,27 @@ const Dropdown = ({ initialOptions = [], onSelect, className, defaultValue = "" 
 
   return (
     <div ref={dropdownRef} className={`${styles.dropdownContainer} ${className}`}>
-      <button onClick={() => setIsOpen((prev) => !prev)} className={`${styles.dropdown} ${className}`}>
+      <button onClick={() => setIsOpen((prev) => !prev)} className={`${styles.dropdown}`}>
         {selectOption}
         <Icon style="rounded" iconname="stat_minus_1" size="2rem" />
       </button>
-      <div>
-        {isOpen && (
-          <div className={`${styles.dropdownList} ${className}`}>
-            <ul>
-              {initialOptions.map((option, index) => (
-                <li
-                  key={index}
-                  className={`${styles.dropItem} ${className}`}
-                  onClick={() => {
-                    handleItemClick(option);
-                  }}
-                >
-                  {option}
-                </li>
-              ))}
-            </ul>
-          </div>
-        )}
-      </div>
+      {isOpen && (
+        <div className={`${styles.dropdownList}`}>
+          <ul>
+            {initialOptions.map((option, index) => (
+              <li
+                key={index}
+                className={`${styles.dropItem}`}
+                onClick={() => {
+                  handleItemClick(option);
+                }}
+              >
+                {option}
+              </li>
+            ))}
+          </ul>
+        </div>
+      )}
     </div>
   );
 };
