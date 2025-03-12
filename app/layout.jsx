@@ -6,7 +6,6 @@ import ReduxProvider from "../store/reduxProvider";
 import ProtectedRoute from "../components/protectedroute/protectedroute";
 import IntegrateMSW from "../mocks/integrateMSW";
 
-
 export const metadata = {
   title: "그랑 코딩학원",
   description: "그랑 코딩학원 인트라넷 서비스",
@@ -22,10 +21,10 @@ export default function RootLayout({ children }) {
       <body className={notoSansKr.className}>
         <ReduxProvider>
           <ProtectedRoute>
-          <Navigation />
-          <CenteredLayout>
-            <IntegrateMSW>{children}</IntegrateMSW>
-          </CenteredLayout>
+            <Navigation />
+            <CenteredLayout>
+              <IntegrateMSW>{children}</IntegrateMSW>
+            </CenteredLayout>
           </ProtectedRoute>
         </ReduxProvider>
       </body>

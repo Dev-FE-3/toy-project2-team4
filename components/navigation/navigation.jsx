@@ -15,7 +15,6 @@ const Navigation = () => {
   const logOut = () => {
     dispatch(logout());
     auth.signOut();
-    // localStorage.removeItem("userInfo");
   };
 
   if (!userInfo) return null;
@@ -23,7 +22,6 @@ const Navigation = () => {
   return (
     <header className={styles.header}>
       <nav className={styles.nav}>
-        {/* <div className={styles.navContainer}> */}
         <ul className={styles.listContainer}>
           <li className={styles.item}>
             <Link href="/">수업 확인</Link>
@@ -41,9 +39,12 @@ const Navigation = () => {
             </>
           )}
         </ul>
-        <span>안녕하세요? {userInfo?.name}님!</span>
-        {/* </div> */}
-        <Button onClick={logOut}>로그아웃</Button>
+        <div className={styles.rightContainer}>
+          <span>안녕하세요? {userInfo?.name}님!</span>
+          <Button onClick={logOut} className={styles.logoutButton}>
+            로그아웃
+          </Button>
+        </div>
       </nav>
     </header>
   );

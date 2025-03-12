@@ -1,7 +1,7 @@
 .header {
   max-width: 1200px;
   margin: 0 auto;
-  padding: 10px;
+  padding: 15px 20px;
   width: 100%;
 
   .nav {
@@ -9,24 +9,15 @@
     justify-content: space-between;
     align-items: center;
 
-    // .navContainer {
-    //   width: 50%; /* 헤더의 절반 차지 */
-    // }
-
     .listContainer {
       display: flex;
-      // gap: 40px;
-      // list-style-type: none;
-      // padding: 0;
-      // margin: 0;
-      // width: 100%; /* 컨테이너의 전체 너비 사용 */
 
       .item {
         position: relative;
         font-size: 1.6rem;
         text-align: center;
 
-        &:last-child {
+        &:nth-child(3) {
           &:after {
             display: none;
           }
@@ -37,7 +28,7 @@
           position: absolute;
           top: 50%;
           right: 0;
-          width: 1px;
+          width: 1.5px;
           height: 14px;
           background-color: var(--gray);
           transform: translateY(-50%);
@@ -58,6 +49,20 @@
           }
         }
       }
+    }
+    .rightContainer {
+      display: flex;
+      align-items: center;
+      gap: 40px;
+      span {
+        font-size: 1.8rem;
+        font-weight: bold;
+      }
+    }
+    .logoutButton {
+      background-color: var(--content);
+      color: var(--foreground);
+      font-weight: bold;
     }
   }
 }
