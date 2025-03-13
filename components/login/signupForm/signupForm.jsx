@@ -3,7 +3,7 @@ import { useState } from "react";
 import { auth } from "../../../utils/firebase";
 import Input from "../../common/input/input";
 import Button from "../../common/button/button";
-import style from "../signupForm/signupForm.module.scss";
+import style from "../loginPageForm.module.scss";
 
 const SignupForm = ({ changeSingUp, changeManager, isManager }) => {
   const [email, setEmail] = useState("");
@@ -37,7 +37,7 @@ const SignupForm = ({ changeSingUp, changeManager, isManager }) => {
       return;
     }
 
-    if (!businessRegistrationNumberRegex.test(businessRegistrationNumber)) {
+    if (isManager && !businessRegistrationNumberRegex.test(businessRegistrationNumber)) {
       alert("유효한 사업자등록번호를 입력해 주세요.");
       return;
     }
@@ -61,11 +61,20 @@ const SignupForm = ({ changeSingUp, changeManager, isManager }) => {
     }
   };
 
-  const handleRoleChange = () => {
-    changeManager();
-    setEmail("");
-    setPassword("");
-    setUserName("");
+  const handleUserButton = () => {
+    if (isManager) {
+      changeManager();
+      setEmail("");
+      setPassword("");
+    }
+  };
+
+  const handleAdminButton = () => {
+    if (!isManager) {
+      changeManager();
+      setEmail("");
+      setPassword("");
+    }
   };
 
   return (
@@ -73,40 +82,33 @@ const SignupForm = ({ changeSingUp, changeManager, isManager }) => {
       <h1 className={style.title}>그랑코딩학원</h1>
 
       <div className={style.changeuserbtn}>
-        <Button
-          type="button"
-          onClick={handleRoleChange}
-          style={isManager ? {} : { backgroundColor: "white", boxShadow: "1px 2px 0px 0px rgba(0, 0, 0, 0.25)" }}
-        >
+        <div className={`${style.roleFocus} ${isManager ? style.adminFocus : style.userFocus}`}></div>
+        <div className={`${style.roleButton} ${isManager ? {} : style.selected}`} onClick={handleUserButton}>
           강사님
-        </Button>
-        <Button
-          type="button"
-          onClick={handleRoleChange}
-          style={isManager ? { backgroundColor: "white", boxShadow: "1px 2px 0px 0px rgba(0, 0, 0, 0.25)" } : {}}
-        >
+        </div>
+        <div className={`${style.roleButton} ${isManager ? style.selected : {}}`} onClick={handleAdminButton}>
           관리자
-        </Button>
+        </div>
       </div>
 
       <form className={style.form} onSubmit={handleSignup} key={isManager ? "manager" : "user"}>
         <div className={style.items}>
-          <h3>이메일</h3>
+          <label>이메일</label>
           <Input type="email" defaultValue={email} placeholder="이메일" onChange={setEmail} />
         </div>
 
         <div className={style.items}>
-          <h3>비밀번호</h3>
+          <label>비밀번호</label>
           <Input type="password" defaultValue={password} placeholder="비밀번호" onChange={setPassword} />
         </div>
 
         <div className={style.items}>
-          <h3>이름</h3>
+          <label>이름</label>
           <Input type="text" defaultValue={userName} placeholder="이름" onChange={setUserName} />
         </div>
         {isManager ? (
           <div className={style.items}>
-            <h3>사업자 등록번호</h3>
+            <label>사업자 등록번호</label>
             <Input
               type="text"
               defaultValue={businessRegistrationNumber}
@@ -120,9 +122,14 @@ const SignupForm = ({ changeSingUp, changeManager, isManager }) => {
         )}
 
         <div className={style.items}>
-          <Button type="submit">회원가입</Button>
-          <Button type="button" onClick={changeSingUp}>
-            로그인하러가기
+          <Button type="submit" className={style.button}>
+            회원가입
+          </Button>
+        </div>
+
+        <div className={style.items}>
+          <Button type="button" onClick={changeSingUp} className={`${style.signButton} ${style.button}`}>
+            로그인하러 가기
           </Button>
         </div>
       </form>
