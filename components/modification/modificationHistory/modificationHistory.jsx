@@ -15,15 +15,30 @@ const ModificationHistory = () => {
   const userEmail = userInfo?.email || "";
   const [isModal, setIsModal] = useState(false);
 
-  const { data } = useFetch(`http://localhost:3000/api/paymentHistory`);
+  // 로컬 스토리지에서 데이터 가져오기
+  const savedData = localStorage.getItem("paymentData");
+  const shouldFetch = !savedData;
+  const { data } = useFetch(shouldFetch ? `http://localhost:3000/api/paymentHistory` : null);
 
   useEffect(() => {
-    if (data?.datas) {
-      console.log("데이터 확인: ", data);
-      const filteredDatas = data.datas.filter((item) => item.email === userEmail);
+    let listDatas;
+
+    if (savedData) {
+      console.log("로컬 스토리지에서 데이터 불러옴: ", JSON.parse(savedData));
+      listDatas = JSON.parse(savedData);
+    } else if (data) {
+      // API 데이터를 가져온 경우 로컬 스토리지에 저장
+      console.log("API에서 가져온 데이터:", data);
+      listDatas = data;
+      // 로컬 스토리지에 데이터 저장
+      localStorage.setItem("paymentData", JSON.stringify(data));
+    }
+
+    if (listDatas) {
+      const filteredDatas = listDatas.filter((list) => list.email === userEmail);
       dispatch(setListDatas(filteredDatas));
     }
-  }, [data, userEmail, dispatch]);
+  }, [data, userEmail, dispatch, savedData]);
 
   console.log("패치로 가져온 데이터 확인:", data);
 
@@ -33,15 +48,26 @@ const ModificationHistory = () => {
 
   const totalCount = sortedDatas.length;
 
-  const handleModal = (sortedData) => {
-    dispatch(setSelectedList(sortedData));
+  const handleModal = (selectedList) => {
+    dispatch(setSelectedList(selectedList));
     setIsModal(true);
   };
 
   const handleListDelete = () => {
-    if (!selectedList?.id) return null;
+    if (!selectedList?.id) return;
 
-    dispatch(deleteList(selectedList.id));
+    const savedData = localStorage.getItem("paymentData");
+
+    if (savedData) {
+      const parsedData = JSON.parse(savedData);
+
+      // 삭제할 데이터(`selectedList.id`)를 제외한 새로운 배열 생성
+      const updatedData = parsedData.filter((item) => item.id !== selectedList.id);
+
+      // 로컬 스토리지에 업데이트된 데이터 저장
+      localStorage.setItem("paymentData", JSON.stringify(updatedData));
+      dispatch(deleteList(selectedList.id));
+    }
     setIsModal(false);
   };
 
@@ -57,7 +83,7 @@ const ModificationHistory = () => {
           <div>사유</div>
           <div>내용</div>
           <div>상태</div>
-          <div>취소</div>
+          <div>삭제</div>
         </li>
 
         <ModificationList sortedDatas={sortedDatas} totalCount={totalCount} handleModal={handleModal} />

@@ -8,10 +8,10 @@ import { formatSimpleDate } from "../../../utils/timeUtils";
 const ModificationList = ({ sortedDatas, totalCount, handleModal }) => {
   const dispatch = useDispatch();
 
-  const handleOpenModal = (sortedData) => {
-    console.log("모달 열기 - isApproved 값 확인:", sortedData.modification.isApproved);
-    dispatch(setSelectedList(sortedData));
-    handleModal(sortedData);
+  const handleOpenModal = (selectedList) => {
+    console.log("모달 열기 - isApproved 값 확인:", selectedList.modification.isApproved);
+    dispatch(setSelectedList(selectedList));
+    handleModal(selectedList);
   };
 
   return (
@@ -21,24 +21,22 @@ const ModificationList = ({ sortedDatas, totalCount, handleModal }) => {
           <div>정정 신청 내역이 없습니다.</div>
         </li>
       ) : (
-        sortedDatas.map((sortedData, index) => (
-          <li key={sortedData.id} className={styles.listLine}>
+        sortedDatas.map((list, index) => (
+          <li key={list.id} className={styles.listLine}>
             <div>{totalCount - index}</div>
-            <div>{formatSimpleDate(sortedData.modification.createTime)}</div>
-            <div>{sortedData.modification.category}</div>
-            <div>{sortedData.modification.message}</div>
-            <div
-              className={`${styles.status} ${sortedData.modification.isApproved ? styles.complete : styles.pending}`}
-            >
-              {sortedData.modification.isApproved ? "정정완료" : "대기"}
+            <div>{formatSimpleDate(list.modification.createTime)}</div>
+            <div>{list.modification.category}</div>
+            <div>{list.modification.message}</div>
+            <div className={`${styles.status} ${list.modification.isApproved ? styles.complete : styles.pending}`}>
+              {list.modification.isApproved ? "정정완료" : "대기"}
             </div>
             <div>
-              {sortedData.modification.isApproved ? (
+              {list.modification.isApproved ? (
                 <Button color="gray" disabled style={{ cursor: "default", pointerEvents: "none" }}>
                   삭제
                 </Button>
               ) : (
-                <Button color="red" onClick={() => handleOpenModal(sortedData)}>
+                <Button color="red" onClick={() => handleOpenModal(list)}>
                   삭제
                 </Button>
               )}
