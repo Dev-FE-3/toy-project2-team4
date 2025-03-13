@@ -2,111 +2,133 @@
   "datas": [
     {
       "num": 1,
-      "email": "test@test.com",
-      "registeredDate": "2025.02.20",
-      "reasonForRequest": "업무 연장",
-      "content": "추가 수업한 부분에 대해서 정정을 신청하겠습니다.",
+      "email": "test@user2.com",
+      "createTime": "2025-01-21T00:00:00Z",
+      "category": "업무 연장",
+      "message": "추가 수업한 부분에 대해서 정정을 신청하겠습니다.",
       "requestStatus": "대기",
-      "isClickable": true
+      "isApproved": false,
+      "delete": "n"
     },
     {
       "num": 2,
-      "email": "test@test.com",
-      "registeredDate": "2024.12.15",
-      "reasonForRequest": "오류 수정",
-      "content": "출석 시간 오류로 인해 정정을 요청합니다.",
+      "email": "test@user2.com",
+      "createTime": "2024-12-21T00:00:00Z",
+      "category": "오류 수정",
+      "message": "출석 시간 오류로 인해 정정을 요청합니다.",
       "requestStatus": "대기",
-      "isClickable": true
+      "isApproved": false,
+      "delete": "n"
     },
     {
       "num": 3,
-      "email": "test@test.com",
-      "registeredDate": "2024.11.30",
-      "reasonForRequest": "업무 연장",
-      "content": "추가 업무가 발생하여 정정 요청합니다.",
+      "email": "test@user2.com",
+      "createTime": "2024-11-21T00:00:00Z",
+      "category": "업무 연장",
+      "message": "추가 업무가 발생하여 정정 요청합니다.",
       "requestStatus": "정정 완료",
-      "isClickable": false
+      "isApproved": true,
+      "delete": "n"
     },
     {
       "num": 4,
-      "email": "test@test.com",
-      "registeredDate": "2025.02.20",
-      "reasonForRequest": "업무 연장",
-      "content": "추가 수업한 부분에 대해서 정정을 신청하겠습니다.",
+      "email": "test@user.com",
+      "createTime": "2024-10-21T00:00:00Z",
+      "category": "업무 연장",
+      "message": "추가 수업한 부분에 대해서 정정을 신청하겠습니다.",
       "requestStatus": "대기",
-      "isClickable": true
+      "isApproved": false,
+      "delete": "n"
     },
     {
       "num": 5,
-      "email": "test@test.com",
-      "registeredDate": "2024.12.15",
-      "reasonForRequest": "오류 수정",
-      "content": "출석 시간 오류로 인해 정정을 요청합니다.",
+      "email": "test@user.com",
+      "createTime": "2024-09-21T00:00:00Z",
+      "category": "오류 수정",
+      "message": "출석 시간 오류로 인해 정정을 요청합니다.",
       "requestStatus": "대기",
-      "isClickable": true
+      "isApproved": false,
+      "delete": "n"
     },
     {
       "num": 6,
-      "email": "test@test.com",
-      "registeredDate": "2024.11.30",
-      "reasonForRequest": "업무 연장",
-      "content": "추가 업무가 발생하여 정정 요청합니다.",
+      "email": "test@user.com",
+      "createTime": "2024-08-21T00:00:00Z",
+      "category": "업무 연장",
+      "message": "추가 업무가 발생하여 정정 요청합니다.",
       "requestStatus": "정정 완료",
-      "isClickable": false
+      "isApproved": false,
+      "delete": "n"
     },
     {
       "num": 7,
-      "email": "test@test.com",
-      "registeredDate": "2025.02.20",
-      "reasonForRequest": "업무 연장",
-      "content": "추가 수업한 부분에 대해서 정정을 신청하겠습니다.",
+      "email": "test@user.com",
+      "createTime": "2024-07-21T00:00:00Z",
+      "category": "업무 연장",
+      "message": "추가 수업한 부분에 대해서 정정을 신청하겠습니다.",
       "requestStatus": "대기",
-      "isClickable": true
+      "isApproved": false,
+      "delete": "n"
     },
     {
       "num": 8,
-      "email": "test@test.com",
-      "registeredDate": "2024.12.15",
-      "reasonForRequest": "오류 수정",
-      "content": "출석 시간 오류로 인해 정정을 요청합니다.",
+      "email": "test@user.com",
+      "createTime": "2024-06-21T00:00:00Z",
+      "category": "오류 수정",
+      "message": "출석 시간 오류로 인해 정정을 요청합니다.",
       "requestStatus": "대기",
-      "isClickable": true
+      "isApproved": false,
+      "delete": "n"
     },
     {
       "num": 9,
-      "email": "test@test.com",
-      "registeredDate": "2024.12.15",
-      "reasonForRequest": "오류 수정",
-      "content": "출석 시간 오류로 인해 정정을 요청합니다.",
+      "email": "test@user.com",
+      "createTime": "2024-05-21T00:00:00Z",
+      "category": "오류 수정",
+      "message": "출석 시간 오류로 인해 정정을 요청합니다.",
       "requestStatus": "대기",
-      "isClickable": true
+      "isApproved": false,
+      "delete": "n"
     },
     {
       "num": 10,
-      "email": "test@test.com",
-      "registeredDate": "2024.12.15",
-      "reasonForRequest": "오류 수정",
-      "content": "출석 시간 오류로 인해 정정을 요청합니다.",
+      "email": "test@user.com",
+      "createTime": "2024-04-21T00:00:00Z",
+      "category": "오류 수정",
+      "message": "출석 시간 오류로 인해 정정을 요청합니다.",
       "requestStatus": "대기",
-      "isClickable": true
+      "isApproved": false,
+      "delete": "n"
     },
     {
       "num": 11,
-      "email": "test2@test.com",
-      "registeredDate": "2024.12.15",
-      "reasonForRequest": "오류 수정",
-      "content": "출석 시간 오류로 인해 정정을 요청합니다.",
+      "email": "test@user.com",
+      "createTime": "2024-03-21T00:00:00Z",
+      "category": "오류 수정",
+      "message": "출석 시간 오류로 인해 정정을 요청합니다.",
       "requestStatus": "대기",
-      "isClickable": true
+      "isApproved": false,
+      "delete": "n"
     },
     {
       "num": 12,
-      "email": "test2@test.com",
-      "registeredDate": "2025.1.15",
-      "reasonForRequest": "오류 수정",
-      "content": "출석 시간 오류로 인해 정정을 요청합니다.",
+      "email": "test@user2.com",
+      "createTime": "2024-02-21T00:00:00Z",
+      "category": "오류 수정",
+      "message": "출석 시간 오류로 인해 정정을 요청합니다.",
       "requestStatus": "대기",
-      "isClickable": true
+      "isApproved": false,
+      "delete": "n"
+    },
+    {
+      "num": 13,
+      "email": "test@user2.com",
+      "createTime": "2024-01-21T00:00:00Z",
+      "category": "오류 수정",
+      "message": "출석 시간 오류로 인해 정정을 요청합니다.",
+      "requestStatus": "대기",
+      "isApproved": false,
+      "delete": "n"
     }
   ]
 }
