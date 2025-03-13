@@ -1,11 +1,11 @@
 "use client";
 import { useState, useEffect } from "react";
-import styles from "../page.module.scss";
-import Button from "../../../components/common/button/button";
-import Input from "../../../components/common/input/input";
-import Dropdown from "../../../components/common/dropdown/dropdown";
+import styles from "./addClassModal.module.scss";
+import Button from "../../common/button/button";
+import Input from "../../common/input/input";
+import Dropdown from "../../common/dropdown/dropdown";
 
-const AddClassModal = ({ onCancel, onCheck, instructors, title, showModal, defaultValues }) => {
+const AddClassModal = ({ onCancel, onCheck, INSTRUCTORS, title, showModal, defaultValues }) => {
   const [isWrong, setIsWrong] = useState({
     instructor: false,
     title: false,
@@ -14,12 +14,26 @@ const AddClassModal = ({ onCancel, onCheck, instructors, title, showModal, defau
     endTime: false,
   });
   const [formData, setFormData] = useState({
-    instructor: defaultValues?.instructor || "",
-    title: defaultValues?.title || "",
-    date: defaultValues?.date || "",
-    startTime: defaultValues?.startTime || "",
-    endTime: defaultValues?.endTime || "",
+    instructor: "",
+    title: "",
+    date: "",
+    startTime: "",
+    endTime: "",
   });
+
+  useEffect(() => {
+    if (defaultValues) {
+      setFormData({
+        instructor: defaultValues.instructor || "",
+        title: defaultValues.title || "",
+        date: defaultValues.date || "",
+        startTime: defaultValues.startTime || "",
+        endTime: defaultValues.endTime || "",
+      });
+    } else {
+      resetForm();
+    }
+  }, [defaultValues]);
 
   const resetForm = () => {
     setFormData({
@@ -68,7 +82,6 @@ const AddClassModal = ({ onCancel, onCheck, instructors, title, showModal, defau
     if (Object.values(newWrongFields).some((isWrong) => isWrong)) {
       return;
     }
-
     onCheck(formData); // formData를 직접 전달
     resetForm();
   };
@@ -77,20 +90,6 @@ const AddClassModal = ({ onCancel, onCheck, instructors, title, showModal, defau
     resetForm();
     onCancel();
   };
-
-  useEffect(() => {
-    if (defaultValues) {
-      setFormData({
-        instructor: defaultValues.instructor || "",
-        title: defaultValues.title || "",
-        date: defaultValues.date || "",
-        startTime: defaultValues.startTime || "",
-        endTime: defaultValues.endTime || "",
-      });
-    } else {
-      resetForm();
-    }
-  }, [defaultValues, showModal]);
 
   return (
     <div className={`${styles.modal} ${showModal ? styles.modalOpen : ""}`}>
@@ -101,9 +100,10 @@ const AddClassModal = ({ onCancel, onCheck, instructors, title, showModal, defau
           <div className={`${isWrong.instructor ? styles.isWrong : ""}`}>
             <Dropdown
               key={`instructor-${defaultValues?.instructor || "new"}-${showModal}`}
-              initialOptions={instructors}
+              initialOptions={INSTRUCTORS}
               onSelect={(value) => handleChange("instructor", value)}
-              defaultValue={formData.instructor}
+              defaultValue={defaultValues?.instructor || ""}
+              className={styles.dropdownComponent}
             />
           </div>
         </div>
@@ -115,7 +115,8 @@ const AddClassModal = ({ onCancel, onCheck, instructors, title, showModal, defau
               key={`course-${defaultValues?.title || "new"}-${showModal}`}
               initialOptions={title}
               onSelect={(value) => handleChange("title", value)}
-              defaultValue={formData.title}
+              defaultValue={defaultValues?.title || ""}
+              className={styles.dropdownComponent}
             />
           </div>
         </div>
@@ -127,7 +128,7 @@ const AddClassModal = ({ onCancel, onCheck, instructors, title, showModal, defau
             type="date"
             isWrong={isWrong.date}
             onChange={(value) => handleChange("date", value)}
-            defaultValue={formData.date}
+            defaultValue={defaultValues?.date || ""}
           />
         </div>
 
@@ -138,7 +139,7 @@ const AddClassModal = ({ onCancel, onCheck, instructors, title, showModal, defau
             type="time"
             isWrong={isWrong.startTime}
             onChange={(value) => handleChange("startTime", value)}
-            defaultValue={formData.startTime}
+            defaultValue={defaultValues?.startTime || ""}
           />
         </div>
 
@@ -149,7 +150,7 @@ const AddClassModal = ({ onCancel, onCheck, instructors, title, showModal, defau
             type="time"
             isWrong={isWrong.endTime}
             onChange={(value) => handleChange("endTime", value)}
-            defaultValue={formData.endTime}
+            defaultValue={defaultValues?.endTime || ""}
           />
         </div>
 

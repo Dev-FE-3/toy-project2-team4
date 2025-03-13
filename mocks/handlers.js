@@ -1,6 +1,7 @@
 import { http, HttpResponse } from "msw";
 
 import paymentHistoryData from "./data/paymentData.json";
+import classCalendarData from "./data/classCalendarData.json";
 
 const allPosts = new Map();
 
@@ -23,5 +24,10 @@ export const handlers = [
     const newPost = await request.json();
     allPosts.set(newPost.id, newPost);
     return HttpResponse.json(newPost, { status: 201 });
+  }),
+
+  // classCalender (수업 목록)
+  http.get("http://localhost:3000/api/classCalendar", () => {
+    return HttpResponse.json(classCalendarData);
   }),
 ];
