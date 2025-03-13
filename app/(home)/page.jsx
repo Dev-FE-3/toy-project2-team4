@@ -1,31 +1,37 @@
 "use client";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import {
   AddClassModal,
   CalendarDate,
   CalendarHeader,
   CLASS_TITLES,
-  classData,
+ // classData,
   INSTRUCTORS,
 } from "../../components/classCalendar/index";
 import styles from "./page.module.scss";
 import { useSelector } from "react-redux";
+import { useFetch } from "../../hooks/useFetch";
 
 export default function Home() {
-
+  
   const userName = useSelector((state) => state.auth.user?.name) // 로그인된 사용자 정보(name)
   const isAdmin = useSelector((state) => state.auth.user?.role) === "admin"
+  const { data: classData } = useFetch(`http://localhost:3000/api/classCalendar`);
   const [selectedFilter, setSelectedFilter] = useState(isAdmin ? "전체보기" : userName);
-  const [classListData, setClassListData] = useState(classData); // 수업 데이터
+  const [classListData, setClassListData] = useState(classData || []); // 수업 데이터
   const [showModal, setShowModal] = useState(false); // 수업 추가/수정 모달
   const [selectedClass, setSelectedClass] = useState(null); // 선택한 수업(admin)
 
-  // 유틸리티 함수
+  useEffect(() => {
+    if (classData) {
+      setClassListData(classData);
+    }
+  }, [classData]);
+
+ 
   const getClassList = (classData, selectedFilter) => {
     return selectedFilter === "전체보기" ? classData : classData.filter((item) => item.instructor === selectedFilter);
   };
-
-  // 이벤트 핸들러
 
   // 수업 추가/수정
   const handleSaveClass = (newClass) => {
@@ -39,6 +45,7 @@ export default function Home() {
     }
     handleModalClose();
   };
+
   // 모달 닫기
   const handleModalClose = () => {
     setShowModal(false);
