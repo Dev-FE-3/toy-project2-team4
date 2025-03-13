@@ -161,6 +161,7 @@ const SignupForm = ({ changeSingUp, changeManager, isManager }) => {
         <Modal
           title="안내"
           titleIcon={<Icon style="rounded" iconname="info" color="#cc3838" />}
+          checkButtonColor="red"
           onCheck={() => {
             setErrorSignUpModal(false);
           }}
