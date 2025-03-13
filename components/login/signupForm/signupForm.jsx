@@ -66,6 +66,8 @@ const SignupForm = ({ changeSingUp, changeManager, isManager }) => {
     } catch (err) {
       console.log("회원가입에 실패했습니다.");
       console.log(err);
+      setErrorSignUp("회원가입에 실패했습니다. 관리자에게 문의하세요.");
+      setErrorSignUpModal(true);
     }
   };
 
@@ -74,6 +76,8 @@ const SignupForm = ({ changeSingUp, changeManager, isManager }) => {
       changeManager();
       setEmail("");
       setPassword("");
+      setUserName("");
+      setBusinessRegistrationNumber("");
     }
   };
 
@@ -82,6 +86,8 @@ const SignupForm = ({ changeSingUp, changeManager, isManager }) => {
       changeManager();
       setEmail("");
       setPassword("");
+      setUserName("");
+      setBusinessRegistrationNumber("");
     }
   };
 
