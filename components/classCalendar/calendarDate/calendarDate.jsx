@@ -1,10 +1,16 @@
-import Day from "./day";
-import styles from "../page.module.scss";
-export default function CalendarDate({ year, month, classList, onEdit, onDelete, isAdmin }) {
+import { Day } from "../index";
+import styles from "./calendarDate.module.scss";
+import { useSelector } from "react-redux";
+export default function CalendarDate({ classList, onEdit, onDelete }) {
+  // Redux에서 전역 상태 가져오기
+  const year = useSelector((state) => state.classCalendar.year);
+  const month = useSelector((state) => state.classCalendar.month);
+  
   const daysInWeek = 7;
   const weeksInMonth = getWeeksInMonth(year, month);
   const firstDayOfMonth = getFirstDayOfMonth(year, month);
   const totalDays = getTotalDays(year, month);
+
 
   return (
     <>
@@ -35,7 +41,6 @@ export default function CalendarDate({ year, month, classList, onEdit, onDelete,
                   classList={todayClassList}
                   onEdit={onEdit}
                   onDelete={onDelete}
-                  isAdmin={isAdmin}
                 />
               );
             })}
@@ -73,7 +78,6 @@ export default function CalendarDate({ year, month, classList, onEdit, onDelete,
   function getClassForDay(classList, todayMonth, day) {
     const formattedDate = `${year}-${String(todayMonth).padStart(2, "0")}-${String(day).padStart(2, "0")}`;
     const todayClassList = classList.filter((classData) => classData.date === formattedDate);
-    return todayClassList? todayClassList: [];
+    return todayClassList ? todayClassList : [];
   }
-
 }

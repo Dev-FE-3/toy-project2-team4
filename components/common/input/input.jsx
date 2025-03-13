@@ -1,5 +1,5 @@
 "use client";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import styles from "./input.module.scss";
 
 /**
@@ -23,10 +23,6 @@ export default function Input({
   onChange,
 }) {
   const [value, setValue] = useState(defaultValue);
-
-  useEffect(() => {
-    setValue(defaultValue);
-  }, [defaultValue]);
 
   const handleChangeValue = (e) => {
     setValue(e.target.value);
