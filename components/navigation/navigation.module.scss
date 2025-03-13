@@ -1,7 +1,7 @@
 .header {
   max-width: 1200px;
   margin: 0 auto;
-  padding: 15px 20px;
+  padding: 15px 10px;
   width: 100%;
 
   .nav {
@@ -11,13 +11,22 @@
 
     .listContainer {
       display: flex;
-
+      align-items: center;
       .item {
         position: relative;
         font-size: 1.6rem;
         text-align: center;
 
-        &:nth-child(3) {
+        &:first-child {
+          img {
+            width: 50px;
+          }
+          &:after {
+            display: none;
+          }
+        }
+
+        &:last-child {
           &:after {
             display: none;
           }
@@ -26,7 +35,7 @@
         &:after {
           content: "";
           position: absolute;
-          top: 50%;
+          top: 55%;
           right: 0;
           width: 1.5px;
           height: 14px;
@@ -35,7 +44,6 @@
         }
 
         a {
-          color: #333;
           text-decoration: none;
           transition: color 0.3s;
           display: block;
@@ -52,8 +60,8 @@
     }
     .rightContainer {
       display: flex;
-      align-items: center;
-      gap: 40px;
+      align-items: end;
+      gap: 20px;
       span {
         font-size: 1.8rem;
         font-weight: bold;
@@ -65,4 +73,7 @@
       font-weight: bold;
     }
   }
+}
+.isvisitted {
+  color: var(--primary);
 }
