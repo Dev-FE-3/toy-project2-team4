@@ -20,10 +20,8 @@ const Navigation = () => {
     auth.signOut();
   };
 
-  if (!userInfo) return null;
+  if (!userInfo) return;
 
-  console.log(pathname);
-  console.log();
   return (
     <header className={styles.header}>
       <nav className={styles.nav}>
