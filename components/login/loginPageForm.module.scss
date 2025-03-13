@@ -1,20 +1,23 @@
 .container {
-  padding: 32px 36px;
+  padding: 25px 30px;
   display: flex;
   flex-direction: column;
   align-items: center;
 
-  gap: 32px;
+  gap: 13px;
   width: 500px;
   border-radius: 2rem;
-  border: 1px solid var(--gray);
+  border: 0.15rem solid var(--gray);
   // height: 750px;
 }
 
 .title {
   color: black;
-  font-size: 2.5rem;
+  font-size: 1rem;
   font-weight: bold;
+  img {
+    width: 100px;
+  }
 }
 
 .changeuserbtn {
@@ -57,23 +60,22 @@
     cursor: pointer;
   }
 }
-.selected {
-  // background-color: rosybrown;
-}
 
 .roleFocus {
-  position: absolute;
+  position: fixed;
   margin: 5px 7px;
-  padding: 30px 100px;
+  padding: 30px 102px;
   border-radius: 1rem;
   background-color: white;
   transition: transform 0.3s ease-in-out;
 }
+
 .userFocus {
   background-color: white;
 }
+
 .adminFocus {
-  transform: translateX(210px);
+  transform: translateX(220px);
   background-color: white;
 }
 
@@ -123,4 +125,11 @@
   &:hover {
     color: var(--background);
   }
+}
+
+.modalItem {
+  position: fixed;
+}
+.modalItemNone {
+  display: none;
 }

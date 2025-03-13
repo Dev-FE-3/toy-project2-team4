@@ -4,12 +4,19 @@ import { auth } from "../../../utils/firebase";
 import Input from "../../common/input/input";
 import Button from "../../common/button/button";
 import style from "../loginPageForm.module.scss";
+import Modal from "../../common/modal/modal";
+import Icon from "../../common/icon/icon";
 
 const SignupForm = ({ changeSingUp, changeManager, isManager }) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [userName, setUserName] = useState("");
   const [businessRegistrationNumber, setBusinessRegistrationNumber] = useState("");
+
+  const [successSignUp, setSuccessSignUp] = useState(false);
+
+  const [errorSignUpModal, setErrorSignUpModal] = useState(false);
+  const [errorSignUp, setErrorSignUp] = useState("");
 
   // 회원가입 처리
   const handleSignup = async (e) => {
@@ -21,24 +28,27 @@ const SignupForm = ({ changeSingUp, changeManager, isManager }) => {
     const businessRegistrationNumberRegex = /^\d{10}$/; //숫자 10자리
 
     // 유효성 검사
-
     if (!emailRegex.test(email) || email === "") {
-      alert("유효한 이메일을 입력하세요.");
+      setErrorSignUp("유효한 이메일을 입력해주세요.");
+      setErrorSignUpModal(true);
       return;
     }
 
     if (!passwordRegex.test(password)) {
-      alert("비밀번호는 6자에서 최대 16자까지 가능합니다.");
+      setErrorSignUp("비밀번호는 6자에서 최대 16자까지 가능합니다.");
+      setErrorSignUpModal(true);
       return;
     }
 
     if (!userNameRegex.test(userName)) {
-      alert("이름은 3자에서 최대 10자까지 가능합니다.");
+      setErrorSignUp("이름은 3자에서 최대 10자까지 가능합니다.");
+      setErrorSignUpModal(true);
       return;
     }
 
     if (isManager && !businessRegistrationNumberRegex.test(businessRegistrationNumber)) {
-      alert("유효한 사업자등록번호를 입력해 주세요.");
+      setErrorSignUp("유효한 사업자등록번호를 입력해 주세요.");
+      setErrorSignUpModal(true);
       return;
     }
 
@@ -52,9 +62,7 @@ const SignupForm = ({ changeSingUp, changeManager, isManager }) => {
         displayName: JSON.stringify(userInfo),
       });
 
-      console.log("회원가입에 성공했습니다!");
-      changeSingUp();
-      // window.location.href = "/"; // 회원가입 후 홈으로 리다이렉트
+      setSuccessSignUp(true);
     } catch (err) {
       console.log("회원가입에 실패했습니다.");
       console.log(err);
@@ -79,7 +87,10 @@ const SignupForm = ({ changeSingUp, changeManager, isManager }) => {
 
   return (
     <div className={style.container}>
-      <h1 className={style.title}>그랑코딩학원</h1>
+      {/* <h1 className={style.title}>그랑코딩학원</h1> */}
+      <h1 className={style.title}>
+        <img src="/images/title-logo.svg" alt="" />
+      </h1>
 
       <div className={style.changeuserbtn}>
         <div className={`${style.roleFocus} ${isManager ? style.adminFocus : style.userFocus}`}></div>
@@ -133,6 +144,31 @@ const SignupForm = ({ changeSingUp, changeManager, isManager }) => {
           </Button>
         </div>
       </form>
+
+      <div className={`${style.modalItem} ${successSignUp ? "" : style.modalItemNone}`}>
+        <Modal
+          title="성공"
+          titleIcon={<Icon style="rounded" iconname="check" color="#3199fe" />}
+          onCheck={() => {
+            changeSingUp();
+          }}
+        >
+          회원가입에 성공했습니다!
+        </Modal>
+      </div>
+
+      <div className={`${style.modalItem} ${errorSignUpModal ? "" : style.modalItemNone}`}>
+        <Modal
+          title="안내"
+          titleIcon={<Icon style="rounded" iconname="info" color="#cc3838" />}
+          checkButtonColor="red"
+          onCheck={() => {
+            setErrorSignUpModal(false);
+          }}
+        >
+          {errorSignUp}
+        </Modal>
+      </div>
     </div>
   );
 };
