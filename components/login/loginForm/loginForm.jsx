@@ -24,8 +24,6 @@ const LoginForm = ({ changeSingUp, changeManager, isManager }) => {
     e.preventDefault();
 
     try {
-      //로그인 유저 정책을 '브라우져 세션'으로 설정
-      // await setPersistence(auth, browserSessionPersistence);
       const userCredential = await signInWithEmailAndPassword(auth, email, password);
       const user = userCredential.user;
 
@@ -41,14 +39,11 @@ const LoginForm = ({ changeSingUp, changeManager, isManager }) => {
         setFailedLogin(false);
         return;
       }
-      console.log(userInfo);
 
-      // 로컬 스토리지에
-      // localStorage.setItem("userInfo", JSON.stringify(userInfo));
-      // redux 상태 업데이트
       dispatch(loginSuccess(userInfo));
 
-      router.replace("/"); // 로그인 성공 시 홈으로 리다이렉트(새로고침 없이)
+      // 로그인 성공 시 홈으로 리다이렉트(새로고침 없이)
+      router.replace("/");
     } catch (err) {
       console.log("로그인에 실패했습니다.", err);
       setFailedLogin(false);
@@ -73,7 +68,6 @@ const LoginForm = ({ changeSingUp, changeManager, isManager }) => {
 
   return (
     <div className={style.container}>
-      {/* <h1 className={style.title}>그랑코딩학원</h1> */}
       <h1 className={style.title}>
         <img src="/images/title-logo.svg" alt="" />
       </h1>

@@ -93,7 +93,6 @@ const SignupForm = ({ changeSingUp, changeManager, isManager }) => {
 
   return (
     <div className={style.container}>
-      {/* <h1 className={style.title}>그랑코딩학원</h1> */}
       <h1 className={style.title}>
         <img src="/images/title-logo.svg" alt="" />
       </h1>
