@@ -9,7 +9,6 @@ const ModificationList = ({ sortedDatas, totalCount, handleModal }) => {
   const dispatch = useDispatch();
 
   const handleOpenModal = (selectedList) => {
-    console.log("모달 열기 - isApproved 값 확인:", selectedList.modification.isApproved);
     dispatch(setSelectedList(selectedList));
     handleModal(selectedList);
   };
