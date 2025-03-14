@@ -6,7 +6,7 @@ import { PaymentHistoryList, PaymentHistoryDetail } from "../../components/payme
 import Modal from "../../components/common/modal/modal";
 import Icon from "../../components/common/icon/icon";
 import styles from "./paymentHistory.module.scss";
-import { paymentHistoryData } from "./data";
+
 import { useFetch } from "../../hooks/useFetch";
 
 const PaymentHistory = () => {
@@ -36,6 +36,7 @@ const PaymentHistory = () => {
 
   return (
     <>
+      <h1 className={styles.pageTitle}>급여 내역 확인</h1>
       <div className={styles.container}>
         <div className={`${styles.list} ${!selectedItem ? styles.fullWidth : ""}`}>
           <PaymentHistoryList items={data} onClick={handleSelectItem} emptyMessage={"급여 내역 정보가 없습니다"} />

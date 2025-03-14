@@ -10,7 +10,7 @@
     "modification": {
       "message": "추가 수업한 부분에 대해서 정정을 신청하겠습니다.",
       "isApproved": false,
-      "category": "오류 수정",
+      "category": "기타",
       "createTime": "2025-01-21T00:00:00Z"
     }
   },
@@ -25,7 +25,7 @@
     "modification": {
       "message": "출석 시간 오류로 인해 정정을 요청합니다.",
       "isApproved": false,
-      "category": "오류 수정",
+      "category": "기타",
       "createTime": "2024-12-21T00:00:00Z"
     }
   },
@@ -40,7 +40,7 @@
     "modification": {
       "message": "추가 업무가 발생하여 정정 요청합니다.",
       "isApproved": false,
-      "category": "오류 수정",
+      "category": "기타",
       "createTime": "2024-11-21T00:00:00Z"
     }
   },
@@ -55,7 +55,7 @@
     "modification": {
       "message": "추가 수업한 부분에 대해서 정정을 신청하겠습니다.",
       "isApproved": false,
-      "category": "오류 수정",
+      "category": "기타",
       "createTime": "2024-10-21T00:00:00Z"
     }
   },
@@ -70,7 +70,7 @@
     "modification": {
       "message": "출석 시간 오류로 인해 정정을 요청합니다.",
       "isApproved": true,
-      "category": "오류 수정",
+      "category": "업무 연장",
       "createTime": "2024-09-21T00:00:00Z"
     }
   },
@@ -85,7 +85,7 @@
     "modification": {
       "message": "추가 업무가 발생하여 정정 요청합니다.",
       "isApproved": false,
-      "category": "오류 수정",
+      "category": "업무 연장",
       "createTime": "2024-08-21T00:00:00Z"
     }
   },
@@ -100,7 +100,7 @@
     "modification": {
       "message": "추가 수업한 부분에 대해서 정정을 신청하겠습니다.",
       "isApproved": false,
-      "category": "오류 수정",
+      "category": "업무 연장",
       "createTime": "2024-07-21T00:00:00Z"
     }
   },
@@ -115,7 +115,7 @@
     "modification": {
       "message": "출석 시간 오류로 인해 정정을 요청합니다.",
       "isApproved": false,
-      "category": "오류 수정",
+      "category": "업무 연장",
       "createTime": "2024-06-21T00:00:00Z"
     }
   },
@@ -130,7 +130,7 @@
     "modification": {
       "message": "추가 수업한 부분에 대해서 정정을 신청하겠습니다.",
       "isApproved": false,
-      "category": "오류 수정",
+      "category": "업무 연장",
       "createTime": "2024-05-21T00:00:00Z"
     }
   },
@@ -145,7 +145,7 @@
     "modification": {
       "message": "급여 계산 오류로 인해 정정을 요청합니다.",
       "isApproved": false,
-      "category": "급여 오류",
+      "category": "업무 연장",
       "createTime": "2024-04-21T00:00:00Z"
     }
   },
@@ -160,7 +160,7 @@
     "modification": {
       "message": "초과 근무 시간이 반영되지 않았습니다.",
       "isApproved": true,
-      "category": "근무 시간",
+      "category": "무급 휴가 사용",
       "createTime": "2024-03-21T00:00:00Z"
     }
   },
@@ -175,7 +175,7 @@
     "modification": {
       "message": "수당 지급이 누락되었습니다.",
       "isApproved": false,
-      "category": "수당 누락",
+      "category": "무급 휴가 사용",
       "createTime": "2024-02-21T00:00:00Z"
     }
   },
@@ -190,7 +190,7 @@
     "modification": {
       "message": "세금 공제 내역이 잘못되었습니다.",
       "isApproved": false,
-      "category": "세금 오류",
+      "category": "무급 휴가 사용",
       "createTime": "2024-01-21T00:00:00Z"
     }
   },
@@ -205,7 +205,7 @@
     "modification": {
       "message": "출근 기록이 잘못 반영되었습니다.",
       "isApproved": true,
-      "category": "출근 오류",
+      "category": "무급 휴가 사용",
       "createTime": "2023-12-21T00:00:00Z"
     }
   },
@@ -220,7 +220,7 @@
     "modification": {
       "message": "급여 지급일이 변경되었습니다.",
       "isApproved": false,
-      "category": "급여 날짜 변경",
+      "category": "무급 휴가 사용",
       "createTime": "2023-11-21T00:00:00Z"
     }
   },
@@ -235,7 +235,7 @@
     "modification": {
       "message": "급여 명세서 내역과 실 지급액이 다릅니다.",
       "isApproved": false,
-      "category": "급여 차이",
+      "category": "무급 휴가 사용",
       "createTime": "2023-10-21T00:00:00Z"
     }
   },
@@ -250,7 +250,7 @@
     "modification": {
       "message": "근무 시간이 10시간 이상인데, 기본 근무 시간으로 반영됨.",
       "isApproved": false,
-      "category": "근무 시간",
+      "category": "무급 휴가 사용",
       "createTime": "2023-09-21T00:00:00Z"
     }
   },
@@ -265,7 +265,7 @@
     "modification": {
       "message": "야간 수당이 누락되었습니다.",
       "isApproved": true,
-      "category": "야간 수당",
+      "category": "무급 휴가 사용",
       "createTime": "2023-08-21T00:00:00Z"
     }
   },
@@ -280,7 +280,7 @@
     "modification": {
       "message": "인센티브 반영이 잘못되었습니다.",
       "isApproved": false,
-      "category": "인센티브 오류",
+      "category": "무급 휴가 사용",
       "createTime": "2023-07-21T00:00:00Z"
     }
   },
@@ -295,7 +295,7 @@
     "modification": {
       "message": "공제 항목이 누락되었습니다.",
       "isApproved": true,
-      "category": "공제 누락",
+      "category": "무급 휴가 사용",
       "createTime": "2023-06-21T00:00:00Z"
     }
   }

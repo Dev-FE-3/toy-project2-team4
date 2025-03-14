@@ -4,7 +4,7 @@ import { useState, useEffect } from "react";
 import Image from "next/image";
 
 import { formatSimpleDate } from "../../../utils/timeUtils";
-import { fetchData } from "../../../utils/apiUtils";
+
 import styles from "./paymentHistoryDetail.module.scss";
 import Button from "../../common/button/button";
 import Icon from "../../common/icon/icon";
@@ -19,12 +19,15 @@ export const PaymentHistoryDetail = ({
   setIsRequestingCorrection,
   onOpenModal,
 }) => {
-  if (item === null) {
+  if (!item) {
     return null; // null일 경우 아무것도 렌더링하지 않음
   }
 
-  const [content, setContent] = useState("");
-  const [selectedCategory, setSelectedCategory] = useState("default");
+  const categoryOptions = ["업무 연장", "무급 휴가 사용", "휴일 근무", "기타"];
+
+  // 초기값을 item.modification에서 가져오도록 설정
+  const [content, setContent] = useState(item.modification?.message || "");
+  const [selectedCategory, setSelectedCategory] = useState(item.modification?.category || categoryOptions[3]);
 
   const handleContentChange = (e) => {
     if (e.target.value.length <= 300) {
@@ -32,8 +35,8 @@ export const PaymentHistoryDetail = ({
     }
   };
 
-  const handleCategoryChange = (e) => {
-    setSelectedCategory(e.target.value);
+  const handleCategoryChange = (selectedOption) => {
+    setSelectedCategory(selectedOption);
   };
 
   const handleCorrectionRequest = () => {
@@ -41,39 +44,32 @@ export const PaymentHistoryDetail = ({
   };
 
   const handleSaveRequest = async () => {
-    const newCorrection = {
+    const newModification = {
       message: content,
       isApproved: false,
       category: selectedCategory,
-      timestamp: new Date().toISOString(),
+      createTime: new Date().toISOString(),
     };
 
     const updatedData = {
       ...item,
-      corrections: [newCorrection],
+      modification: newModification,
     };
 
-    try {
-      setIsRequestingCorrection(false);
-      onOpenModal();
-      await fetchData("/test", updatedData, "POST");
-    } catch (error) {
-      console.error("데이터 패칭 오류:", error);
-    }
+    setIsRequestingCorrection(false);
+    onOpenModal();
   };
 
   const handleClose = () => {
-    setContent(""); // 내용 초기화
+    setContent(item.modification?.message || ""); // 내용 초기화 (기존 데이터 유지)
+    setSelectedCategory(item.modification?.category || categoryOptions[3]); // 카테고리 초기화
     onClose(); // 부모에게 초기화 요청
   };
 
   useEffect(() => {
-    // 컴포넌트가 언마운트될 때 상태 초기화
-    return () => {
-      setContent("");
-      setSelectedCategory("default");
-    };
-  }, []);
+    setContent(item.modification?.message || "");
+    setSelectedCategory(item.modification?.category || categoryOptions[3]);
+  }, [item]); // item이 변경될 때 초기화
 
   return (
     <div className={styles.container}>
@@ -103,9 +99,10 @@ export const PaymentHistoryDetail = ({
                   사유
                 </label>
                 <Dropdown
-                  initialOptions={["업무 연장", "무급 휴가 사용", "휴일 근무", "기타"]}
+                  initialOptions={categoryOptions}
                   onSelect={handleCategoryChange}
-                ></Dropdown>
+                  defaultValue={selectedCategory}
+                />
               </div>
               <div className={styles.textareaLabel}>
                 <div className={styles.textMaxLength} htmlFor="contents">
