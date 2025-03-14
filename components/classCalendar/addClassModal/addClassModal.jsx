@@ -82,7 +82,7 @@ const AddClassModal = ({ onCancel, onCheck, INSTRUCTORS, title, showModal, defau
     if (Object.values(newWrongFields).some((isWrong) => isWrong)) {
       return;
     }
-    onCheck(formData); // formData를 직접 전달
+    onCheck(formData); // formData 전달
     resetForm();
   };
 

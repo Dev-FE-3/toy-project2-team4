@@ -39,7 +39,7 @@ export default function Home() {
   }, []);
 
   useEffect(() => {
-    if (classListData.length===0 && mockClassData) {
+    if (classListData.length === 0 && mockClassData) {
       localStorage.setItem("classData", JSON.stringify(mockClassData)); // 데이터를 JSON 문자열로 변환하여 저장
       setClassListData(mockClassData);
     } else if (classListData) {
@@ -84,7 +84,6 @@ export default function Home() {
     });
   };
 
-  // 계산된 값
   // 강사별 필터링된 수업 리스트
   const filteredClassList = getClassList(classListData, selectedFilter);
 
