@@ -1,6 +1,5 @@
 // 액션 생성 함수 (Action Creators)
 export const setListDatas = (datas) => ({
-  // eamil 일치하는 리스트만 담김
   type: "SET_LIST_DATAS",
   payload: datas,
 });

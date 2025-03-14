@@ -10,12 +10,11 @@ import { useFetch } from "../../../hooks/useFetch";
 
 const ModificationHistory = () => {
   const dispatch = useDispatch();
-  const { listDatas, selectedList } = useSelector((state) => state.modificationHistory); // Redux에서 상태 가져오기
+  const { listDatas, selectedList } = useSelector((state) => state.modificationHistory);
   const userInfo = useSelector((state) => state.auth.user);
   const userEmail = userInfo?.email || "";
   const [isModal, setIsModal] = useState(false);
 
-  // 로컬 스토리지에서 데이터 가져오기
   const savedData = localStorage.getItem("paymentData");
   const shouldFetch = !savedData;
   const { data } = useFetch(shouldFetch ? `http://localhost:3000/api/paymentHistory` : null);
@@ -24,13 +23,9 @@ const ModificationHistory = () => {
     let listDatas;
 
     if (savedData) {
-      console.log("로컬 스토리지에서 데이터 불러옴: ", JSON.parse(savedData));
       listDatas = JSON.parse(savedData);
     } else if (data) {
-      // API 데이터를 가져온 경우 로컬 스토리지에 저장
-      console.log("API에서 가져온 데이터:", data);
       listDatas = data;
-      // 로컬 스토리지에 데이터 저장
       localStorage.setItem("paymentData", JSON.stringify(data));
     }
 
@@ -39,8 +34,6 @@ const ModificationHistory = () => {
       dispatch(setListDatas(filteredDatas));
     }
   }, [data, userEmail, dispatch, savedData]);
-
-  console.log("패치로 가져온 데이터 확인:", data);
 
   const sortedDatas = [...listDatas].sort(
     (a, b) => new Date(b.modification.createTime) - new Date(a.modification.createTime),
@@ -60,11 +53,8 @@ const ModificationHistory = () => {
 
     if (savedData) {
       const parsedData = JSON.parse(savedData);
-
-      // 삭제할 데이터(`selectedList.id`)를 제외한 새로운 배열 생성
       const updatedData = parsedData.filter((item) => item.id !== selectedList.id);
 
-      // 로컬 스토리지에 업데이트된 데이터 저장
       localStorage.setItem("paymentData", JSON.stringify(updatedData));
       dispatch(deleteList(selectedList.id));
     }
