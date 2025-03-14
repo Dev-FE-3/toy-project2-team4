@@ -90,7 +90,7 @@ export default function Home() {
   // 렌더링
   return (
     <>
-      <h1 className={styles.pageTitle}>수업 확인 페이지</h1>
+      <h1 className={styles.pageTitle}>수업 확인</h1>
       <div className={styles.calendarContainer}>
         <CalendarHeader
           INSTRUCTORS={INSTRUCTORS}
