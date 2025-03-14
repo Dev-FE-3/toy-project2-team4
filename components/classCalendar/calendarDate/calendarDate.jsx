@@ -5,12 +5,11 @@ export default function CalendarDate({ classList, onEdit, onDelete }) {
   // Redux에서 전역 상태 가져오기
   const year = useSelector((state) => state.classCalendar.year);
   const month = useSelector((state) => state.classCalendar.month);
-  
+
   const daysInWeek = 7;
   const weeksInMonth = getWeeksInMonth(year, month);
   const firstDayOfMonth = getFirstDayOfMonth(year, month);
   const totalDays = getTotalDays(year, month);
-
 
   return (
     <>
@@ -49,32 +48,27 @@ export default function CalendarDate({ classList, onEdit, onDelete }) {
       </div>
     </>
   );
-
+  // 주수 계산
   function getWeeksInMonth(year, month) {
-    // 이번 달의 첫째 날과 마지막 날 구하기
     const firstDay = getFirstDayOfMonth(year, month);
-    // 이번 달의 총 날짜 수
     const totalDays = getTotalDays(year, month);
-
-    // (첫째 날 이전의 빈 칸 + 이번 달 날짜 수) ÷ 7 을 올림 처리
     return Math.ceil((firstDay + totalDays) / 7);
   }
-
+  // 1일 요일 계산
   function getFirstDayOfMonth(year, month) {
     const firstDay = new Date(year, month - 1, 1);
-    // 첫째 날의 요일 (0: 일요일, 1: 월요일, ..., 6: 토요일)
     let firstDayOfWeek = firstDay.getDay();
     // 첫째 날의 요일 (0: 월요일, 1: 화요일, ..., 6: 일요일)
     firstDayOfWeek = firstDayOfWeek === 0 ? 6 : firstDayOfWeek - 1;
     return firstDayOfWeek;
   }
-
+  // 달 일수 계산
   function getTotalDays(year, month) {
     const lastDay = new Date(year, month, 0);
     const totalDays = lastDay.getDate();
     return totalDays;
   }
-
+  // 해당일의 수업목록 필터링
   function getClassForDay(classList, todayMonth, day) {
     const formattedDate = `${year}-${String(todayMonth).padStart(2, "0")}-${String(day).padStart(2, "0")}`;
     const todayClassList = classList.filter((classData) => classData.date === formattedDate);

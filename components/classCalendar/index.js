@@ -4,4 +4,3 @@ export { default as CalendarHeader } from "./calendarHeader/calendarHeader";
 export { default as ClassItem } from "./classItem/classItem";
 export { default as Day } from "./day/day";
 export { CLASS_COLORS, INSTRUCTORS, CLASS_TITLES } from "../../app/(home)/constants";
-export { classData } from "../../app/(home)/classData";
