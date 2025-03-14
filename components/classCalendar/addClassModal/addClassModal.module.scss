@@ -8,10 +8,12 @@
   display: none;
   justify-content: center;
   align-items: center;
+  z-index: 10;
 
   &.modalOpen {
     display: flex;
   }
+
   .modalContent {
     width: 384px;
     padding: 40px 70px;
@@ -38,12 +40,14 @@
         margin-bottom: 3px;
         font-weight: 400;
       }
+
       .dropdownComponent {
         width: 240px;
         & button {
           height: 40px;
         }
       }
+
       .isWrong {
         > * {
           // isWrong의 직계 자식 요소 모두 선택
@@ -61,10 +65,4 @@
       margin-top: 20px;
     }
   }
-}
-
-// admin이 아닐 때 기본적으로 숨김
-.classAddButton,
-.adminIconContainer {
-  visibility: visible;
 }

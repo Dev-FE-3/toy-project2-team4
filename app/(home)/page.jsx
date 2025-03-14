@@ -27,7 +27,7 @@ export default function Home() {
     const handleStorageChange = () => {
       const storedData = localStorage.getItem("classData");
       if (storedData) {
-        setClassData(JSON.parse(storedData));
+        setClassListData(JSON.parse(storedData));
       }
     };
     // 로컬 스토리지 변경 감지
@@ -39,7 +39,7 @@ export default function Home() {
   }, []);
 
   useEffect(() => {
-    if (!classListData && mockClassData) {
+    if (classListData.length === 0 && mockClassData) {
       localStorage.setItem("classData", JSON.stringify(mockClassData)); // 데이터를 JSON 문자열로 변환하여 저장
       setClassListData(mockClassData);
     } else if (classListData) {
@@ -84,14 +84,13 @@ export default function Home() {
     });
   };
 
-  // 계산된 값
   // 강사별 필터링된 수업 리스트
   const filteredClassList = getClassList(classListData, selectedFilter);
 
   // 렌더링
   return (
     <>
-      <div>수업 확인 페이지</div>
+      <h1 className={styles.pageTitle}>수업 확인 페이지</h1>
       <div className={styles.calendarContainer}>
         <CalendarHeader
           INSTRUCTORS={INSTRUCTORS}
