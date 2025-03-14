@@ -6,8 +6,8 @@ import LoginForm from "../../components/login/loginForm/loginForm";
 import SignupForm from "../../components/login/signupForm/signupForm";
 
 export default function LoginPage() {
-  const [isSignUp, setIsSignUp] = useState(false); // 로그인/회원가입 토글
-  const [isManager, setIsManager] = useState(false); // 관리자인지 강사님인지 확인
+  const [isSignUp, setIsSignUp] = useState(false);
+  const [isManager, setIsManager] = useState(false);
 
   const changeManager = () => {
     if (isManager) {

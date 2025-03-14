@@ -1,7 +1,7 @@
 .header {
   max-width: 1200px;
   margin: 0 auto;
-  padding: 10px;
+  padding: 15px 10px;
   width: 100%;
 
   .nav {
@@ -9,22 +9,22 @@
     justify-content: space-between;
     align-items: center;
 
-    // .navContainer {
-    //   width: 50%; /* 헤더의 절반 차지 */
-    // }
-
     .listContainer {
       display: flex;
-      // gap: 40px;
-      // list-style-type: none;
-      // padding: 0;
-      // margin: 0;
-      // width: 100%; /* 컨테이너의 전체 너비 사용 */
-
+      align-items: center;
       .item {
         position: relative;
         font-size: 1.6rem;
         text-align: center;
+
+        &:first-child {
+          img {
+            width: 50px;
+          }
+          &:after {
+            display: none;
+          }
+        }
 
         &:last-child {
           &:after {
@@ -35,16 +35,15 @@
         &:after {
           content: "";
           position: absolute;
-          top: 50%;
+          top: 55%;
           right: 0;
-          width: 1px;
+          width: 1.5px;
           height: 14px;
           background-color: var(--gray);
           transform: translateY(-50%);
         }
 
         a {
-          color: #333;
           text-decoration: none;
           transition: color 0.3s;
           display: block;
@@ -59,5 +58,26 @@
         }
       }
     }
+    .rightContainer {
+      display: flex;
+      align-items: end;
+      gap: 20px;
+      span {
+        font-size: 1.8rem;
+      }
+    }
+    .logoutButton {
+      background-color: var(--content);
+      color: var(--foreground);
+      font-weight: bold;
+
+      &:hover {
+        background-color: var(--primary);
+        color: var(--content);
+      }
+    }
   }
+}
+.isvisitted {
+  color: var(--primary);
 }

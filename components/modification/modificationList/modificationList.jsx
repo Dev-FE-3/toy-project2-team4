@@ -1,33 +1,42 @@
 "use client";
 import styles from "./modificationList.module.scss";
 import Button from "../../common/button/button"
+import { useDispatch } from "react-redux";
+import { setSelectedList } from "../../../store/reducers/modificationHistoryReducer";
+import { formatSimpleDate } from "../../../utils/timeUtils";
 
-const ModificationList = ({ sortedDatas, totalCount, handleModal, listDatas }) => {
+const ModificationList = ({ sortedDatas, totalCount, handleModal }) => {
+  const dispatch = useDispatch();
+
+  const handleOpenModal = (selectedList) => {
+    console.log("모달 열기 - isApproved 값 확인:", selectedList.modification.isApproved);
+    dispatch(setSelectedList(selectedList));
+    handleModal(selectedList);
+  };
+
   return (
     <ul className={styles.listContent}>
-      {listDatas.length === 0 ? (
+      {sortedDatas.length === 0 ? (
         <li className={styles.noData}>
           <div>정정 신청 내역이 없습니다.</div>
         </li>
       ) : (
-        sortedDatas.map((sortedData, index) => (
-          <li key={sortedData.num} className={styles.listLine}>
+        sortedDatas.map((list, index) => (
+          <li key={list.id} className={styles.listLine}>
             <div>{totalCount - index}</div>
-            <div>{sortedData.registeredDate}</div>
-            <div>{sortedData.reasonForRequest}</div>
-            <div>{sortedData.content}</div>
-            <div
-              className={`${styles.status} ${sortedData.requestStatus === "대기" ? styles.pending : styles.complete}`}
-            >
-              {sortedData.requestStatus}
+            <div>{formatSimpleDate(list.modification.createTime)}</div>
+            <div>{list.modification.category}</div>
+            <div>{list.modification.message}</div>
+            <div className={`${styles.status} ${list.modification.isApproved ? styles.complete : styles.pending}`}>
+              {list.modification.isApproved ? "정정완료" : "대기"}
             </div>
             <div>
-              {sortedData.isClickable ? (
-                <Button color="red" onClick={() => handleModal(sortedData)}>
+              {list.modification.isApproved ? (
+                <Button color="gray" disabled style={{ cursor: "default", pointerEvents: "none" }}>
                   삭제
                 </Button>
               ) : (
-                <Button color="gray" disabled style={{ cursor: "default", pointerEvents: "none" }}>
+                <Button color="red" onClick={() => handleOpenModal(list)}>
                   삭제
                 </Button>
               )}

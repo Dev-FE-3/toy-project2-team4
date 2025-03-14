@@ -15,6 +15,10 @@ export const handlers = [
     return HttpResponse.json(paymentHistoryData);
   }),
 
+  http.get("http://localhost:3000/api/ModificationHistory", () => {
+    return HttpResponse.json(paymentHistoryData);
+  }),
+
   //POST 요청은 동작만 확인
   http.post("http://localhost:3000/api/paymentHistory", async ({ request }) => {
     const newPost = await request.json();
