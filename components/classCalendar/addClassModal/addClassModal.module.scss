@@ -8,7 +8,7 @@
   display: none;
   justify-content: center;
   align-items: center;
-
+  z-index: 10;
   &.modalOpen {
     display: flex;
   }
