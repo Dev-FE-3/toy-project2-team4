@@ -1,19 +1,17 @@
 "use client";
 
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 
 export default function IntegrateMSW({ children }) {
-  const startClientMSW = async () => {
-    if (typeof window !== "undefined") {
-      const { worker } = await import("./browser");
-      await worker.start({
-        onUnhandledRequest: "bypass",
-      });
-    }
-  };
+  const [isWorkerStarted, setIsWorkerStarted] = useState(false);
+
   useEffect(() => {
-    startClientMSW();
-  }, []);
+    if (typeof window !== "undefined" && !isWorkerStarted) {
+      import("./browser")
+        .then(({ worker }) => worker.start({ onUnhandledRequest: "bypass" }))
+        .then(() => setIsWorkerStarted(true));
+    }
+  }, [isWorkerStarted]);
 
   return <>{children}</>;
 }

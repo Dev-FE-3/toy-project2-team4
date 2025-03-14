@@ -40,7 +40,11 @@ export const PaymentHistoryList = ({ items, onClick, emptyMessage }) => {
                 <div className={styles.itemContent}>{item.totalAmount.toLocaleString()}</div>
                 <div className={styles.itemContent}>{item.actualAmount.toLocaleString()}</div>
                 <div className={styles.itemContent}>
-                  <Button onClick={() => handleOpenDetail(item)}>열람하기</Button>
+                  <div>
+                    <Button className={styles.openButton} onClick={() => handleOpenDetail(item)}>
+                      열람하기
+                    </Button>
+                  </div>
                 </div>
               </li>
             ))}
