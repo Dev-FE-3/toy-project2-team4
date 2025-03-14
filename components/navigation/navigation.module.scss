@@ -64,13 +64,17 @@
       gap: 20px;
       span {
         font-size: 1.8rem;
-        font-weight: bold;
       }
     }
     .logoutButton {
       background-color: var(--content);
       color: var(--foreground);
       font-weight: bold;
+
+      &:hover {
+        background-color: var(--primary);
+        color: var(--content);
+      }
     }
   }
 }
