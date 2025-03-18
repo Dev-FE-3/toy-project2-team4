@@ -31,8 +31,8 @@ export default function Day({ otherMonth, day, classList, onEdit, onDelete }) {
       <div className={styles.classList}>
         {sortByTime(classList)
           .slice(0, isExpanded ? classList.length : 3)
-          .map((item, index) => (
-            <ClassItem key={index} item={item} onEdit={onEdit} onDelete={onDelete} />
+          .map((item) => (
+            <ClassItem key={item.id} item={item} onEdit={onEdit} onDelete={onDelete} />
           ))}
 
         {/* 수업이 3개 이상일 때만 확장/축소 버튼을 보여줌 */}
