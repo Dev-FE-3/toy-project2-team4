@@ -34,7 +34,6 @@ export default function ClassItem({ index, item, onEdit, onDelete }) {
         <p>{item.title}</p>
         {isAdmin && (
           <div className={styles.adminIconContainer}>
-            <>
               <div className={styles.icon} onClick={() => onEdit(item)}>
                 <Icon
                   iconname="edit" // 연필 아이콘
@@ -48,7 +47,6 @@ export default function ClassItem({ index, item, onEdit, onDelete }) {
                   size="20px"
                 />
               </div>
-            </>
           </div>
         )}
       </div>
