@@ -5,7 +5,7 @@ import Modal from "../../common/modal/modal";
 import { useMemo, useState } from "react";
 import { useSelector } from "react-redux";
 
-export default function ClassItem({ index, item, onEdit, onDelete }) {
+export default function ClassItem({ item, onEdit, onDelete }) {
   const role = useSelector((state) => state.auth.user?.role);
   const isAdmin = useMemo(() => role === "admin", [role]);
   const [showDeleteModal, setShowDeleteModal] = useState(false);
@@ -24,7 +24,6 @@ export default function ClassItem({ index, item, onEdit, onDelete }) {
   return (
     <>
       <div
-        key={index}
         className={styles.classItem}
         style={{
           borderColor: color, // 선명한 색
