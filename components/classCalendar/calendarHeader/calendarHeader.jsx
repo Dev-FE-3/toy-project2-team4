@@ -26,13 +26,11 @@ export default function CalendarHeader({ INSTRUCTORS, selectedFilter, setSelecte
     if (newMonth > 12) {
       newMonth = 1;
       newYear += 1;
-      dispatch(setYear(newYear)); // Redux 상태 업데이트
     } else if (newMonth < 1) {
       newMonth = 12;
       newYear -= 1;
-      dispatch(setYear(newYear)); // Redux 상태 업데이트
     }
-
+    if (newYear !== year) dispatch(setYear(newYear)); // Redux 상태 업데이트
     dispatch(setMonth(newMonth)); // Redux 상태 업데이트
   };
 
