@@ -7,7 +7,7 @@ export default function Day({ otherMonth, day, classList, onEdit, onDelete }) {
 
   // classList 확장
   const toggleExpand = () => {
-    setIsExpanded(!isExpanded);
+    setIsExpanded((prev) => !prev);
   };
 
   // 시간순 정렬
