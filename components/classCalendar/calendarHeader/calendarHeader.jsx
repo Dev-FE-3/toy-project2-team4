@@ -2,13 +2,13 @@ import Dropdown from "../../common/dropdown/dropdown";
 import Button from "../../common/button/button";
 import Icon from "../../common/icon/icon";
 import styles from "./calendarHeader.module.scss";
-import React from "react";
+import React, { useMemo } from "react";
 import { setMonth, setYear } from "../../../store/reducers/classCalendarReducer/classCalendarActions";
 import { useDispatch, useSelector } from "react-redux";
 export default function CalendarHeader({ INSTRUCTORS, selectedFilter, setSelectedFilter, setShowModal }) {
   // Redux에서 전역 상태 가져오기
   const role = useSelector((state) => state.auth.user?.role);
-  const isAdmin = role === "admin";
+  const isAdmin = useMemo(() => role === "admin", [role]);
   const year = useSelector((state) => state.classCalendar.year);
   const month = useSelector((state) => state.classCalendar.month);
   const dispatch = useDispatch();
@@ -26,13 +26,11 @@ export default function CalendarHeader({ INSTRUCTORS, selectedFilter, setSelecte
     if (newMonth > 12) {
       newMonth = 1;
       newYear += 1;
-      dispatch(setYear(newYear)); // Redux 상태 업데이트
     } else if (newMonth < 1) {
       newMonth = 12;
       newYear -= 1;
-      dispatch(setYear(newYear)); // Redux 상태 업데이트
     }
-
+    if (newYear !== year) dispatch(setYear(newYear)); // Redux 상태 업데이트
     dispatch(setMonth(newMonth)); // Redux 상태 업데이트
   };
 

@@ -66,7 +66,7 @@ export default function Home() {
     handleModalClose();
   };
 
-  // 모달 닫기
+  // 모달 닫기  
   const handleModalClose = () => {
     setShowModal(false);
     setSelectedClass(null);
