@@ -16,6 +16,10 @@ const Dropdown = ({ initialOptions = [], onSelect, className, defaultValue = "" 
   const [selectOption, setSelectOption] = useState(defaultValue || "선택하기");
   const dropdownRef = useRef(null);
 
+  useEffect(() => {
+    setSelectOption(defaultValue || "선택하기");
+  }, [defaultValue]);
+  
   const handleClickOutside = (e) => {
     if (dropdownRef.current && !dropdownRef.current.contains(e.target)) {
       setIsOpen(false);

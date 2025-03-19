@@ -15,9 +15,13 @@ const ModificationHistory = () => {
   const userEmail = userInfo?.email || "";
   const [isModal, setIsModal] = useState(false);
 
-  const savedData = localStorage.getItem("paymentData");
-  const shouldFetch = !savedData;
-  const { data } = useFetch(shouldFetch ? `http://localhost:3000/api/paymentHistory` : null);
+  const [localData, setLocalData] = useState(() => {
+    const saved = localStorage.getItem("paymentData");
+    return saved ? JSON.parse(saved) : null;
+  });
+  // const savedData = localStorage.getItem("paymentData");
+  // const shouldFetch = !savedData;
+  const { data } = useFetch(localData ? `http://localhost:3000/api/paymentHistory` : null);
 
   useEffect(() => {
     let listDatas;
@@ -35,9 +39,12 @@ const ModificationHistory = () => {
     }
   }, [data, userEmail, dispatch, savedData]);
 
-  const sortedDatas = [...listDatas].sort(
-    (a, b) => new Date(b.modification.createTime) - new Date(a.modification.createTime),
-  );
+  const sortedDatas = Array.isArray(listDatas)
+    ? [...listDatas].sort((a, b) => new Date(b.modification.createTime) - new Date(a.modification.createTime))
+    : [];
+  // const sortedDatas = [...listDatas].sort(
+  //   (a, b) => new Date(b.modification.createTime) - new Date(a.modification.createTime),
+  // );
 
   const totalCount = sortedDatas.length;
 
@@ -80,7 +87,7 @@ const ModificationHistory = () => {
       </div>
 
       {isModal && (
-        <Modal
+        <Modal // 리엑트 포탈(상위의 영향을 안받느다면)?-> 독립적으로 만들 수 있음
           onCheck={handleListDelete}
           onCancel={() => setIsModal(false)}
           title="주의"
