@@ -14,37 +14,36 @@ const ModificationHistory = () => {
   const userInfo = useSelector((state) => state.auth.user);
   const userEmail = userInfo?.email || "";
   const [isModal, setIsModal] = useState(false);
-
-  const [localData, setLocalData] = useState(() => {
-    const saved = localStorage.getItem("paymentData");
-    return saved ? JSON.parse(saved) : null;
-  });
-  // const savedData = localStorage.getItem("paymentData");
-  // const shouldFetch = !savedData;
-  const { data } = useFetch(localData ? `http://localhost:3000/api/paymentHistory` : null);
+  const [localData, setLocalData] = useState(null);
 
   useEffect(() => {
-    let listDatas;
+    if (typeof window !== "undefined") {
+      const savedData = localStorage.getItem("paymentData");
+      setLocalData ? JSON.parse(savedData) : null;
+    }
+  }, []);
 
-    if (savedData) {
-      listDatas = JSON.parse(savedData);
+  const { data } = useFetch(localData ? null : `http://localhost:3000/api/paymentHistory`);
+
+  useEffect(() => {
+    let tempListDatas = null;
+
+    if (localData) {
+      tempListDatas = localData;
     } else if (data) {
-      listDatas = data;
+      tempListDatas = data;
       localStorage.setItem("paymentData", JSON.stringify(data));
     }
 
-    if (listDatas) {
-      const filteredDatas = listDatas.filter((list) => list.email === userEmail);
+    if (tempListDatas) {
+      const filteredDatas = tempListDatas.filter((list) => list.email === userEmail);
       dispatch(setListDatas(filteredDatas));
     }
-  }, [data, userEmail, dispatch, savedData]);
+  }, [data, userEmail, dispatch, localData]);
 
   const sortedDatas = Array.isArray(listDatas)
     ? [...listDatas].sort((a, b) => new Date(b.modification.createTime) - new Date(a.modification.createTime))
     : [];
-  // const sortedDatas = [...listDatas].sort(
-  //   (a, b) => new Date(b.modification.createTime) - new Date(a.modification.createTime),
-  // );
 
   const totalCount = sortedDatas.length;
 
@@ -87,7 +86,7 @@ const ModificationHistory = () => {
       </div>
 
       {isModal && (
-        <Modal // 리엑트 포탈(상위의 영향을 안받느다면)?-> 독립적으로 만들 수 있음
+        <Modal
           onCheck={handleListDelete}
           onCancel={() => setIsModal(false)}
           title="주의"
