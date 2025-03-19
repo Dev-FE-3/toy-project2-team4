@@ -1,4 +1,3 @@
-"use client";
 import ModificationHistory from "../../components/modification/modificationHistory/modificationHistory";
 import styles from "./modificationHistory.module.scss";
 
