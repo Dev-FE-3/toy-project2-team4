@@ -9,9 +9,9 @@ export const setSelectedList = (selectedList) => ({
   payload: selectedList,
 });
 
-export const deleteList = (num) => ({
+export const deleteList = (id) => ({
   type: "DELETE_LIST",
-  payload: num,
+  payload: id,
 });
 
 // 초기 상태
@@ -34,7 +34,7 @@ const modificationReducer = (state = initialState, action) => {
     case "DELETE_LIST":
       return {
         ...state,
-        listDatas: state.listDatas.filter((item) => item.num !== action.payload),
+        listDatas: state.listDatas.filter((item) => item.id !== action.payload),
         selectedList: null,
       };
 
